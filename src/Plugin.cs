@@ -198,10 +198,10 @@ namespace NewTerra
         public void RoomSettings_ctor(On.RoomSettings.orig_ctor orig, RoomSettings self, string name, Region region, bool template, bool firstTemplate, SlugcatStats.Name playerChar)
         {
             orig(self, name, region, template, firstTemplate, playerChar);
-            if (playerChar.value == "Tenacious")
+            if (playerChar?.value == "Tenacious")
             {
-                string path = (playerChar == null) ? "" : WorldLoader.FindRoomFile(name, false, "_settings-" + playerChar.value + currWeather + ".txt");
-                self.filePath = path;
+                Logger.LogMessage("playerChar value check true");
+                string path = (playerChar == null) ? "" : WorldLoader.FindRoomFile(name, false, "_settings-" + currWeather + ".txt");
                 if (!File.Exists(path))
                 {
                     if (ModManager.MSC && name.EndsWith("-2"))
@@ -225,6 +225,8 @@ namespace NewTerra
                         self.filePath = path;
                     }
                 }
+                self.filePath = path;
+                self.Load(playerChar);
             }
         }
 
@@ -241,6 +243,7 @@ namespace NewTerra
             if (game.IsStorySession)
             {
                 currWeather = weatherpatterns[rnd.Next(weatherpatterns.Count)];
+                Logger.LogMessage("currWeather set!");
             }
         }
 
