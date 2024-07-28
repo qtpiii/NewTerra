@@ -1,0 +1,50 @@
+{
+	"id": "Tenacious",
+	"name": "The Tenacious",
+	"description": "A slow, soft-hitting, yet durable omnivore. With adaptability comes a greater chance at survival.",
+	"features": {
+		"color": "d1c3d4",
+		"weight": [1.6, 1.2]
+		"tunnel_speed": 1.1
+		"climb_speed": 0.9
+		"walk_speed": 0.8
+		"crouch_stealth": 1.8
+		"throw_skill": 0
+		"lung_capacity": 2
+		"loudness": 1.5
+		
+		"alignments": {
+			"Lizards": { "like": 1.0, "strength": 0.5 },
+		}
+		
+		"diet": {
+			"base": "White",
+			"corpses": 0.5,
+		}
+		
+		"custom_colors": [
+			{ "name": "Body", "story": "d1c3d4", "arena": [ "d1c3d4", "87cb98", "302b37", "2d4839" ] },
+			{ "name": "Eyes", "story": "000000", "arena": [ "000000", "000000", "FFFFFF", "FFFFFF" ] },
+		]
+		
+		"karma": 3
+		"karma_cap": 4
+		
+		"has_dreams": false
+		
+		"cycle_length_min": 12
+		"cycle_length_max": 15
+		
+		"food_min": 7
+		"food_max": 9
+		
+		"select_menu_scene": "Slugcat_Tenacious",
+		"select_menu_scene_ascended": "Ghost_Tenacious",
+		"sleep_scene": "Sleep_Tenacious"
+		"starve_scene": "Starve_Tenacious"
+		"death_scene": "Death_Tenacious"
+		
+		"expedition_enabled": false
+
+	}
+}

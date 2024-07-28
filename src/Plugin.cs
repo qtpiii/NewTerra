@@ -1,0 +1,248 @@
+﻿using System;
+using BepInEx;
+using UnityEngine;
+using System.Linq;
+using System.IO;
+using System.Collections.Generic;
+
+namespace NewTerra
+{
+    [BepInPlugin(MOD_ID, "New Terra", "0.1.0")]
+    class Plugin : BaseUnityPlugin
+    {
+        private const string MOD_ID = "qtpi.new-terra";
+
+        public void OnEnable()
+        {
+            try
+            {
+                On.PlayerGraphics.ctor += PlayerGraphics_ctor;
+                On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
+                On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
+                On.Creature.Violence += Creature_Violence;
+                On.Player.Update += Player_Update;
+                On.Player.ctor += Player_ctor;
+                On.Player.TerrainImpact += Player_TerrainImpact;
+                On.RoomSpecificScript.AddRoomSpecificScript += RoomSpecificScript_AddRoomSpecificScript;
+                On.RoomSettings.ctor += RoomSettings_ctor;
+                On.World.ctor += World_ctor;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
+            
+        }
+
+        private void RoomSpecificScript_AddRoomSpecificScript(On.RoomSpecificScript.orig_AddRoomSpecificScript orig, Room room)
+        {
+            orig(room);
+            if (room.abstractRoom.name == "AW_E01")
+            {
+                if (room.game.IsStorySession && room.game.GetStorySession.saveState.cycleNumber == 0 && room.abstractRoom.firstTimeRealized)
+                {
+                    room.AddObject(new AW_TenaciousStart(room));
+                }
+            }
+        }
+
+        private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
+        {
+            if (self != null && self.SlugCatClass.value == ("Tenacious"))
+            {
+                self.immuneToFallDamage = 1;
+                if (speed > 60f)
+                {
+                    self.room.PlaySound(SoundID.Slugcat_Terrain_Impact_Hard, self.mainBodyChunk);
+                    self.Stun((int)Mathf.Lerp(40f, 120f, speed));
+                } 
+            }
+            orig(self, chunk, direction, speed, firstContact);
+        }
+
+        private void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
+        {
+            orig(self, abstractCreature, world);
+            if (self != null && self.SlugCatClass.value == ("Tenacious"))
+            {
+                abstractCreature.lavaImmune = true;
+            }
+        }
+
+        private void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
+        {
+            orig(self, eu);
+            if (self != null && self.SlugCatClass.value == ("Tenacious"))
+            {
+                self.Hypothermia -= 0.75f * self.HypothermiaGain;
+            }
+        }
+
+        private void Creature_Violence(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
+        {
+            if (self is Player player && player != null && player.SlugCatClass.value == ("Tenacious"))
+            {
+                if (type == Creature.DamageType.Blunt)
+                {
+                    damage *= 0.25f;
+                } 
+                else if (type == Creature.DamageType.Electric)
+                {
+                    damage *= 0.25f;
+                }
+                else if (type == Creature.DamageType.Explosion)
+                {
+                    damage *= 0.75f;
+                }
+                else
+                {
+                    damage *= 1.25f;
+                }
+            }
+            orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+        }
+
+        private void LoadResources(RainWorld rainWorld)
+        {
+            Futile.atlasManager.LoadAtlas("atlases/body");
+            Futile.atlasManager.LoadAtlas("atlases/face");
+            Futile.atlasManager.LoadAtlas("atlases/head");
+            Futile.atlasManager.LoadAtlas("atlases/hips");
+            Futile.atlasManager.LoadAtlas("atlases/legs");
+            Futile.atlasManager.LoadAtlas("atlases/arm");
+        }
+
+        private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
+        {
+            orig(self, sLeaser, rCam, timeStacker, camPos);
+            if (self.player != null && self.player.SlugCatClass.value == ("Tenacious"))
+            {
+                string name = sLeaser.sprites[0]?.element?.name;
+                if (name != null && name.StartsWith("BodyA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[0].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[1]?.element?.name;
+                if (name != null && name.StartsWith("HipsA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[1].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[3]?.element?.name;
+                if (name != null && name.StartsWith("HeadA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[3].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[4]?.element?.name;
+                if (name != null && name.StartsWith("LegsA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[4].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[5]?.element?.name;
+                if (name != null && name.StartsWith("PlayerArm") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[5].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[6]?.element?.name;
+                if (name != null && name.StartsWith("PlayerArm") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[6].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[7]?.element?.name;
+                if (name != null && name.StartsWith("OnTopOfTerrainHand") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[7].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[8]?.element?.name;
+                if (name != null && name.StartsWith("OnTopOfTerrainHand") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[8].SetElementByName("Tardi" + name);
+                }
+                name = sLeaser.sprites[9]?.element?.name;
+                if (name != null && name.StartsWith("Face") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+                {
+                    sLeaser.sprites[9].SetElementByName("Tardi" + name);
+                }
+            }
+        }
+
+        private void PlayerGraphics_ctor(On.PlayerGraphics.orig_ctor orig, PlayerGraphics self, PhysicalObject ow)
+        {
+            orig(self, ow);
+            if (self.player != null && self.player.SlugCatClass.value == ("Tenacious"))
+            {
+                if (self.RenderAsPup)
+                {
+                    self.tail[0] = new(self, 9f, 0.75f, null, 0.85f, 1.0f, 1.0f, true);
+                    self.tail[1] = new(self, 8f, 1.25f, self.tail[0], 0.85f, 1.0f, 0.5f, true);
+                    self.tail[2] = new(self, 6f, 1.25f, self.tail[1], 0.85f, 1.0f, 0.5f, true);
+                    self.tail[3] = new(self, 3f, 1f, self.tail[2], 0.85f, 1.0f, 0.5f, true);
+                }
+                else
+                {
+                    self.tail[0] = new(self, 9f, 1.5f, null, 0.85f, 1.0f, 1.0f, true);
+                    self.tail[1] = new(self, 8f, 2.5f, self.tail[0], 0.85f, 1.0f, 0.5f, true);
+                    self.tail[2] = new(self, 6f, 2.5f, self.tail[1], 0.85f, 1.0f, 0.5f, true);
+                    self.tail[3] = new(self, 3f, 2f, self.tail[2], 0.85f, 1.0f, 0.5f, true);
+                }
+
+                var bp = self.bodyParts.ToList();
+                bp.RemoveAll(x => x is TailSegment);
+                bp.AddRange(self.tail);
+                self.bodyParts = bp.ToArray();
+            }
+                
+        }
+
+        public string currWeather;
+        public void RoomSettings_ctor(On.RoomSettings.orig_ctor orig, RoomSettings self, string name, Region region, bool template, bool firstTemplate, SlugcatStats.Name playerChar)
+        {
+            orig(self, name, region, template, firstTemplate, playerChar);
+            if (playerChar.value == "Tenacious")
+            {
+                string path = (playerChar == null) ? "" : WorldLoader.FindRoomFile(name, false, "_settings-" + playerChar.value + currWeather + ".txt");
+                self.filePath = path;
+                if (!File.Exists(path))
+                {
+                    if (ModManager.MSC && name.EndsWith("-2"))
+                    {
+                        path = WorldLoader.FindRoomFile(name.Substring(0, name.Length - 2), false, "-2_settings.txt");
+                    }
+                    else
+                    {
+                        path = WorldLoader.FindRoomFile(name, false, "_settings.txt");
+                    }
+                    if (File.Exists(path))
+                    {
+                        self.filePath = path;
+                    }
+                    else if (name.EndsWith("-2"))
+                    {
+                        self.filePath = WorldLoader.FindRoomFile(name.Substring(0, name.Length - 2), false, "_settings.txt");
+                    }
+                    else
+                    {
+                        self.filePath = path;
+                    }
+                }
+            }
+        }
+
+        private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
+        {
+            orig(self, game, region, name, singleRoomWorld);
+            List<string> weatherpatterns = new List<string>
+            {
+                "", "cloudy", "rain", "thunder"
+            };
+
+            System.Random rnd = new System.Random();
+
+            if (game.IsStorySession)
+            {
+                currWeather = weatherpatterns[rnd.Next(weatherpatterns.Count)];
+            }
+        }
+
+    }
+}
