@@ -200,7 +200,6 @@ namespace NewTerra
             orig(self, name, region, template, firstTemplate, playerChar);
             if (playerChar?.value == "Tenacious")
             {
-                Logger.LogMessage("playerChar value check true");
                 string path = (playerChar == null) ? "" : WorldLoader.FindRoomFile(name, false, "_settings-" + currWeather + ".txt");
                 if (!File.Exists(path))
                 {
@@ -242,8 +241,14 @@ namespace NewTerra
 
             if (game.IsStorySession)
             {
-                currWeather = weatherpatterns[rnd.Next(weatherpatterns.Count)];
-                Logger.LogMessage("currWeather set!");
+                if (game.GetStorySession.saveState.cycleNumber != 0)
+                {
+                    currWeather = "";
+                }
+                else
+                {
+                    currWeather = weatherpatterns[rnd.Next(weatherpatterns.Count)];
+                }
             }
         }
 
