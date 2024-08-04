@@ -241,7 +241,7 @@ namespace NewTerra
 
             if (game.IsStorySession)
             {
-                if (game.GetStorySession.saveState.cycleNumber != 0)
+                if (game.GetStorySession.saveState.cycleNumber == 0)
                 {
                     currWeather = "";
                 }
