@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using MoreSlugcats;
 
 namespace NewTerra
 {
@@ -24,9 +25,9 @@ namespace NewTerra
                 On.Player.ctor += Player_ctor;
                 On.Player.TerrainImpact += Player_TerrainImpact;
                 On.RoomSpecificScript.AddRoomSpecificScript += RoomSpecificScript_AddRoomSpecificScript;
-                //On.RoomSettings.ctor += RoomSettings_ctor;
                 On.World.ctor += World_ctor;
                 On.RoomSettings.LoadEffects += RoomSettings_LoadEffects;
+                On.RoomRain.Update += RoomRain_Update;
             }
             catch (Exception ex)
             {
@@ -34,6 +35,15 @@ namespace NewTerra
                 throw;
             }
             
+        }
+
+        private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
+        {
+            orig(self, eu);
+            if (self.room.roomSettings.name.StartsWith("RU_"))
+            {
+                self.floodingSound.Volume = 0;
+            }
         }
 
         private void RoomSpecificScript_AddRoomSpecificScript(On.RoomSpecificScript.orig_AddRoomSpecificScript orig, Room room)
@@ -197,40 +207,6 @@ namespace NewTerra
 
         public string currWeather;
 
-        //public void RoomSettings_ctor(On.RoomSettings.orig_ctor orig, RoomSettings self, string name, Region region, bool template, bool firstTemplate, SlugcatStats.Name playerChar)
-        //{
-        //    orig(self, name, region, template, firstTemplate, playerChar);
-        //    if (playerChar?.value == "Tenacious")
-        //    {
-        //        string path = (playerChar == null) ? "" : WorldLoader.FindRoomFile(name, false, "_settings-" + currWeather + ".txt");
-        //        if (!File.Exists(path))
-        //        {
-        //            if (ModManager.MSC && name.EndsWith("-2"))
-        //            {
-        //                path = WorldLoader.FindRoomFile(name.Substring(0, name.Length - 2), false, "-2_settings.txt");
-        //            }
-        //            else
-        //            {
-        //                path = WorldLoader.FindRoomFile(name, false, "_settings.txt");
-        //            }
-        //            if (File.Exists(path))
-        //            {
-        //                self.filePath = path;
-        //            }
-        //            else if (name.EndsWith("-2"))
-        //            {
-        //                self.filePath = WorldLoader.FindRoomFile(name.Substring(0, name.Length - 2), false, "_settings.txt");
-        //            }
-        //            else
-        //            {
-        //                self.filePath = path;
-        //            }
-        //        }
-        //        self.filePath = path;
-        //        self.Load(playerChar);
-        //    }
-        //}
-
         private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
         {
             orig(self, game, region, name, singleRoomWorld);
@@ -257,12 +233,13 @@ namespace NewTerra
         private void RoomSettings_LoadEffects(On.RoomSettings.orig_LoadEffects orig, RoomSettings self, string[] s)
         {
             orig(self, s);
+            #region weather
             if (self.name.StartsWith("RU_") || self.name.StartsWith("AW_"))
             {
                 switch (currWeather)
                 {
                     case "1":
-                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.SkyAndLightBloom, 0.05f, false));
+                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.3f, false));
                         break;
                     case "2":
                         self.Clouds = 0.7f;
@@ -276,13 +253,21 @@ namespace NewTerra
                     case "4":
                         self.Clouds = 1f;
                         self.CeilingDrips = 1f;
-                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.15f, false));
-                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Lightning, 0.05f, false));
+                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.1f, false));
                         self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.BkgOnlyLightning, 1f, false));
                         self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.ExtraLoudThunder, 1f, false));
+                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
                         break;
                 }
             }
+            if (self.name.StartsWith("DB_"))
+            {
+                if (ModManager.MSC && self.DangerType == RoomRain.DangerType.AerieBlizzard)
+                {
+                    self.DangerType = MoreSlugcatsEnums.RoomRainDangerType.Blizzard;
+                }
+            }
+            #endregion
         }
 
     }
