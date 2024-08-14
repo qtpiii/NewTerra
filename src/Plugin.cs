@@ -37,6 +37,7 @@ namespace NewTerra
             
         }
 
+        #region misc hooks
         private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
         {
             orig(self, eu);
@@ -58,6 +59,9 @@ namespace NewTerra
             }
         }
 
+        #endregion
+
+        #region damage resistance
         private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
         {
             if (self != null && self.SlugCatClass.value == ("Tenacious"))
@@ -113,7 +117,9 @@ namespace NewTerra
             }
             orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
         }
+        #endregion
 
+        #region graphics
         private void LoadResources(RainWorld rainWorld)
         {
             Futile.atlasManager.LoadAtlas("atlases/body");
@@ -205,6 +211,10 @@ namespace NewTerra
                 
         }
 
+        #endregion
+
+        #region weather
+
         public string currWeather;
 
         private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
@@ -233,13 +243,12 @@ namespace NewTerra
         private void RoomSettings_LoadEffects(On.RoomSettings.orig_LoadEffects orig, RoomSettings self, string[] s)
         {
             orig(self, s);
-            #region weather
             if (self.name.StartsWith("RU_") || self.name.StartsWith("AW_"))
             {
                 switch (currWeather)
                 {
                     case "1":
-                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.3f, false));
+                        self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
                         break;
                     case "2":
                         self.Clouds = 0.7f;
@@ -260,15 +269,16 @@ namespace NewTerra
                         break;
                 }
             }
-            if (self.name.StartsWith("DB_"))
-            {
-                if (ModManager.MSC && self.DangerType == RoomRain.DangerType.AerieBlizzard)
-                {
-                    self.DangerType = MoreSlugcatsEnums.RoomRainDangerType.Blizzard;
-                }
-            }
-            #endregion
+            //if (self.name.StartsWith("DB_"))
+            //{
+            //    if (ModManager.MSC && self.DangerType == RoomRain.DangerType.AerieBlizzard)
+            //    {
+            //        self.DangerType = MoreSlugcatsEnums.RoomRainDangerType.Blizzard;
+            //    }
+            //}
+            
         }
 
+        #endregion
     }
 }
