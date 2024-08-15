@@ -219,10 +219,11 @@ namespace NewTerra
 
         private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
         {
+            
             orig(self, game, region, name, singleRoomWorld);
             List<string> weatherpatterns = new List<string>
             {
-                "1", "2", "3", "4"
+                "1", "1", "2", "2", "3", "4"
             };
 
             System.Random rnd = new System.Random();
