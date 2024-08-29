@@ -228,7 +228,7 @@ namespace NewTerra
 
             System.Random rnd = new System.Random();
 
-            if (game.IsStorySession)
+            if (game != null && game.IsStorySession)
             {
                 if (game.GetStorySession.saveState.cycleNumber == 0)
                 {
