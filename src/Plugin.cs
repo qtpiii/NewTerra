@@ -122,12 +122,21 @@ namespace NewTerra
         #region graphics
         private void LoadResources(RainWorld rainWorld)
         {
-            Futile.atlasManager.LoadAtlas("atlases/body");
-            Futile.atlasManager.LoadAtlas("atlases/face");
-            Futile.atlasManager.LoadAtlas("atlases/head");
-            Futile.atlasManager.LoadAtlas("atlases/hips");
-            Futile.atlasManager.LoadAtlas("atlases/legs");
-            Futile.atlasManager.LoadAtlas("atlases/arm");
+            try
+            {
+                Futile.atlasManager.LoadAtlas("atlases/body");
+                Futile.atlasManager.LoadAtlas("atlases/face");
+                Futile.atlasManager.LoadAtlas("atlases/head");
+                Futile.atlasManager.LoadAtlas("atlases/hips");
+                Futile.atlasManager.LoadAtlas("atlases/legs");
+                Futile.atlasManager.LoadAtlas("atlases/arm");
+                Futile.atlasManager.LoadAtlas("atlases/NT_VultureMasks");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+
         }
 
         private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
@@ -283,5 +292,6 @@ namespace NewTerra
         }
 
         #endregion
+
     }
 }
