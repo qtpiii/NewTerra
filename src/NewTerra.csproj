@@ -2,7 +2,7 @@
     
     <PropertyGroup>
         <TargetFramework>net48</TargetFramework>
-        <LangVersion>11</LangVersion>
+        <LangVersion>12</LangVersion>
         <DebugType>portable</DebugType>
     </PropertyGroup>
     
@@ -39,6 +39,15 @@
         </Reference>
         <Reference Include="Assembly-CSharp">
           <HintPath>D:\SteamLibrary\steamapps\common\Rain World\BepInEx\utils\PUBLIC-Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+          <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\Rain World\BepInEx\core\BepInEx.dll</HintPath>
+        </Reference>
+        <Reference Include="Fisobs">
+          <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\workshop\content\312520\2920541687\plugins\Fisobs.dll</HintPath>
+        </Reference>
+        <Reference Include="Pom">
+          <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\workshop\content\312520\2920439169\newest\plugins\Pom.dll</HintPath>
         </Reference>
     </ItemGroup>
     

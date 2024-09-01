@@ -2,9 +2,7 @@
 using BepInEx;
 using UnityEngine;
 using System.Linq;
-using System.IO;
 using System.Collections.Generic;
-using MoreSlugcats;
 
 namespace NewTerra
 {
@@ -28,6 +26,7 @@ namespace NewTerra
                 On.World.ctor += World_ctor;
                 On.RoomSettings.LoadEffects += RoomSettings_LoadEffects;
                 On.RoomRain.Update += RoomRain_Update;
+                On.SlugcatStats.NourishmentOfObjectEaten += SlugcatStats_NourishmentOfObjectEaten;
             }
             catch (Exception ex)
             {
@@ -38,6 +37,18 @@ namespace NewTerra
         }
 
         #region misc hooks
+
+        private int SlugcatStats_NourishmentOfObjectEaten(On.SlugcatStats.orig_NourishmentOfObjectEaten orig, SlugcatStats.Name slugcatIndex, IPlayerEdible eatenobject)
+        {
+            orig(slugcatIndex, eatenobject);
+            int nourishment = 0;
+            if (eatenobject is DangleSeed)
+            {
+                nourishment += 2;
+            }
+            return nourishment;
+        }
+
         private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
         {
             orig(self, eu);
@@ -293,5 +304,10 @@ namespace NewTerra
 
         #endregion
 
+        #region music
+        
+
+
+        #endregion
+        }
     }
-}
