@@ -8,7 +8,7 @@ namespace NewTerra
 		private int timer;
 		public AW_TenaciousStart(Room room)
 		{
-			this.timer = 0;
+			timer = 0;
 			this.room = room;
 		}
 
@@ -26,12 +26,12 @@ namespace NewTerra
 
 					player.mainBodyChunk.vel = new Vector2(0f, -10f);
 					player.Stun(160);
-					this.Destroy();
+					Destroy();
 
 				}
 
 			}
-			this.timer++;
+			timer++;
 		}
 
 	}
