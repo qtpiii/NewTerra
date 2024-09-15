@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NewTerra
 {
@@ -24,7 +19,7 @@ namespace NewTerra
 			AbstractCreature firstAlivePlayer = room.game.FirstAlivePlayer;
 			if (room.game.session is StoryGameSession && room.game.Players.Count > 0 && firstAlivePlayer != null && firstAlivePlayer.realizedCreature != null && firstAlivePlayer.realizedCreature.room == room && room.game.GetStorySession.saveState.cycleNumber == 0)
 			{
-				Player player = firstAlivePlayer.realizedCreature as Player;
+				Player player = (Player)firstAlivePlayer.realizedCreature;
 				player.SuperHardSetPosition(new Vector2(340f, 3120f));
 				if (timer > 40)
 				{

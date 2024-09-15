@@ -34,7 +34,16 @@ namespace NewTerra
 				Logger.LogError(ex);
 				throw;
 			}
+			try
+			{
+				_AddBGLabels();
+			}
+			catch (TypeLoadException) { Logger.LogWarning("BlackGlare not loaded, labels inaccessible"); }
+		}
 
+		private void _AddBGLabels()
+		{
+			BlackGlare.API.Labels.AddObjectLabel<Player>((p) => "Goated").AddCondition((p) => p.SlugCatClass.value == "Tenacious");
 		}
 
 		#region misc hooks
@@ -65,7 +74,7 @@ namespace NewTerra
 		#region damage resistance
 		private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
 		{
-			if (self != null && self.SlugCatClass.value == ("Tenacious"))
+			if (self != null && self.SlugCatClass.value == "Tenacious")
 			{
 				self.immuneToFallDamage = 1;
 				if (speed > 60f)
@@ -80,7 +89,7 @@ namespace NewTerra
 		private void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
 		{
 			orig(self, abstractCreature, world);
-			if (self != null && self.SlugCatClass.value == ("Tenacious"))
+			if (self != null && self.SlugCatClass.value == "Tenacious")
 			{
 				abstractCreature.lavaImmune = true;
 			}
@@ -89,7 +98,7 @@ namespace NewTerra
 		private void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
 		{
 			orig(self, eu);
-			if (self != null && self.SlugCatClass.value == ("Tenacious"))
+			if (self != null && self.SlugCatClass.value == "Tenacious")
 			{
 				self.Hypothermia -= 0.75f * self.HypothermiaGain;
 			}
@@ -97,7 +106,7 @@ namespace NewTerra
 
 		private void Creature_Violence(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
 		{
-			if (self is Player player && player != null && player.SlugCatClass.value == ("Tenacious"))
+			if (self is Player player && player != null && player.SlugCatClass.value == "Tenacious")
 			{
 				if (type == Creature.DamageType.Blunt)
 				{
@@ -144,9 +153,9 @@ namespace NewTerra
 		private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
 		{
 			orig(self, sLeaser, rCam, timeStacker, camPos);
-			if (self.player != null && self.player.SlugCatClass.value == ("Tenacious"))
+			if (self.player != null && self.player.SlugCatClass.value == "Tenacious")
 			{
-				string name = sLeaser.sprites[0]?.element?.name;
+				string? name = sLeaser.sprites[0]?.element?.name;
 				if (name != null && name.StartsWith("BodyA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
 				{
 					sLeaser.sprites[0].SetElementByName("Tardi" + name);
@@ -197,7 +206,7 @@ namespace NewTerra
 		private void PlayerGraphics_ctor(On.PlayerGraphics.orig_ctor orig, PlayerGraphics self, PhysicalObject ow)
 		{
 			orig(self, ow);
-			if (self.player != null && self.player.SlugCatClass.value == ("Tenacious"))
+			if (self.player != null && self.player.SlugCatClass.value == "Tenacious")
 			{
 				if (self.RenderAsPup)
 				{
@@ -226,7 +235,7 @@ namespace NewTerra
 
 		#region weather
 
-		public string currWeather;
+		public string? currWeather;
 
 		private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
 		{
