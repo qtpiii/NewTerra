@@ -186,8 +186,6 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 					placedObjectIndex,
 					_data.GetVanillaConsumableData());
 				room.abstractRoom.AddEntity(absFruit);
-				absFruit.RealizeInRoom();
-				LogWarning(absFruit.realizedObject.firstChunk.pos);
 			}
 			Destroy();
 		}
