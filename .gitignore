@@ -402,3 +402,8 @@ FodyWeavers.xsd
 #libs
 
 /lib
+
+# mod plugins folder
+
+/mod/newest/plugins
+/mod/plugins
