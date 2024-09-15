@@ -77,14 +77,15 @@
 	</ItemGroup>
 
 	<Target Name="GenerateMod" AfterTargets="PostBuildEvent">
-		<ItemGroup>
-			<!-- <RemovePlugins Include="../mod/newest/plugins/*.dll" /> -->
-			<CopyPlugins Include="$(TargetPath)" />
-		</ItemGroup>
 		<Message Text="NT: GenerateMod"
 			Importance="high" />
 		<!-- <Delete Files="@(RemovePlugins)" /> -->
-		<Copy SourceFiles="@(CopyPlugins)" DestinationFolder="../mod/newest/plugins/" />
+		<Copy SourceFiles="$(OutDir)$(ProjectName).dll" DestinationFolder="../mod/newest/plugins"
+			Retries="3" RetryDelayMilliseconds="300" />
+		<Copy SourceFiles="$(OutDir)$(ProjectName).pdb" DestinationFolder="../mod/newest/plugins"
+			Retries="3" RetryDelayMilliseconds="300" />
+		<!-- <Copy SourceFiles="$(OutDir)$(ProjectName).xml" DestinationFolder="../mod/newest/plugins"
+			Retries="3" RetryDelayMilliseconds="300" /> -->
 	</Target>
 	<Target Name="CopyTo" AfterTargets="GenerateMod" Condition="'$(RWMods_NT)'!=''">
 		<ItemGroup>
