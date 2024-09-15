@@ -15,31 +15,35 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="../lib/BepInEx.dll">
+		<Reference Include="HOOKS-Assembly-CSharp">
+			<HintPath>../lib/HOOKS-Assembly-CSharp.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="../lib/HOOKS-Assembly-CSharp.dll">
+		<Reference Include="Mono.Cecil">
+			<HintPath>../lib/Mono.Cecil.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="../lib/Mono.Cecil.dll">
+		<Reference Include="Mono.Cecil.Rocks">
+			<HintPath>../lib/Mono.Cecil.Rocks.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="../lib/Mono.Cecil.Rocks.dll">
+		<Reference Include="MonoMod.RuntimeDetour">
+			<HintPath>../lib/MonoMod.RuntimeDetour.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="../lib/MonoMod.RuntimeDetour.dll">
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="../lib/MonoMod.Utils.dll">
+		<Reference Include="MonoMod.Utils">
+			<HintPath>../lib/MonoMod.Utils.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<!-- <Reference Include="../lib/SlugBase.dll">
 			<Private>false</Private>
 		</Reference> -->
-		<Reference Include="../lib/UnityEngine.CoreModule.dll">
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>../lib/UnityEngine.CoreModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="../lib/UnityEngine.dll">
+		<Reference Include="UnityEngine">
+			<HintPath>../lib/UnityEngine.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="Assembly-CSharp">
