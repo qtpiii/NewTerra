@@ -2,15 +2,15 @@
 	"id": "Slugcat_Tenacious",
 	"scene_folder": "scenes/slugcat - tenacious",
 	"images": [
-		{ "name": "Background", "pos": [492, 297], "depth": 3.7, "shader": "Basic" },
-		{ "name": "Slugcat",    "pos": [605, 427], "depth": 2.8, "shader": "Basic" },
-		{ "name": "Grass 3",    "pos": [602, 264], "depth": 2.2, "shader": "Basic" },
-		{ "name": "Grass 2",    "pos": [446, 283], "depth": 2.0, "shader": "Basic" },
-		{ "name": "Grass 1",    "pos": [515, 265], "depth": 1.8, "shader": "Basic" }
+		{ "name": "Background", "pos": [431, 248], "depth": 3.1 },
+		{ "name": "Trash 1",    "pos": [458, 235], "depth": 2.9 },
+		{ "name": "Slugcat",    "pos": [539, 265], "depth": 2.5, "shader": "Basic" },
+		{ "name": "Trash 2",    "pos": [406, 211], "depth": 2.0 },
+		{ "name": "Trash 3",    "pos": [421, 211], "depth": 1.8 }
 	],
-	"idle_depths": [ 2.8 ],
+	"idle_depths": [ 2.5 ],
 	"glow_pos": [688, 484],
 	"mark_pos": [689, 583],
 	"select_menu_pos": [0, 0],
-	"slugcat_depth": 2.8
+	"slugcat_depth": 2.5
 }

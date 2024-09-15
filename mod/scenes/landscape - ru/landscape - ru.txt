@@ -1,0 +1,12 @@
+ru_landscape - 5 : 25
+ru_landscape - 4 : 7
+ru_landscape - 3 : 5
+ru_landscape - 2 : 3
+ru_landscape - 1 : 1
+
+blurMin : 0.15
+blurMax : 0.35
+
+idleDepths : 4
+idleDepths : 3
+idleDepths : 2

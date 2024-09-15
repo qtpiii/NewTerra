@@ -49,6 +49,12 @@
         <Reference Include="Pom">
           <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\workshop\content\312520\2920439169\newest\plugins\Pom.dll</HintPath>
         </Reference>
+        <Reference Include="Unity.Mathematics">
+          <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\Rain World\RainWorld_Data\Managed\Unity.Mathematics.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+          <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\Rain World\RainWorld_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
     </ItemGroup>
     
     <Target Name="GenerateMod" AfterTargets="PostBuildEvent">

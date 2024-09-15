@@ -3,6 +3,8 @@ using BepInEx;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using Fisobs.Core;
+using static Pom.Pom;
 
 namespace NewTerra
 {
@@ -26,7 +28,6 @@ namespace NewTerra
                 On.World.ctor += World_ctor;
                 On.RoomSettings.LoadEffects += RoomSettings_LoadEffects;
                 On.RoomRain.Update += RoomRain_Update;
-                On.SlugcatStats.NourishmentOfObjectEaten += SlugcatStats_NourishmentOfObjectEaten;
             }
             catch (Exception ex)
             {
@@ -37,17 +38,6 @@ namespace NewTerra
         }
 
         #region misc hooks
-
-        private int SlugcatStats_NourishmentOfObjectEaten(On.SlugcatStats.orig_NourishmentOfObjectEaten orig, SlugcatStats.Name slugcatIndex, IPlayerEdible eatenobject)
-        {
-            orig(slugcatIndex, eatenobject);
-            int nourishment = 0;
-            if (eatenobject is DangleSeed)
-            {
-                nourishment += 2;
-            }
-            return nourishment;
-        }
 
         private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
         {
@@ -142,6 +132,7 @@ namespace NewTerra
                 Futile.atlasManager.LoadAtlas("atlases/legs");
                 Futile.atlasManager.LoadAtlas("atlases/arm");
                 Futile.atlasManager.LoadAtlas("atlases/NT_VultureMasks");
+                Futile.atlasManager.LoadAtlas("atlases/DangleSeed");
             }
             catch (Exception ex)
             {

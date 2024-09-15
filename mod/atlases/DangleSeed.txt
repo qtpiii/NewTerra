@@ -1,0 +1,44 @@
+{"frames": {
+
+"DangleSeed0A.png":
+{
+	"frame": {"x":1,"y":1,"w":6,"h":9},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":9},
+	"sourceSize": {"w":6,"h":9}
+},
+"DangleSeed0B.png":
+{
+	"frame": {"x":1,"y":12,"w":6,"h":10},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":10},
+	"sourceSize": {"w":6,"h":10}
+},
+"DangleSeed1A.png":
+{
+	"frame": {"x":1,"y":24,"w":6,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":6,"h":8},
+	"sourceSize": {"w":6,"h":9}
+},
+"DangleSeed1B.png":
+{
+	"frame": {"x":1,"y":34,"w":6,"h":10},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":10},
+	"sourceSize": {"w":6,"h":10}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "DangleSeed.png",
+	"format": "RGBA8888",
+	"size": {"w":8,"h":45},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cf22c67e042a01d7e5b627447269b686:cff2c65c574167b9c7f77333ec7f616f:383c014fb75f3a4e72d5d5afce7fb1d7$"
+}
+}
