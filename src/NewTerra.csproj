@@ -58,12 +58,22 @@
 		<Reference Include="Pom">
 			<HintPath>../lib/Pom.dll</HintPath>
 		</Reference>
+		<Reference Include="BlackGlare">
+			<HintPath>../lib/BlackGlare.dll</HintPath>
+		</Reference>
 		<Reference Include="Unity.Mathematics">
 			<HintPath>../lib/Unity.Mathematics.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.InputLegacyModule">
 			<HintPath>../lib/UnityEngine.InputLegacyModule.dll</HintPath>
 		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PolySharp" Version="1.8.3">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<Target Name="GenerateMod" AfterTargets="PostBuildEvent">
@@ -77,16 +87,16 @@
 		<Copy SourceFiles="@(CopyPlugins)" DestinationFolder="../mod/newest/plugins/" />
 	</Target>
 	<Target Name="CopyTo" AfterTargets="GenerateMod" Condition="'$(RWMods_NT)'!=''">
-		<!-- <Sleep Milliseconds="500"></Sleep> -->
 		<ItemGroup>
-			<RemoveFilesInRW Include="$(RWMods_NT)/**"/>
-			<CopyFilesToRW Include="../mod/**"/>
+			<RemoveFilesInRW Include="$(RWMods_NT)/**" />
+			<CopyFilesToRW Include="../mod/**" />
 		</ItemGroup>
 		<Delete Files="@(RemovePlugins)" />
 		<Message Text="NT: Buildcopy from [ $(TargetPath) ] to [ $(RWMods_NT) ] - @(_CopyItems)"
 			Importance="high" />
 		<Delete Files="@(RemoveFilesInRW)" />
-		<Copy SourceFiles="@(CopyFilesToRW)" DestinationFolder="$(RWMods_NT)/%(RecursiveDir)" Retries="3"
+		<Copy SourceFiles="@(CopyFilesToRW)" DestinationFolder="$(RWMods_NT)/%(RecursiveDir)"
+			Retries="3"
 			RetryDelayMilliseconds="300" />
 	</Target>
 
