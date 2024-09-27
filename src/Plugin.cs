@@ -10,11 +10,14 @@ namespace NewTerra;
 [BepInPlugin(MOD_ID, "New Terra", "0.1.0")]
 [BepInDependency("thalber.blackglare")]
 [BepInDependency("io.github.dual.fisobs")]
-class Plugin : BaseUnityPlugin
+public class Plugin : BaseUnityPlugin
 {
 	internal const string MOD_ID = "qtpi.new-terra";
+	internal const string POM_CATEGORY = "NEW_TERRA";
 	internal const string TARDIGOATED_ID = "Tenacious";
 	
+
+	internal readonly Dictionary<string, string[]> DecalAutoplaceSets = new();
 
 	public void OnEnable()
 	{
@@ -139,6 +142,12 @@ class Plugin : BaseUnityPlugin
 	#region graphics
 	private void LoadResources(RainWorld rainWorld)
 	{
+		DecalAutoplaceSets.Clear();
+		foreach (string fname in AssetManager.ListDirectory("decalsets", false, true)) {
+			System.IO.FileInfo file = new(fname);
+			if (file.Extension is not ".txt") continue;
+			DecalAutoplaceSets.Add(file.Name[..^4], System.IO.File.ReadAllLines(fname));
+		}
 		try
 		{
 			Futile.atlasManager.LoadAtlas("atlases/body");
@@ -152,6 +161,7 @@ class Plugin : BaseUnityPlugin
 		}
 		catch (Exception ex)
 		{
+			Logger.LogError("Error on resource load");
 			Logger.LogError(ex);
 		}
 
