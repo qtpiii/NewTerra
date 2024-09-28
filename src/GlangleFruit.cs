@@ -35,8 +35,12 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 	public const float VISUAL_ANGLE_PER_SEED = 30f;
 	public const float VISUAL_DISTANCE_PER_SEED = 0.2f;
 	public const float VISUAL_DISTANCE_INITIAL = 3f;
-
-
+	private const float PHYS_GRAVITY = 0.9f;
+	private const float PHYS_BOUNCE = 0.2f;
+	private const float PHYS_AIR_FRICTION = 0.97f;
+	private const float PHYS_SURFACE_FRICTION = 0.5f;
+	private const float PHYS_WATER_FRICTION = 0.95f;
+	private const float PHYS_BUOYANCY = 1.1f;
 	private (float angle, float dst)[] seedTransforms = [];
 	private float rot = 0f;
 	private float lastRot = 0f;
@@ -58,13 +62,13 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 			}
 		];
 		bodyChunkConnections = [];
-		airFriction = 0.97f;
-		gravity = 0.9f;
-		bounce = 0.2f;
-		surfaceFriction = 0.1f;
+		airFriction = PHYS_AIR_FRICTION;
+		gravity = PHYS_GRAVITY;
+		bounce = PHYS_BOUNCE;
+		surfaceFriction = PHYS_SURFACE_FRICTION;
 		collisionLayer = 1;
-		waterFriction = 0.95f;
-		buoyancy = 1.1f;
+		waterFriction = PHYS_WATER_FRICTION;
+		buoyancy = PHYS_BUOYANCY;
 		ChangeCollisionLayer(0);
 	}
 
@@ -83,11 +87,13 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		}
 		else
 		{
-			angVel = (firstChunk.vel.magnitude, angVel) switch
+			const float 
+			angVel = (firstChunk.vel.magnitude, angVel, firstChunk.ContactPoint.x, firstChunk.contactPoint.y) switch
 			{
-				( <= 1f, _) => 0f,
-				( >= 1f, 0f) => Random.Range(0, 10f) * Mathf.Sign(firstChunk.vel.x),
-				_ => angVel,
+				( <= 1f, _, _, _) => 0f, //coming to a stop
+				( >= 1f, 0f, not 0, 0) => Random.Range(5, 10f) * Mathf.Sign(firstChunk.vel.x), //going into freefall
+				( >= 1f, _, not 0, -1) => 1f, //rolling on the ground
+				_ => angVel, //neutral fall/flight/drop
 			};
 			rot = Mathf.LerpAngle(rot, rot + angVel, 1f);
 		}
@@ -106,8 +112,6 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 	public override void TerrainImpact(int chunk, IntVector2 direction, float speed, bool firstContact)
 	{
 		base.TerrainImpact(chunk, direction, speed, firstContact);
-		if (speed <= 5f) angVel = 0f;
-		else Speeeen();
 		if (speed >= 2f && firstContact)
 		{
 			room.PlaySound(
