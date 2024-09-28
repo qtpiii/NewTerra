@@ -87,13 +87,12 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		}
 		else
 		{
-			const float 
 			angVel = (firstChunk.vel.magnitude, angVel, firstChunk.ContactPoint.x, firstChunk.contactPoint.y) switch
 			{
-				( <= 1f, _, _, _) => 0f, //coming to a stop
-				( >= 1f, 0f, not 0, 0) => Random.Range(5, 10f) * Mathf.Sign(firstChunk.vel.x), //going into freefall
-				( >= 1f, _, not 0, -1) => 1f, //rolling on the ground
-				_ => angVel, //neutral fall/flight/drop
+				( <= 0.1f, _, _, _) => 0f, //coming to a stop
+				( >= 0.1f, 0f, 0, 0) => Random.Range(5, 10f) * Mathf.Sign(firstChunk.vel.x), //going into freefall
+				(_, _, 0, -1) => (float)(360f * (firstChunk.vel.x / (2f * Mathf.PI * firstChunk.rad))), //rolling on the ground
+				_ => angVel, //neutral fall/flight
 			};
 			rot = Mathf.LerpAngle(rot, rot + angVel, 1f);
 		}
