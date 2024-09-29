@@ -52,8 +52,8 @@ public class Plugin : BaseUnityPlugin
 
 	private void _AddBGLabels()
 	{
-		BlackGlare.API.Labels.AddObjectLabel<Player>((p) => "Goated").AddCondition((p) => p.SlugCatClass.value == TARDIGOATED_ID);
-		BlackGlare.API.Labels.AddObjectLabel<GlangleFruit>((f) => $"yummers x{f.GAbs.bitesLeft}");
+		// BlackGlare.API.Labels.AddObjectLabel<Player>((p) => "Goated").AddCondition((p) => p.SlugCatClass.value == TARDIGOATED_ID);
+		// BlackGlare.API.Labels.AddObjectLabel<GlangleFruit>((f) => $"yummers x{f.GAbs.bitesLeft}");
 	}
 
 	#region misc hooks
