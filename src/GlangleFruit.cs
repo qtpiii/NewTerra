@@ -18,7 +18,7 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		On.Player.Grabability += (orig, self, obj) => obj is GlangleFruit ? Player.ObjectGrabability.OneHand : orig(self, obj);
 		On.Player.ThrowObject += (orig, self, grasp, eu) =>
 		{
-			if (self.grasps[grasp].grabbed is GlangleFruit gfruit) gfruit.Speeeen();
+			if (self.grasps[grasp].grabbed is GlangleFruit gfruit) gfruit.Speeeen(45f);
 			orig(self, grasp, eu);
 		};
 		Content.Register(new GFisob());
@@ -28,22 +28,20 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 	private const float MASS_BASE = 0.1f;
 	private const float MASS_PER_BITE = 0.01f;
 	private const float CHUNKRAD_BASE = 5f;
-	private const float CHUNKRAD_PER_BITE = 0.05f;
-	private const int MAX_BITES_DEFAULT = 10;
+	private const float CHUNKRAD_PER_BITE = 0.1f;
 	private const float VISUAL_PERPDISTANCE_PER_SEED = 15f;
 	private const float VISUAL_DISTANCE_PER_SEED = 0.1f;
 	private const float VISUAL_DISTANCE_INITIAL = 6f;
-	private const float VISUAL_RANDOM_PERPDISTANCE_MAX = 6f;
-	private const float VISUAL_RANDOM_DIST_MAX = 1f;
+	private const float VISUAL_RANDOM_DISPLACE_ORBIT_MAX = 6f;
+	private const float VISUAL_RANDOM_DISPLACE_RADIAL_MAX = 1f;
 	private const float VISUAL_RANDOM_EXTRA_ROT_MAX = 10f;
-
 	private const float PHYS_GRAVITY = 0.9f;
 	private const float PHYS_BOUNCE = 0.2f;
 	private const float PHYS_AIR_FRICTION = 0.97f;
 	private const float PHYS_SURFACE_FRICTION = 0.5f;
 	private const float PHYS_WATER_FRICTION = 0.95f;
 	private const float PHYS_BUOYANCY = 1.1f;
-	private (float angle, float dst, float extraRot)[] seedTransforms;
+	private readonly (float angle, float dst, float extraRot)[] seedTransforms;
 	private float rot = 0f;
 	private float lastRot = 0f;
 	private float angVel = 0f;
@@ -81,22 +79,17 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		for (int i = 0; i < GAbs.maxBites; i++)
 		{
 			float perimeter = 2f * Mathf.PI * dst;
-			float randDistIncrement = VISUAL_RANDOM_DIST_MAX * Random.Range(-1f, 1f);
-			float randPerpDistIncr = VISUAL_RANDOM_PERPDISTANCE_MAX * Random.Range(-1f, 1f);
+			float randRadialDisplace = VISUAL_RANDOM_DISPLACE_RADIAL_MAX * Random.Range(-1f, 1f);
+			float randOrbitDisplace = VISUAL_RANDOM_DISPLACE_ORBIT_MAX * Random.Range(-1f, 1f);
+			float randAngleIncrement = 360f * (randOrbitDisplace / perimeter);
 			float randRot = VISUAL_RANDOM_EXTRA_ROT_MAX * Random.Range(-1f, 1f);
-			//float distanceIncrement = VISUAL_DISTANCE_PER_SEED + randDistIncr;
-			//float targetPerpdist = VISUAL_PERPDISTANCE_PER_SEED + randPerpDistIncr;
 			float baseAngleIncrement = 360f * (VISUAL_PERPDISTANCE_PER_SEED / perimeter);
-			float randAngleIncrement = 360f * (randPerpDistIncr / perimeter);
-
-			// LogWarning($"a {angle} + {baseAngleIncrement} + {randAngleIncrement} d {dst} + {VISUAL_DISTANCE_PER_SEED} {randDistIncrement} p {perimeter} rr {randRot}");
 			seedTransforms[i] = (
 				Mathf.LerpAngle(angle, angle + randAngleIncrement, 1f),
-				dst + randDistIncrement,
+				dst + randRadialDisplace,
 				randRot);
 			angle = Mathf.LerpAngle(angle, angle + baseAngleIncrement, 1f);
 			dst += VISUAL_DISTANCE_PER_SEED;
-
 		}
 		Random.state = state;
 	}
@@ -151,9 +144,9 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		}
 	}
 
-	void Speeeen()
+	void Speeeen(float angVelMaxAbs)
 	{
-		angVel = Random.Range(-45f, 45f);
+		angVel = angVelMaxAbs * Random.Range(-1f, 1f);
 	}
 
 	#region idrawable
@@ -187,8 +180,6 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		float startAngle = Mathf.LerpAngle(lastRot, rot, timeStacker);
 		sLeaser.sprites[0].SetPosition(basePos);
 		sLeaser.sprites[0].rotation = startAngle;
-		// sLeaser.sprites[0].color = Color.Lerp(Color.yellow, Color.red, (float)GAbs.bitesLeft / (float)MAX_BITES_DEFAULT);
-		// sLeaser.sprites[0].width = sLeaser.sprites[0].height = (BASE_CHUNKRAD + GAbs.bitesLeft * CHUNKRAD_PER_BITE) * 2;
 		for (int i = 0; i < GAbs.maxBites; i++)
 		{
 			FSprite seed = sLeaser.sprites[i + 1];
@@ -341,10 +332,12 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 	public sealed class GSpawner : UpdatableAndDeletable
 	{
 		private readonly PlacedObject _owner;
+		private readonly bool _firstTimeRealized;
 		public GSpawner(PlacedObject owner, Room room)
 		{
 			this.room = room;
 			_owner = owner;
+			_firstTimeRealized = room.abstractRoom.firstTimeRealized;
 		}
 
 		private PomData _data => (PomData)_owner.data;
@@ -352,9 +345,10 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 		{
 			int roomIndex = room.abstractRoom.index;
 			int placedObjectIndex = room.roomSettings.placedObjects.IndexOf(_owner);
+			LogWarning($"{roomIndex} {placedObjectIndex} ");
 			if (room.game.session switch
 			{
-				StoryGameSession story => !story.saveState.ItemConsumed(room.world, false, roomIndex, placedObjectIndex) && room.abstractRoom.firstTimeRealized,
+				StoryGameSession story => !story.saveState.ItemConsumed(room.world, false, roomIndex, placedObjectIndex) && _firstTimeRealized,
 				_ => true
 			})
 			{
@@ -375,7 +369,7 @@ public sealed class GlangleFruit : PlayerCarryableItem, IDrawable, IPlayerEdible
 			}
 			else
 			{
-				LogWarning($"{room.world} {placedObjectIndex} sadly consumed");
+				LogWarning($"sadly consumed");
 			}
 			Destroy();
 		}
