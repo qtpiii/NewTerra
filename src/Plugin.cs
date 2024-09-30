@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using BepInEx;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace NewTerra;
 
 [BepInPlugin(MOD_ID, "New Terra", "0.1.0")]
-[BepInDependency("thalber.blackglare")]
+[BepInDependency("thalber.blackglare", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("io.github.dual.fisobs")]
 public class Plugin : BaseUnityPlugin
 {
@@ -39,7 +40,7 @@ public class Plugin : BaseUnityPlugin
 			__SwitchToBepinexLogger(Logger);
 			_AddBGLabels();
 		}
-		catch (TypeLoadException)
+		catch (FileNotFoundException)
 		{
 			Logger.LogWarning("BlackGlare not loaded, labels inaccessible");
 		}
@@ -52,7 +53,7 @@ public class Plugin : BaseUnityPlugin
 
 	private void _AddBGLabels()
 	{
-		// BlackGlare.API.Labels.AddObjectLabel<Player>((p) => "Goated").AddCondition((p) => p.SlugCatClass.value == TARDIGOATED_ID);
+		BlackGlare.API.Labels.AddObjectLabel<Player>((p) => "Goated").AddCondition((p) => p.SlugCatClass.value == TARDIGOATED_ID);
 		// BlackGlare.API.Labels.AddObjectLabel<GlangleFruit>((f) => $"yummers x{f.GAbs.bitesLeft}");
 	}
 
