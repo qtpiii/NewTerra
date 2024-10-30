@@ -19,7 +19,7 @@ public class Plugin : BaseUnityPlugin
 	
 
 	internal readonly Dictionary<string, string[]> DecalAutoplaceSets = new();
-	internal string currWeather;
+	internal string? currWeather;
 
 	public void OnEnable()
 	{
