@@ -1,0 +1,8 @@
+DangerType: None
+CeilingDrips: 0.1
+Clouds: 0.1
+Grime: 0.1
+Palette: 4984
+EffectColorA: 13
+EffectColorB: 21
+Effects: DayNight-0.5-20-20, MossWaterRGB-0.6520041-940.6667-113.9111-Height:0.2962753-Red:92.68307-Green:82.82296-Blue:35.49464, RGBElectricDeath-1-663.1979-374.1778-AffectBKGLightning:True-Blue:255-Green:245-Red:185, SilenceWater-0.3093302-924.3032-417.5555, SeedBats-1-282.5677-49.91111, 

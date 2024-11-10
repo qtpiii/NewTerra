@@ -1,0 +1,124 @@
+ROOMS
+
+RU_A02 : RU_C01, RU_B01, RU_B15
+RU_B01 : RU_A23, RU_A02, RU_B03, RU_C04
+RU_A03 : RU_A04, RU_B21, RU_C02 : SWARMROOM
+RU_S01 : RU_B02, RU_A04, RU_B06 : ANCIENTSHELTER
+RU_C01 : RU_B16, RU_A02, RU_A09
+RU_B02 : DISCONNECTED, RU_D02, DISCONNECTED, RU_S01
+RU_A04 : RU_A03, RU_S01
+RU_C02 : RU_A03, RU_B17
+RU_B03 : RU_C03, RU_B01
+RU_B04 : RU_A08, RU_B07 : SWARMROOM
+RU_A05 : RU_B05, RU_A01, RU_A29, RU_A14 : SWARMROOM
+RU_A06 : RU_B15, RU_C04, RU_A30
+RU_B05 : RU_A05, RU_D01
+RU_A07 : RU_C03, RU_A23
+RU_D01 : RU_B05, RU_B20, RU_D04
+RU_B06 : RU_S01, RU_C03
+RU_C03 : RU_B06, RU_A07, RU_A13, RU_A17, RU_B03
+RU_D02 : GATE_AW_RU, RU_B02
+GATE_AW_RU : DISCONNECTED, RU_D02 : GATE
+RU_A08 : RU_A21, RU_B04
+RU_A09 : RU_C01, RU_A10, RU_B15
+RU_B07 : RU_B04, RU_D03
+RU_C04 : RU_B01, RU_A06, RU_A12
+RU_A10 : RU_B17, RU_A09, RU_C06
+RU_A12 : RU_S02, RU_C04
+RU_S02 : RU_A13, RU_A12 : ANCIENTSHELTER
+RU_B10 : RU_A01, RU_A23, RU_A14
+RU_A13 : RU_C03, RU_S02
+RU_A14 : RU_A05, RU_B10
+RU_A15 : RU_A21, RU_B17
+RU_F01 : RU_B20, RU_A26, RU_A31
+RU_C06 : RU_A25, RU_A10
+RU_A17 : RU_C03, RU_A24
+GATE_RU_F4 : RU_A32, DISCONNECTED : GATE
+RU_D03 : RU_B07, RU_A28, RU_A22 : SCAVOUTPOST
+RU_A21 : RU_A15, RU_A08
+RU_S03 : RU_B22, RU_B19, RU_A22 : ANCIENTSHELTER
+RU_A22 : RU_D03, RU_S03
+RU_A01 : RU_A05, RU_B10
+RU_A23 : RU_B21, RU_B10, RU_A07, RU_B01
+RU_A24 : RU_A17, RU_B24
+RU_B15 : RU_A02, RU_A09, RU_A06
+RU_B16 : RU_C01, RU_B18
+RU_B17 : RU_C02, RU_A15, RU_A10
+RU_B18 : RU_E01, RU_A29, RU_B16, RU_A25
+RU_B19 : RU_E01, RU_S03, RU_A27
+RU_A25 : RU_B18, RU_C06, RU_B22
+RU_D04 : RU_D01, DISCONNECTED, RU_A26, RU_S04, RU_A27
+RU_B20 : RU_F01, RU_D01
+RU_S04 : RU_B25, RU_D04 : ANCIENTSHELTER
+RU_A26 : RU_F01, RU_D04
+RU_A27 : RU_D04, RU_B19
+RU_E01 : RU_B19, RU_B18 : SWARMROOM
+RU_A28 : RU_D03, DISCONNECTED
+RU_B21 : RU_A03, RU_A23
+RU_A29 : RU_A05, RU_B18
+RU_B22 : RU_A25, RU_S03
+RU_A30 : RU_A06 : SWARMROOM
+RU_A31 : RU_F01, RU_C09, RU_B25
+RU_B24 : RU_A24, RU_A32
+RU_A32 : RU_B24, GATE_RU_F4
+RU_C09 : RU_B23, RU_A31
+RU_B23 : DISCONNECTED, RU_C09
+RU_B25 : RU_S04, RU_A31
+END ROOMS
+CREATURES
+
+RU_A02 : 5-TentaclePlant-{Ignorecycle}, 3-BlueLizard
+OFFSCREEN : 0-Vulture-2, 0-Scrounger-2, 0-Scavenger-6, 0-Scavenger-{Night}-2, 0-Scrounger-{Night}-8, 0-Scavenger-{Seed:3640}
+LINEAGE : OFFSCREEN : 0 : NONE-{Night}-0.5, KingVulture-{Night}-0
+LINEAGE : OFFSCREEN : 0 : Vulture-{Ignorecycle}-0.2, KingVulture-{Ignorecycle}-0
+RU_A05 : 4-BigNeedleWorm, 4-SmallNeedleWorm-3
+RU_C02 : 3-BigNeedleWorm, 3-SmallNeedleWorm-4, 4-WhiteLizard-{Ignorecycle}, 5-CyanLizard-{Night}
+RU_D04 : 5-BigNeedleWorm, 5-SmallNeedleWorm-2, 7-Centipede-{0.2}, 8-Centipede-{0.6}, 9-SmallCentipede-2, 10-LanternMouse-{Night}, 6-WhiteLizard-{Night}
+RU_A09 : 4-EggBug, 3-Centipede-{Ignorecycle}
+RU_C04 : 6-Salamander, 5-surfacewalker-{Ignorecycle}, 3-WaterBlob-{Ignorecycle}-2
+RU_C06 : 5-Salamander, 3-WhiteLizard-{Ignorecycle}, 2-WaterBlob-{Ignorecycle}-3, 4-Eel-{Night}
+RU_B01 : 6-Salamander, 7-Eel-{Night}, 4-Centipede-{Night}, 5-SmallCentipede-{Night}-2
+RU_B24 : 3-Salamander-{Ignorecycle}, 2-Leech-6, 3-Eel-{Night}
+RU_B21 : 4-WhiteLizard, 2-EggBug, 3-CyanLizard-{Night}
+RU_E01 : 2-BlueLizard-{Ignorecycle}, 5-Centipede-{0.5}, 5-Centipede-{0.2}, 4-CyanLizard-{Night}-2
+RU_A21 : 2-WhiteLizard
+RU_B10 : 3-PinkLizard
+LINEAGE : RU_B24 : 4 : NONE-{Ignorecycle}-0.2, BubbleWeaver-{Ignorecycle}-0.3, NONE-{Ignorecycle}-0.2, SapphiricWeaver-{Ignorecycle}-0
+RU_A24 : 3-Leech-4, 2-Snail-{Ignorecycle}-2
+RU_A12 : 2-Snail-{Ignorecycle}-2, 3-CyanLizard-{Night}
+RU_C01 : 5-Snail-2
+RU_B07 : 3-Snail-2, 2-WaterSpitter-{Ignorecycle}, 4-WaterBlob-{Night}
+RU_D03 : 6-WaterSpitter, 5-WaterBlob-{Night}-2, 3-BubbleWeaver-{Night}
+RU_F01 : 8-DropBug-{Ignorecycle}, 3-Centipede-{0.6}, 6-LanternMouse-{Night}-2
+RU_C09 : 4-DropBug-{Ignorecycle}, 6-Centipede-{1}, 3-SmallCentipede-2, 3-LanternMouse-{Night}-2, 5-CyanLizard-{Night}
+RU_C03 : 5-BlueLizard, 8-WhiteLizard, 6-WaterBlob-{Night}-2
+RU_B03 : 2-Leech-3, 2-BubbleWeaver-{Night}
+RU_A06 : 3-Snail-{Ignorecycle}-2
+RU_B15 : 8-BlueLizard, 5-WhiteLizard-{Ignorecycle}, 3-SmallCentipede-2
+RU_D01 : 8-Centipede-{0.4}, 6-SmallCentipede-2, 7-Centipede-{Night}-2, 5-SmallCentipede-{Night}-2
+LINEAGE : RU_C09 : 6 : NONE-{Night}-0.3, Centipede-{Night}-0
+RU_A31 : 4-SmallCentipede
+RU_B05 : 2-Centipede-{Night}, 4-PinkLizard
+RU_A14 : 5-SmallCentipede
+RU_A29 : 3-Centipede-{0.4}
+RU_B16 : 3-WhiteLizard-{Ignorecycle}
+RU_B20 : 2-BlueLizard
+RU_A26 : 4-BlueLizard
+RU_B19 : 4-Centipede-{0.3}
+LINEAGE : RU_C01 : 4 : surfacewalker-{Night}-0.2, BubbleWeaver-{Night}-0
+RU_A10 : 3-BlueLizard
+RU_A22 : 4-surfacewalker-{Ignorecycle}-2
+LINEAGE : RU_A09 : 4 : NONE-{Night}-0.3, BubbleWeaver-0
+LINEAGE : RU_B17 : 6 : NONE-{Night}-0.2, BubbleWeaver-{Night}-0
+LINEAGE : RU_B21 : 5 : surfaceswimmer-{Night}-0.4, BubbleWeaver-{Night}-0
+LINEAGE : RU_A26 : 3 : NONE-{Night}-0.1, BubbleWeaver-{Night}-0
+LINEAGE : RU_C09 : 2 : LanternMouse-{Night}-0.1, BubbleWeaver-{Night}-0.1, NONE-{Night}-0
+LINEAGE : RU_B20 : 4 : CyanLizard-{Night}-0.1, RedLizard-{Night}-0.6, BlueLizard-{Night}-0
+LINEAGE : RU_B15 : 9 : NONE-{Night}-0.5, RedCentipede-{Night}-0.2, Centipede-{Night}-0
+RU_A01 : 4-BlueLizard, 2-CyanLizard-{Night}-2
+RU_B22 : 2-Centipede-{1}
+LINEAGE : RU_B22 : 2 : NONE-{Night}-0.3, RedCentipede-{Night}-0.4, Centipede-{Night}-0
+LINEAGE : RU_A22 : 2 : BubbleWeaver-{Night}-0.2, NONE-{Night}-0
+LINEAGE : RU_D02 : 2 : NONE-{Night}-0.2, SapphiricWeaver-{Night}-0.7, BubbleWeaver-{Night}-0
+RU_B25 : 3-WhiteLizard, 2-CyanLizard-{Night}
+END CREATURES

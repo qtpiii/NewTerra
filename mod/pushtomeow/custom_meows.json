@@ -1,0 +1,10 @@
+{
+	"custom_meows": [
+		{
+			"slugcat_id": "Tenacious",
+			"short_meow_soundid": "SlugcatMeowFatShort",
+			"long_meow_soundid": "SlugcatMeowFat",
+			"volume_multiplier": 1.1
+		}
+	]
+}

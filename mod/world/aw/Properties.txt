@@ -1,0 +1,8 @@
+
+overseersSpawnChance: 0
+playerGuideOverseerSpawnChance: 0
+pupSpawnChance: 0.05
+earlyCycleChance: 0
+kelpColor: 0.3, 0.65, 0.15
+batsPerActiveSwarmRoom: 8
+Subregion: Acrid Compound

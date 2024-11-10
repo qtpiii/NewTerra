@@ -1,0 +1,9 @@
+
+overseersSpawnChance: 0
+playerGuideOverseerSpawnChance: 0
+pupSpawnChance: 0
+earlyCycleChance: 0
+batsPerActiveSwarmRoom: 5
+Room Setting Templates: Inside, Outside, Burrow, Crypt
+Subregion: Cursory Burrow
+Subregion: Necrotic Crypt

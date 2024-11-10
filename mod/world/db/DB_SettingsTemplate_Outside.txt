@@ -1,0 +1,12 @@
+DangerType: AerieBlizzard
+RainIntensity: 0.2
+RumbleIntensity: 0
+CeilingDrips: 0.15
+Clouds: 0.15
+Grime: 0.25
+WetTerrain: OFF
+Palette: 4989
+EffectColorA: 10
+EffectColorB: 9
+Effects: LightBurn-0.05-20-20, Coldness-0.5-30-107, Beetle-0.10-299-60, HSLDisplaySnow-0.7061376-800.5094-360.6667-Luminosity:55.57298-Saturation:3.093355-Hue:305.2785-AffectSnowfall:False-LerpRainCycle:False-EndLuminosity:30.82654,
+AmbientSounds: OMNI><am_env-winterhum.ogg><719.8955><311.6372><0.3043478><1,

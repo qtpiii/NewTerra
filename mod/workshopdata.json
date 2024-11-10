@@ -1,0 +1,19 @@
+{
+  "Title": "New Terra",
+  "Description": "Lawl",
+  "ID": "qtpi.new-terra",
+  "Version": "0.2.1",
+  "TargetGameVersion": "v1.9.06",
+  "Requirements": "slime-cubed.slugbase,pom,regionkit,crs,bry.bubbleweavers,lb-fgf-m4r-ik.modpack,shrimb.scroungers",
+  "RequirementNames": "SlugBase,POM,RegionKit,Custom Regions Support,Bubble Weavers,The M4rblelous Entity Pack,Scroungers",
+  "Authors": "qtpi",
+  "Visibility": "Unlisted",
+  "Tags": [
+    "Regions",
+    "Campaigns",
+    "Custom Slugcat"
+  ],
+  "WorkshopID": 3299507593,
+  "UploadFilesOnly": false,
+  "UploadThumbnail": false
+}

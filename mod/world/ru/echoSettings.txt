@@ -1,0 +1,8 @@
+priming : true
+size : 1
+minkarma : -1
+minkarmacap : 4
+radius : 4
+echosong : SB
+room : RU_F01
+defaultflip : -1

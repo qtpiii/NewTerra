@@ -1,0 +1,4 @@
+[MERGE]
+GATE_AW_RU : 1 : 5
+GATE_RU_F4 : Forbidden : Forbidden
+[ENDMERGE]

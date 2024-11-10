@@ -1,0 +1,12 @@
+Template: NONE
+DangerType: None
+RainIntensity: 0.3
+RumbleIntensity: 0.3
+Clouds: 0.35
+Grime: 0.1
+Palette: 4984
+EffectColorB: 9
+Effects: Fog-0.08-20-20, DayNight-0.75-20-20, SeedBats-1-207.8646-73.37778, 
+PlacedObjects: DayNightSettings><-137.864><88.60338><5~8.660254~4985~10, ColouredLightSource><-92><272><-34~-288~E9FFB4~360^-754~0.05434782~True~1~0~0.5~Always~0~100, 
+AmbientSounds: OMNI><am_ind-midsex02.ogg><727.38><442.902><0.25><0.9608696, OMNI><am_ind-deephum.ogg><720.4455><192.4424><0.3586957><1, SPOT><am_ind-50hz.ogg><730.5864><255.6151><0.3586957><1><1108.586><336.6151><-35.35534><-35.35534><0><0.5565219, 
+FadePalette: 4986, 0.75

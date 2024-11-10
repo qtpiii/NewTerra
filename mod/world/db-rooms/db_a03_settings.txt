@@ -1,0 +1,2 @@
+Template: DB_SettingsTemplate_Burrow
+FadePalette: 8, 0.05434782

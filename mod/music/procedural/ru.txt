@@ -1,0 +1,22 @@
+TH_RU - BASS : NEUTRAL
+TH_RU - BASSLINE : NEUTRAL
+TH_RU - DIST : NEUTRAL
+TH_RU - DROPS : NEUTRAL
+TH_RU - ECHOSNARE : NEUTRAL
+TH_RU - KEYS : NEUTRAL
+TH_RU - KICK : NEUTRAL
+TH_RU - KICKHAT : NEUTRAL
+TH_RU - KICKPERC : NEUTRAL
+TH_RU - NOISE : NEUTRAL
+TH_RU - PAD : NEUTRAL
+TH_RU - SHAKER : NEUTRAL
+TH_RU - SNARE : NEUTRAL
+TH_RU - SUB : NEUTRAL
+TH_RU - SUBLINE : NEUTRAL
+
+
+Layer : {Sunny}TH_RU - KICK, {Cloudy}TH_RU - KICKHAT, {Rainy|Stormy}TH_RU - KICKPERC
+Layer : {Sunny|Cloudy}TH_RU - SNARE, {Cloudy|Rainy|Stormy}TH_RU - SHAKER, {Rainy|Stormy}TH_RU - ECHOSNARE
+Layer : {Sunny|Cloudy|Rainy|Riverbed Urban}TH_RU - BASS, {Sunny|Cloudy|Rainy|Old Path}TH_RU - SUB, {Stormy|Riverbed Urban}TH_RU - BASSLINE, {Stormy|Old Path}TH_RU - SUBLINE
+Layer : {Cloudy|Rainy|Stormy|Riverbed Urban}TH_RU - DIST, TH_RU - KEYS, {Old Path}TH_RU - DROPS
+Layer : {Sunny|Cloudy}TH_RU - PAD, {Rainy|Stormy}TH_RU - NOISE

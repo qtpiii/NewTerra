@@ -1,0 +1,14 @@
+Template: NONE
+DangerType: None
+CeilingDrips: 0.6
+RainIntensity: 0
+RumbleIntensity: 0
+Clouds: 0.2
+Grime: 0.1
+Palette: 4986
+EffectColorA: 9
+EffectColorB: 13
+Effects: Bloom-0.1-40-106, DayNight-0.75-20-20, 
+PlacedObjects: DayNightSettings><-137.864><88.60338><5~8.660254~4985~10, CommonGateData><493.9922><1015.375><100~50~False~False~False~False~False~False~False~False~0~1~1, ElectricGateData><-148.3011><925.5204><100~50~True~False~False~True~True~False~True~False~0~1~False~0~1~0.5, LightSource><574.03><1011.415><0.05654376~Environment~530.0364~111.3778~50~86.60254~1~1~None~0~0, 
+AmbientSounds: SPOT><am_ind-midsex01.ogg><752.064><456.8105><0.3586957><1><794.064><49.81055><-212.3553><74.64465><0><0.3500001, OMNI><am_ind-utility01.ogg><738.4115><355.1794><0.3586957><1, SPOT><am_ind-electrichum01.ogg><731.934><176.4217><0.5><1><483.934><1011.422><-191.3553><-109.3553><0><0.2086958, OMNI><mech active.wav><386.0557><505.7972><0.1521739><1, 
+FadePalette: 4984, 0.5, 0.5

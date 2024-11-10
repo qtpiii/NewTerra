@@ -1,0 +1,11 @@
+Template: NONE
+DangerType: None
+RainIntensity: 0
+RumbleIntensity: 0
+Clouds: 0.25
+Grime: 0.1
+Palette: 4984
+EffectColorB: 9
+Effects: Fog-0.1-20-20, DayNight-0.75-20-20, SeedBats-1-248.4177-49.91111, 
+PlacedObjects: DayNightSettings><-137.864><88.60338><5~8.660254~4985~10, 
+FadePalette: 4986, 0.85

@@ -1,0 +1,14 @@
+Template: NONE
+DangerType: None
+CeilingDrips: 0.1
+RainIntensity: 0
+RumbleIntensity: 0
+Clouds: 0.15
+Grime: 0.1
+Palette: 10
+EffectColorA: 13
+EffectColorB: 21
+Effects: DayNight-0.75-20-20, 
+PlacedObjects: DayNightSettings><-137.864><88.60338><5~8.660254~4988~10, LightFixture><90.70425><380.0731><RedLight~17.32051~-10~54, LightFixture><845.8003><381.8239><RedLight~17.32051~-10~17, CustomDecal><193.8632><-82.673><-12~581~574~578~568~-2~317~51~0~1~1~rustb3~0.2065217~0.9021739~0.3695652~0.7282609~0.2282609~0.8478261~0.3369565~0.7391304, 
+AmbientSounds: OMNI><am_ind-deephum.ogg><722.7238><276.0517><0.5><1, OMNI><so_ind-deep50hz.ogg><746.7462><493.2><0.4021739><1, 
+FadePalette: 4988, 0.5
