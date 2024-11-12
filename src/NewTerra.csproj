@@ -14,57 +14,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="HOOKS-Assembly-CSharp">
-			<HintPath>../lib/HOOKS-Assembly-CSharp.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Mono.Cecil">
-			<HintPath>../lib/Mono.Cecil.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Mono.Cecil.Rocks">
-			<HintPath>../lib/Mono.Cecil.Rocks.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="MonoMod.RuntimeDetour">
-			<HintPath>../lib/MonoMod.RuntimeDetour.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="MonoMod.Utils">
-			<HintPath>../lib/MonoMod.Utils.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<!-- <Reference Include="../lib/SlugBase.dll">
-			<Private>false</Private>
-		</Reference> -->
-		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>../lib/UnityEngine.CoreModule.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine">
-			<HintPath>../lib/UnityEngine.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>../lib/PUBLIC-Assembly-CSharp.dll</HintPath>
-		</Reference>
-		<Reference Include="BepInEx">
-			<HintPath>../lib/BepInEx.dll</HintPath>
-		</Reference>
-		<Reference Include="Fisobs">
-			<HintPath>../lib/Fisobs.dll</HintPath>
-		</Reference>
-		<Reference Include="Pom">
-			<HintPath>../lib/Pom.dll</HintPath>
-		</Reference>
-		<Reference Include="BlackGlare">
-			<HintPath>../lib/BlackGlare.dll</HintPath>
-		</Reference>
-		<Reference Include="Unity.Mathematics">
-			<HintPath>../lib/Unity.Mathematics.dll</HintPath>
-		</Reference>
-		<Reference Include="UnityEngine.InputLegacyModule">
-			<HintPath>../lib/UnityEngine.InputLegacyModule.dll</HintPath>
+		<Reference Include="../lib/*.dll">
+			<Private>False</Private>
 		</Reference>
 	</ItemGroup>
 
