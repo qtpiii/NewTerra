@@ -81,70 +81,45 @@ namespace NewTerra
 		private void RoomSettings_LoadEffects(On.RoomSettings.orig_LoadEffects orig, RoomSettings self, string[] s)
 		{
 			orig(self, s);
-			if (self.name.StartsWith("RU_") || self.name.StartsWith("AW_"))
+			if (!self.isTemplate)
 			{
-				//switch (currWeather)
+				if (self.name.StartsWith("RU_") || self.name.StartsWith("AW_"))
+				{
+					switch (currWeather)
+					{
+					case CurrWeather.Sunny:
+						self.Clouds = 0.1f;
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
+						break;
+					case CurrWeather.Cloudy:
+						self.Clouds = 0.6f;
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Bloom, 0.2f, false));
+						break;
+					case CurrWeather.Rainy:
+						self.Clouds = 0.9f;
+						self.CeilingDrips = 0.7f;
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 0.8f, false));
+						break;
+					case CurrWeather.Stormy:
+						self.Clouds = 1f;
+						self.CeilingDrips = 1f;
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 1f, false));
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.05f, false));
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.BkgOnlyLightning, 1f, false));
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.ExtraLoudThunder, 1f, false));
+						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
+						break;
+					}
+					Debug.Log("Effects loaded in " + self.name + " for " + currWeather + " weather");
+				}
+				//if (self.name.StartsWith("DB_"))
 				//{
-				//case CurrWeather.Sunny:
-				//	self.Clouds = 0.1f;
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
-				//	break;
-				//case CurrWeather.Cloudy:
-				//	self.Clouds = 0.6f;
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Bloom, 0.2f, false));
-				//	break;
-				//case CurrWeather.Rainy:
-				//	self.Clouds = 0.9f;
-				//	self.CeilingDrips = 0.7f;
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 0.8f, false));
-				//	break;
-				//case CurrWeather.Stormy:
-				//	self.Clouds = 1f;
-				//	self.CeilingDrips = 1f;
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 1f, false));
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.05f, false));
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.BkgOnlyLightning, 1f, false));
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.ExtraLoudThunder, 1f, false));
-				//	self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
-				//	break;
+				//    if (ModManager.MSC && self.DangerType == RoomRain.DangerType.AerieBlizzard)
+				//    {
+				//        self.DangerType = MoreSlugcatsEnums.RoomRainDangerType.Blizzard;
+				//    }
 				//}
-				
-				if (currWeather == CurrWeather.Sunny)
-				{
-					self.Clouds = 0.1f;
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
-				}
-				else if (currWeather == CurrWeather.Cloudy)
-				{
-					self.Clouds = 0.6f;
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Bloom, 0.2f, false));
-				}
-				else if (currWeather == CurrWeather.Rainy)
-				{
-					self.Clouds = 0.9f;
-					self.CeilingDrips = 0.7f;
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 0.8f, false));
-				}
-				else if (currWeather == CurrWeather.Stormy)
-				{
-					self.Clouds = 1f;
-					self.CeilingDrips = 1f;
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 1f, false));
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.05f, false));
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.BkgOnlyLightning, 1f, false));
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.ExtraLoudThunder, 1f, false));
-					self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
-				}
-				Debug.Log("Effects loaded in " + self.name + " for " + currWeather + " weather");
 			}
-			//if (self.name.StartsWith("DB_"))
-			//{
-			//    if (ModManager.MSC && self.DangerType == RoomRain.DangerType.AerieBlizzard)
-			//    {
-			//        self.DangerType = MoreSlugcatsEnums.RoomRainDangerType.Blizzard;
-			//    }
-			//}
-
 		}
 	}
 }
