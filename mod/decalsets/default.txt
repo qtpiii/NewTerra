@@ -1,3 +1,0 @@
-Rust1
-Rust2
-Rust3

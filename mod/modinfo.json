@@ -4,7 +4,7 @@
 	"version": "0.1.0",
 	"authors": "qtpi",
 	"description": "A world of unknowns, of new territories.",
-	"requirements": [ "slime-cubed.slugbase", "fisobs" ],
-	"requirements_names": [ "SlugBase", "Fisobs"],
+	"requirements": [ "slime-cubed.slugbase", "fisobs", "pom", "regionkit"],
+	"requirements_names": [ "SlugBase", "Fisobs", "POM", "RegionKit"],
 	"tags": [ "Custom Slugcat" ]
 }

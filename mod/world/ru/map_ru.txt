@@ -1,68 +1,68 @@
-RU_A02: -336><12><-278><-50><1><Riverbed Urban
+RU_A02: -336><13.5><-278><-50><1><Riverbed Urban
 RU_B01: -480><-63><-368><-138><1><Riverbed Urban
-RU_A03: -321><364.5><-260><236><1><Riverbed Urban
-RU_S01: -468><355.5><-364><220><1><Riverbed Urban
-RU_C01: -18><-4.5><-184><-60><1><Riverbed Urban
-RU_B02: -615><508.5><-528><294><1><Riverbed Urban
-RU_A04: -378><433.5><-302><292><1><Riverbed Urban
-RU_C02: -99><253.5><-192><170><2><Riverbed Urban
-RU_B03: -574.5><-22.5><-580><-44><2><Riverbed Urban
-RU_B04: 609><-3><362><-38><1><Riverbed Urban
-RU_A05: 78><112.5><2><40><0><Riverbed Urban
-RU_A06: -183><-219><-190><-200><1><Riverbed Urban
-RU_B05: 330><93><142><110><1><
-RU_A07: -648><109.5><-508><48><1><Riverbed Urban
-RU_D01: 844.5><106.5><474><238><1><Old Path
-RU_B06: -579><283.5><-490><164><1><Riverbed Urban
-RU_C03: -876><130.5><-798><-20><1><Riverbed Urban
-RU_D02: -1050><538.5><-932><322><1><
-GATE_AW_RU: -1410><663><-1010><388><2><
-RU_A08: 438><111><380><106><2><Riverbed Urban
-RU_A09: -15><-106.5><-50><-130><1><Riverbed Urban
-RU_B07: 942><-13.5><566><-38><1><Riverbed Urban
-RU_C04: -513><-235.5><-494><-210><1><Riverbed Urban
-RU_A10: 105><-112.5><42><-134><1><Riverbed Urban
-RU_A12: -798><-235.5><-586><-212><1><Riverbed Urban
-RU_S02: -918><-181.5><-690><-188><1><Riverbed Urban
-RU_B10: -270><85.5><-286><28><0><Riverbed Urban
-RU_A13: -969><-91.5><-738><-114><1><Riverbed Urban
-RU_A14: -36><79.5><-80><14><0><Riverbed Urban
-RU_A15: 231><246><134><184><2><Riverbed Urban
-RU_F01: 1851><231><1204><210><2><Old Path
-RU_C06: 357><-102><156><-116><1><Riverbed Urban
-RU_A17: -1020><-124.5><-844><-104><2><Riverbed Urban
-GATE_RU_F4: -717><-423><-638><-340><1><
-RU_D03: 1437><-31.5><916><-44><1><Riverbed Urban
-RU_A21: 384><231><300><184><2><Riverbed Urban
-RU_S03: 1074><-103.5><782><-146><1><Riverbed Urban
-RU_A22: 1197><-136.5><896><-130><1><Riverbed Urban
+RU_A03: -321><366><-260><236><1><Riverbed Urban
+RU_S01: -468><357><-364><220><1><Riverbed Urban
+RU_C01: -18><-3><-184><-60><1><Riverbed Urban
+RU_B02: -615><510><-528><294><1><Riverbed Urban
+RU_A04: -378><435><-302><292><1><Riverbed Urban
+RU_C02: -99><255><-192><170><2><Riverbed Urban
+RU_B03: -576><-21><-580><-44><2><Riverbed Urban
+RU_B04: 609><-1.5><362><-38><1><Riverbed Urban
+RU_A05: 78><114><2><40><0><Riverbed Urban
+RU_A06: -183><-217.5><-190><-200><1><Riverbed Urban
+RU_B05: 328.5><93><142><110><1><
+RU_A07: -648><111><-508><48><1><Riverbed Urban
+RU_D01: 843><108><474><238><1><Old Path
+RU_B06: -579><285><-490><164><1><Riverbed Urban
+RU_C03: -876><132><-798><-20><1><Riverbed Urban
+GATE_AW_RU: -1434><663><-1010><388><2><
+RU_A08: 438><112.5><380><106><2><Riverbed Urban
+RU_A09: -15><-105><-50><-130><1><Riverbed Urban
+RU_B07: 942><-12><566><-38><1><Riverbed Urban
+RU_C04: -513><-234><-494><-210><1><Riverbed Urban
+RU_A10: 105><-111><42><-134><1><Riverbed Urban
+RU_A12: -798><-234><-586><-212><1><Riverbed Urban
+RU_S02: -918><-180><-690><-188><1><Riverbed Urban
+RU_B10: -270><87><-286><28><0><Riverbed Urban
+RU_A13: -969><-90><-738><-114><1><Riverbed Urban
+RU_A14: -36><81><-80><14><0><Riverbed Urban
+RU_A15: 231><247.5><134><184><2><Riverbed Urban
+RU_F01: 1851><232.5><1204><210><2><Old Path
+RU_C06: 355.5><-102><156><-116><1><Riverbed Urban
+RU_A17: -1020><-123><-844><-104><2><Riverbed Urban
+GATE_RU_F4: -717><-421.5><-638><-340><1><
+RU_D03: 1437><-30><916><-44><1><Riverbed Urban
+RU_A21: 384><232.5><300><184><2><Riverbed Urban
+RU_S03: 1074><-102><782><-146><1><Riverbed Urban
+RU_A22: 1197><-135><896><-130><1><Riverbed Urban
 RU_A01: -57><117><-92><80><0><Riverbed Urban
-RU_A23: -486><88.5><-372><32><1><Riverbed Urban
-RU_A24: -1050><-238.5><-864><-186><2><Riverbed Urban
-RU_B15: -216><-120><-260><-132><1><Riverbed Urban
-RU_B16: 330><-6><170><-36><0><Riverbed Urban
-RU_B17: 123><96><86><-38><2><Riverbed Urban
-RU_B18: 537><37.5><366><34><0><Riverbed Urban
-RU_B19: 1122><34.5><790><-50><0><Riverbed Urban
-RU_A25: 675><-70.5><480><-120><0><Riverbed Urban
-RU_D04: 1380><10.5><908><122><2><Old Path
-RU_B20: 1365><135><938><224><1><Old Path
-RU_S04: 1785><-16.5><1272><44><2><Old Path
-RU_A26: 1800><70.5><1342><132><2><Old Path
-RU_A27: 1194><-31.5><918><38><0><
-RU_E01: 787.5><139.5><518><100><2><Riverbed Urban
-RU_A28: 1746><-120><1278><-112><0><
-RU_B21: -351><174><-280><94><1><Riverbed Urban
-RU_A29: 282><72><206><34><0><Riverbed Urban
-RU_B22: 891><-34.5><580><-108><0><Riverbed Urban
-RU_A30: -156><-321><-172><-268><1><Riverbed Urban
-RU_A31: 2259><67.5><1708><116><2><Old Path
-RU_B24: -969><-333><-862><-268><2><
-RU_A32: -873><-429><-740><-344><1><
-RU_C09: 2637><99><1822><138><2><Old Path
+RU_A23: -486><90><-372><32><1><Riverbed Urban
+RU_A24: -1050><-237><-864><-186><2><Riverbed Urban
+RU_B15: -216><-118.5><-260><-132><1><Riverbed Urban
+RU_B16: 330><-4.5><170><-36><0><Riverbed Urban
+RU_B17: 123><97.5><86><-38><2><Riverbed Urban
+RU_B18: 537><39><366><34><0><Riverbed Urban
+RU_B19: 1122><36><790><-50><0><Riverbed Urban
+RU_A25: 675><-69><480><-120><0><Riverbed Urban
+RU_D04: 1380><12><908><122><2><Old Path
+RU_B20: 1363.5><136.5><938><224><1><Old Path
+RU_S04: 1785><-15><1272><44><2><Old Path
+RU_A26: 1800><72><1342><132><2><Old Path
+RU_A27: 1194><-30><918><38><0><
+RU_E01: 786><141><518><100><2><Riverbed Urban
+RU_A28: 1746><-118.5><1278><-112><0><
+RU_B21: -351><175.5><-280><94><1><Riverbed Urban
+RU_A29: 282><73.5><206><34><0><Riverbed Urban
+RU_B22: 891><-33><580><-108><0><Riverbed Urban
+RU_A30: -156><-319.5><-172><-268><1><Riverbed Urban
+RU_A31: 2259><69><1708><116><2><Old Path
+RU_B24: -969><-331.5><-862><-268><2><
+RU_A32: -873><-427.5><-740><-344><1><
+RU_C09: 2637><100.5><1822><138><2><Old Path
+RU_B23: 3048><133.5><2176><176><2><Old Path
+RU_B25: 2049><-43.5><1436><30><2><Old Path
 OffScreenDen_ru: 102><585><122><374><1><
-RU_B23: 3048><132><2176><176><2><Old Path
-RU_B25: 2049><-45><1436><30><2><Old Path
+RU_D05: -1074><543><-952><320><1><
 Connection: RU_A02,RU_C01,44,26,4,21,0,2
 Connection: RU_A02,RU_B01,4,14,37,62,2,0
 Connection: RU_A02,RU_B15,36,8,20,30,3,1
@@ -77,7 +77,7 @@ Connection: RU_S01,RU_A04,37,24,7,4,1,3
 Connection: RU_S01,RU_B06,37,10,93,17,3,0
 Connection: RU_C01,RU_B16,140,26,5,26,0,2
 Connection: RU_C01,RU_A09,79,11,26,30,3,1
-Connection: RU_B02,RU_D02,7,25,193,13,2,0
+Connection: RU_B02,RU_D05,7,25,209,14,2,0
 Connection: RU_C02,RU_B17,140,9,24,71,3,1
 Connection: RU_B03,RU_C03,20,21,78,7,3,3
 Connection: RU_B04,RU_A08,4,23,31,4,2,3
@@ -97,7 +97,7 @@ Connection: RU_D01,RU_D04,191,5,9,30,3,1
 Connection: RU_B06,RU_C03,11,14,105,108,2,0
 Connection: RU_C03,RU_A13,20,14,9,26,3,1
 Connection: RU_C03,RU_A17,11,12,20,30,3,1
-Connection: RU_D02,GATE_AW_RU,10,21,36,43,2,3
+Connection: GATE_AW_RU,RU_D05,36,43,6,23,3,2
 Connection: RU_A08,RU_A21,28,32,39,11,1,3
 Connection: RU_A09,RU_A10,37,17,9,19,0,2
 Connection: RU_A09,RU_B15,9,13,86,18,2,0
