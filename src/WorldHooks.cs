@@ -22,7 +22,7 @@ namespace NewTerra
 				On.RoomSettings.LoadEffects += RoomSettings_LoadEffects;
 				On.RoomRain.Update += RoomRain_Update;
 
-				On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.ctor += Track_ctor;
+				On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.AllowedInSubRegion += Track_AllowedInSubRegion;
 			}
 			catch(Exception ex)
 			{
@@ -30,14 +30,24 @@ namespace NewTerra
 			}
 		}
 
-		private void Track_ctor(On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.orig_ctor orig, Music.ProceduralMusic.ProceduralMusicInstruction.Track self, string name)
+		private bool Track_AllowedInSubRegion(On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.orig_AllowedInSubRegion orig, Music.ProceduralMusic.ProceduralMusicInstruction.Track self, string subRegion)
 		{
-			orig(self, name);
-			CurrWeather trackWeather;
-			bool AllowedInWeatherType(Enums.CurrWeather weather)
+			if (self.subRegions == null)
 			{
-				return trackWeather == weather;
+				return true;
 			}
+			bool? regiontruth = null;
+			bool? weathertruth = null;
+			for (int i = 0; i < self.subRegions.Length; i++)
+			{
+				if (Enum.TryParse(self.subRegions[i], out CurrWeather allowedweather))
+				{
+					if (weathertruth != true) weathertruth = allowedweather == currWeather;
+					continue;
+				} //it's not a weather
+				if (regiontruth != true) regiontruth = subRegion == self.subRegions[i];
+			}
+			return (weathertruth != false) && (regiontruth != false);
 		}
 
 		private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
