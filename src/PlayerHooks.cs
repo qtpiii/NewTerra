@@ -13,7 +13,6 @@ namespace NewTerra
 		{
 			try
 			{
-				On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 				On.PlayerGraphics.ctor += PlayerGraphics_ctor;
 				On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
 
@@ -29,24 +28,6 @@ namespace NewTerra
 		}
 
 		#region graphics
-		private void LoadResources(RainWorld rainWorld)
-		{
-			try
-			{
-				Futile.atlasManager.LoadAtlas("atlases/body");
-				Futile.atlasManager.LoadAtlas("atlases/face");
-				Futile.atlasManager.LoadAtlas("atlases/head");
-				Futile.atlasManager.LoadAtlas("atlases/hips");
-				Futile.atlasManager.LoadAtlas("atlases/legs");
-				Futile.atlasManager.LoadAtlas("atlases/arm");
-			}
-			catch (Exception ex)
-			{
-				Plugin.logger.LogError("Error on resource load");
-				Plugin.logger.LogError(ex);
-			}
-
-		}
 
 		private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
 		{

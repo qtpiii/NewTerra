@@ -11,6 +11,7 @@
 		<FileVersion>0.1</FileVersion>
 		<AssemblyVersion>0.1</AssemblyVersion>
 		<DebugType>Portable</DebugType>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
