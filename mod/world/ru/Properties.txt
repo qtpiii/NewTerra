@@ -4,7 +4,7 @@ playerGuideOverseerSpawnChance: 0
 pupSpawnChance: 0.4
 earlyCycleChance: 0
 kelpColor: 0.3, 0.25, 0.15
-batsPerActiveSwarmRoom: 6
+batsPerActiveSwarmRoom: 4
 Room Setting Templates: Default
 Subregion: Riverbed Urban
 Subregion: Old Path

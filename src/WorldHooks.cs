@@ -102,11 +102,11 @@ namespace NewTerra
 						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
 						break;
 					case CurrWeather.Cloudy:
-						self.Clouds = 0.6f;
+						self.Clouds = 0.4f;
 						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Bloom, 0.2f, false));
 						break;
 					case CurrWeather.Rainy:
-						self.Clouds = 0.9f;
+						self.Clouds = 0.8f;
 						self.CeilingDrips = 0.7f;
 						self.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 0.8f, false));
 						break;
