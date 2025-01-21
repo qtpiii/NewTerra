@@ -6,5 +6,5 @@ Grime: 0.15
 Palette: 4986
 EffectColorA: 6
 EffectColorB: 9
-Effects: Fog-0.15-20-20, DayNight-0.5-20-20, Flies-0.2-20-20, RockFlea-0.2-23-95, Ants-0.25-40-65, MossWaterRGB-0.5-1030-495-Red:121.3478-Green:166.3588-Blue:51.00007-Height:0.5, RGBElectricDeath-1-663.1979-374.1778-AffectBKGLightning:True-Blue:255-Green:245-Red:185, SilenceWater-0.1-924.3032-417.5555, SeedBats-1-282.5677-49.91111, LethalWater-1-514-269, WaterViscosity-0.2-533-86, HeatWave-0.1-269-129,
+Effects: Fog-0.15-20-20, DayNight-0.75-20-20, Flies-0.2-20-20, RockFlea-0.2-23-95, Ants-0.25-40-65, MossWaterRGB-0.5-1030-495-Red:121.3478-Green:166.3588-Blue:51.00007-Height:0.5, RGBElectricDeath-1-663.1979-374.1778-AffectBKGLightning:True-Blue:255-Green:245-Red:185, SilenceWater-0.1-924.3032-417.5555, SeedBats-1-282.5677-49.91111, LethalWater-1-514-269, WaterViscosity-0.2-533-86, HeatWave-0.1-269-129,
 AmbientSounds: OMNI><am_ind-fabrik02.ogg><728.1978><156.9705><0.5><0.55, OMNI><am_ind-midsex03.ogg><733.2682><475.1992><0.3586957><0.9021739,
