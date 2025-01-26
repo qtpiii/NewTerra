@@ -5,5 +5,5 @@ Grime: 0.25
 Palette: 4984
 EffectColorA: 2
 EffectColorB: 13
-Effects: DayNight-0.5-20-20, Flies-0.15-20-20, RockFlea-0.2-23-95, MossWaterRGB-0.5-1030-495-Red:166.3588-Green:121.3478-Blue:51.00007-Height:0.5, RGBElectricDeath-1-663.1979-374.1778-AffectBKGLightning:True-Blue:255-Green:245-Red:185, SilenceWater-0.1-924.3032-417.5555, SeedBats-1-282.5677-49.91111, 
+Effects: DayNight-0.6-20-20, Flies-0.15-20-20, RockFlea-0.2-23-95, MossWaterRGB-0.5-1030-495-Red:166.3588-Green:121.3478-Blue:51.00007-Height:0.5, RGBElectricDeath-1-663.1979-374.1778-AffectBKGLightning:True-Blue:255-Green:245-Red:185, SilenceWater-0.1-924.3032-417.5555, SeedBats-1-282.5677-49.91111, 
 AmbientSounds: OMNI><am_win_hilltop.ogg><709.3493><385.9236><0.6086956><1, OMNI><am_env-citytone.ogg><351.8445><470.3741><0.5543478><1.352174, 

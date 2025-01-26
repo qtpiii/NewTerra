@@ -1,0 +1,4 @@
+Palette: 4988
+PlacedObjects: LightSource><434.0566><330.301><0.02173913~Environment~310~37~50~86.60254~1~1~None~0~0, CustomDecal><209.6442><163.0803><7~346~490~342~494~-4~-352~120~0~1~1~rustb3~0.3586957~1~0.3586957~1~0.3586957~1~0.3586957~1, LightSource><543><324><0.01086957~Environment~218~48~50~86.60254~1~1~None~0~0, LightSource><468><293><0.1086956~Environment~123~-4~-143~-231.3975~1~1~None~0~0, 
+AmbientSounds: OMNI><am_win_hilltop.ogg><709.3493><385.9236><0.3043478><1, OMNI><so_ind-mechhum01.ogg><525.7512><194.8><0.3586957><1, 
+FadePalette: 4984, 0.6086956
