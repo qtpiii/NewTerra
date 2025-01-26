@@ -1,3 +1,4 @@
 Template: NONE
 Palette: 4984
+PlacedObjects: SteamerGate><488.8187><534.5845><-205^-210~159^-204, 
 FadePalette: 4986, 0.5
