@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using BepInEx;
 using BepInEx.Logging;
@@ -22,6 +23,8 @@ public class Plugin : BaseUnityPlugin
 	internal readonly Dictionary<string, string[]> DecalAutoplaceSets = new();
 
 	internal static ManualLogSource logger;
+
+	public static ConditionalWeakTable<Player, TardiData> tardiCWT = new();
 
 	public void OnEnable()
 	{

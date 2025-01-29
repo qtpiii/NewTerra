@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using RWCustom;
 using UnityEngine;
 
 namespace NewTerra
@@ -18,6 +19,7 @@ namespace NewTerra
 			{
 				On.PlayerGraphics.ctor += PlayerGraphics_ctor;
 				On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
+				On.PlayerGraphics.InitiateSprites += PlayerGraphicsOnInitiateSprites;
 				On.PlayerGraphics.Update += PlayerGraphicsOnUpdate;
 
 				On.Creature.Violence += Creature_Violence;
@@ -33,6 +35,33 @@ namespace NewTerra
 			}
 		}
 
+		private void PlayerGraphicsOnInitiateSprites(On.PlayerGraphics.orig_InitiateSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
+		{
+			orig(self, sLeaser, rCam);
+
+			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			{
+				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				if (data.spritesInitialized == false) // trust nojoardy. (sprites might be initiated twice :gunchie:)
+				{
+					data.spritesInitialized = true;
+				}
+				else
+				{
+					return;
+				}
+
+				data.startOfSprites = sLeaser.sprites.Length;
+				Array.Resize(ref sLeaser.sprites, sLeaser.sprites.Length + data.totalAddedSprites);
+
+				for (int i = 0; i < 2; i++)
+				{
+					sLeaser.sprites[data.ArmSprite(i)] = new FSprite("TardiPlayerArm10");
+				}
+				self.AddToContainer(sLeaser, rCam, null);
+			}
+		}
+
 		private void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
 		{
 			orig(self);
@@ -41,11 +70,8 @@ namespace NewTerra
 			{
 				for (int i = 0; i < 2; i++)
 				{
-					self.hands[i].retract = false;//self.player.grasps[i + 2] == null || self.player.grasps[i] == null;
-					self.hands[i].retractCounter = 0;
-					self.hands[i].mode = Limb.Mode.HuntRelativePosition;
-					self.hands[i + 2].pos = self.hands[i].pos;
-					self.hands[i + 2].pos -= new Vector2(0, 10);
+					self.hands[i + 2].pos = self.player.bodyChunks[1].pos + Custom.PerpendicularVector(self.player.bodyChunks[0].pos, self.player.bodyChunks[1].pos) * 20;
+					self.hands[i + 2].mode = Limb.Mode.HuntRelativePosition;
 				}
 			}
 		}
@@ -53,27 +79,6 @@ namespace NewTerra
 		private void PlayerOnGraphicsModuleUpdated(ILContext il)
 		{
 			ILCursor c = new(il);
-			
-			/*
-			for (int i = 0; i < 2; i++)
-			{
-				c.GotoNext(
-					x => x.MatchLdfld<PlayerGraphics>(nameof(PlayerGraphics.hands)),
-					x => x.MatchLdloc(0),
-					x => x.MatchLdelemRef()
-				);
-				Debug.Log(c);
-				c.Index += 2;
-				Debug.Log(c);
-				c.EmitDelegate((int j) =>
-				{
-					Debug.Log("TEST: " + j);
-					Debug.Log(Mathf.Clamp(j, 0, 1));
-					return Mathf.Clamp(j, 0, 1);
-				});
-				Debug.Log(c);
-			}
-			*/
 			
 			c.GotoNext(
 				x => x.MatchLdloc(0),
@@ -140,6 +145,9 @@ namespace NewTerra
 				{
 					sLeaser.sprites[9].SetElementByName("Tardi" + name);
 				}
+
+				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				sLeaser.sprites[data.ArmSprite(0)].SetPosition(self.hands[2].pos);
 			}
 		}
 
@@ -200,9 +208,18 @@ namespace NewTerra
 		private void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
 		{
 			orig(self, abstractCreature, world);
-			if (self != null && self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			if (self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
 				abstractCreature.lavaImmune = true;
+				
+				try
+				{
+					Plugin.tardiCWT.Add(self, new TardiData()); // attach cwt
+				}
+				catch (ArgumentException)
+				{
+					Debug.Log("Tenacious CWT already attached!");
+				}
 			}
 		}
 
