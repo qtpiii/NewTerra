@@ -13,7 +13,7 @@ namespace NewTerra
 {
 	internal class PlayerHooks
 	{
-		public void OnEnable()
+		public void Apply()
 		{
 			try
 			{
@@ -21,13 +21,20 @@ namespace NewTerra
 				On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
 				On.PlayerGraphics.InitiateSprites += PlayerGraphicsOnInitiateSprites;
 				On.PlayerGraphics.Update += PlayerGraphicsOnUpdate;
+				On.PlayerGraphics.Reset += PlayerGraphicsOnReset;
+				On.PlayerGraphics.AddToContainer += PlayerGraphicsOnAddToContainer;
+				
+				IL.SlugcatHand.Update += SlugcatHandUnhardcode;
+				IL.SlugcatHand.EngageInMovement += SlugcatHandUnhardcode;
+				
+				IL.SlugcatHand.Update += SlugcatHandOnUpdate;
 
 				On.Creature.Violence += Creature_Violence;
 				On.Creature.ctor += CreatureOnctor;
 				On.Player.Update += Player_Update;
 				On.Player.ctor += Player_ctor;
 				On.Player.TerrainImpact += Player_TerrainImpact;
-				IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated;
+				IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated; // stupid joar. this unhardcodes how many times a for loop repeats (from 2 to the actual amount of grasps)
 			}
 			catch (Exception ex)
 			{
@@ -35,6 +42,137 @@ namespace NewTerra
 			}
 		}
 
+		private void SlugcatHandOnUpdate(ILContext il)
+		{
+			ILCursor c = new(il);
+
+			while (true)
+			{
+				if (c.TryGotoNext(
+					    x => x.MatchLdarg(0),
+					    x => x.MatchLdfld<Limb>(nameof(Limb.limbNumber)),
+					    x => x.MatchConvR4(),
+					    x => x.MatchMul()
+				    ))
+				{
+					c.Index += 2;
+					c.EmitDelegate((int i) =>
+					{
+						return i % 2;
+					});
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+		private void SlugcatHandUnhardcode(ILContext il)
+		{
+			ILCursor c = new(il);
+			
+			// goes to every "limbNumber == 0 ?" in the method and replaces it with "limbNumber % 2 != 0 ?"
+			while (true)
+			{
+				if (c.TryGotoNext(
+					    x => x.MatchLdarg(0),
+					    x => x.MatchLdfld<Limb>("limbNumber"),
+					    x => x.MatchBr(out _)
+				    ))
+				{
+					goto InjectDelegate;
+				}
+				else if (c.TryGotoNext(
+					         x => x.MatchLdarg(0),
+					         x => x.MatchLdfld<Limb>("limbNumber"),
+					         x => x.MatchBrfalse(out _)
+				         ))
+				{
+					goto InjectDelegate;
+				}
+				else if (c.TryGotoNext(
+					         x => x.MatchLdarg(0),
+					         x => x.MatchLdfld<Limb>("limbNumber"),
+					         x => x.MatchBrtrue(out _)
+				         ))
+				{
+					goto InjectDelegate;
+				}
+				else
+				{
+					break;
+				}
+				
+				InjectDelegate:
+				{
+					c.Index += 2;
+					c.EmitDelegate<Func<int, int>>((i) =>
+					{
+						return i % 2 != 0 ? 1 : 0;
+					});
+				}
+			}
+		}
+
+		private void PlayerOnGraphicsModuleUpdated(ILContext il)
+		{
+			ILCursor c = new(il);
+
+			c.GotoNext(
+				x => x.MatchLdloc(0),
+				x => x.MatchBrfalse(out _)
+			);
+			c.Index += 1;
+			c.EmitDelegate((int i) =>
+			{
+				return i % 2 != 0 ? 1 : 0;
+			});
+			
+			c.GotoNext(
+				x => x.MatchLdloc(0),
+				x => x.MatchLdcI4(2),
+				x => x.MatchBlt(out _)
+			);
+			c.Index += 2;
+			c.Emit(OpCodes.Ldarg_0);
+			c.EmitDelegate<Func<int, Player, int>>((int grasps, Player player) =>
+			{
+				return player.grasps.Length;
+			});
+		}
+
+		#region graphics
+		
+		private void PlayerGraphicsOnReset(On.PlayerGraphics.orig_Reset orig, PlayerGraphics self)
+		{
+			orig(self);
+			
+			self.hands[2].Reset(self.player.bodyChunks[0].pos);
+			self.hands[3].Reset(self.player.bodyChunks[0].pos);
+			Plugin.tardiCWT.TryGetValue(self.player, out var data);
+			data.spritesInitialized = false;
+		}
+		
+		private void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
+		{
+			orig(self);
+
+			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					self.hands[i + 2].Update();
+					self.hands[i + 2].relativeHuntPos.y -= 15;
+				}
+
+				if ((self.player.animation == Player.AnimationIndex.BeamTip || self.player.animation == Player.AnimationIndex.StandOnBeam) && self.disbalanceAmount > 0)
+				{
+					self.hands[2].relativeHuntPos.x *= -1;
+				}
+			}
+		}
+		
 		private void PlayerGraphicsOnInitiateSprites(On.PlayerGraphics.orig_InitiateSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
 		{
 			orig(self, sLeaser, rCam);
@@ -42,7 +180,8 @@ namespace NewTerra
 			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
-				if (data.spritesInitialized == false) // trust nojoardy. (sprites might be initiated twice :gunchie:)
+				
+				if (data.spritesInitialized == false) // trust nojoardy. (sprites might be initiated twice :gunchie: and this is used in addtocontainer :gunched:)
 				{
 					data.spritesInitialized = true;
 				}
@@ -57,97 +196,110 @@ namespace NewTerra
 				for (int i = 0; i < 2; i++)
 				{
 					sLeaser.sprites[data.ArmSprite(i)] = new FSprite("TardiPlayerArm10");
+					sLeaser.sprites[data.ArmSprite(i)].anchorX = 0.9f;
 				}
 				self.AddToContainer(sLeaser, rCam, null);
 			}
 		}
-
-		private void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
+		
+		private void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner)
 		{
-			orig(self);
-
-			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			if (self.player.SlugCatClass.value != Plugin.TARDIGOATED_ID)
 			{
-				for (int i = 0; i < 2; i++)
+				orig(self, sLeaser, rCam, newContatiner);
+			}
+			else
+			{
+				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				newContatiner ??= rCam.ReturnFContainer("Midground");
+				foreach (int spriteIndex in (int[])[0, 1, 2, 3, 4, data.startOfSprites, data.startOfSprites + 1, 5, 6, 7, 8, 9, 10, 11])
 				{
-					self.hands[i + 2].pos = self.player.bodyChunks[1].pos + Custom.PerpendicularVector(self.player.bodyChunks[0].pos, self.player.bodyChunks[1].pos) * 20;
-					self.hands[i + 2].mode = Limb.Mode.HuntRelativePosition;
+					if (!data.spritesInitialized) return;
+					
+					sLeaser.sprites[spriteIndex].RemoveFromContainer();
+					
+					if ((spriteIndex > 6 && spriteIndex < 9) || spriteIndex > 9)
+					{
+						rCam.ReturnFContainer("Foreground").AddChild(sLeaser.sprites[spriteIndex]);
+					}
+					else
+					{
+						newContatiner.AddChild(sLeaser.sprites[spriteIndex]);
+					}
 				}
 			}
 		}
-
-		private void PlayerOnGraphicsModuleUpdated(ILContext il)
-		{
-			ILCursor c = new(il);
-			
-			c.GotoNext(
-				x => x.MatchLdloc(0),
-				x => x.MatchLdcI4(2),
-				x => x.MatchBlt(out _)
-			);
-			c.Index += 2;
-			c.Emit(OpCodes.Ldarg_0);
-			c.EmitDelegate((int grasps, Player player) =>
-			{
-				return player.grasps.Length;
-			});
-		}
-
-		#region graphics
-
+		
 		private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
 		{
 			orig(self, sLeaser, rCam, timeStacker, camPos);
 			if (self.player != null && self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
-				string? name = sLeaser.sprites[0]?.element?.name;
-				if (name != null && name.StartsWith("BodyA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+				foreach (var index in (int[])[0, 1, 3, 4, 5, 6, 7, 8, 9])
 				{
-					sLeaser.sprites[0].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[1]?.element?.name;
-				if (name != null && name.StartsWith("HipsA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[1].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[3]?.element?.name;
-				if (name != null && name.StartsWith("HeadA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[3].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[4]?.element?.name;
-				if (name != null && name.StartsWith("LegsA") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[4].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[5]?.element?.name;
-				if (name != null && name.StartsWith("PlayerArm") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[5].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[6]?.element?.name;
-				if (name != null && name.StartsWith("PlayerArm") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[6].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[7]?.element?.name;
-				if (name != null && name.StartsWith("OnTopOfTerrainHand") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[7].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[8]?.element?.name;
-				if (name != null && name.StartsWith("OnTopOfTerrainHand") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[8].SetElementByName("Tardi" + name);
-				}
-				name = sLeaser.sprites[9]?.element?.name;
-				if (name != null && name.StartsWith("Face") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
-				{
-					sLeaser.sprites[9].SetElementByName("Tardi" + name);
+					string? name = sLeaser.sprites[index]?.element?.name;
+					if (name != null && !name.StartsWith("Tardi") && Futile.atlasManager.DoesContainElementWithName("Tardi" + name))
+					{
+						sLeaser.sprites[index].SetElementByName("Tardi" + name);
+					}
 				}
 
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
-				sLeaser.sprites[data.ArmSprite(0)].SetPosition(self.hands[2].pos);
+				
+				// 90% of the code in this for loop and "vector" and "vector2" are decompiled code :grape:
+				Vector2 vector = Vector2.Lerp(self.drawPositions[0, 1], self.drawPositions[0, 0], timeStacker);
+				Vector2 vector2 = Vector2.Lerp(self.drawPositions[1, 1], self.drawPositions[1, 0], timeStacker);
+				for (int j = 0; j < 2; j++)
+				{
+					Vector2 vector10 = Vector2.Lerp(self.hands[j + 2].lastPos, self.hands[j + 2].pos, timeStacker);
+					if (self.hands[j + 2].mode != Limb.Mode.Retracted)
+					{
+						sLeaser.sprites[data.ArmSprite(j)].x = vector10.x - camPos.x;
+						sLeaser.sprites[data.ArmSprite(j)].y = vector10.y - camPos.y;
+						float num9 = 4.5f / ((float)self.hands[j + 2].retractCounter + 1f);
+						//float num9 = 4.5f;
+						if ((self.player.animation == Player.AnimationIndex.StandOnBeam || self.player.animation == Player.AnimationIndex.BeamTip) && self.disbalanceAmount <= 40f && self.hands[j + 2].mode == Limb.Mode.HuntRelativePosition)
+						{
+							num9 *= self.disbalanceAmount / 40f;
+						}
+						if (self.player.animation == Player.AnimationIndex.HangFromBeam)
+						{
+							num9 *= 0.5f;
+						}
+						num9 *= Mathf.Abs(Mathf.Cos(Custom.AimFromOneVectorToAnother(vector2, vector) / 360f * 3.1415927f * 2f));
+						Vector2 vector11 = vector + Custom.RotateAroundOrigo(new Vector2((-1f + 2f * (float)(j % 2f)) * num9, -3.5f), Custom.AimFromOneVectorToAnother(vector2, vector));
+						sLeaser.sprites[data.ArmSprite(j)].element = Futile.atlasManager.GetElementWithName("Tardi" + self._cachedPlayerArms[Mathf.RoundToInt(Mathf.Clamp(Vector2.Distance(vector10, vector11) / 2f, 0f, 12f))]);
+						sLeaser.sprites[data.ArmSprite(j)].rotation = Custom.AimFromOneVectorToAnother(vector10, vector11) + 90f;
+						if (self.player.bodyMode == Player.BodyModeIndex.Crawl)
+						{
+							sLeaser.sprites[data.ArmSprite(j)].scaleY = ((vector.x < vector2.x) ? (-1f) : 1f);
+						}
+						else if (self.player.bodyMode == Player.BodyModeIndex.WallClimb)
+						{
+							sLeaser.sprites[data.ArmSprite(j)].scaleY = ((self.player.flipDirection == -1) ? (-1f) : 1f);
+						}
+						else
+						{
+							sLeaser.sprites[data.ArmSprite(j)].scaleY = Mathf.Sign(Custom.DistanceToLine(vector10, vector, vector2));
+						}
+						if (self.player.animation == Player.AnimationIndex.HangUnderVerticalBeam)
+						{
+							sLeaser.sprites[data.ArmSprite(j)].scaleY = ((j % 2 != 0) ? 1f : (-1f));
+						}
+					}
+					sLeaser.sprites[data.ArmSprite(j)].isVisible = self.hands[j + 2].mode != Limb.Mode.Retracted && ((self.player.animation != Player.AnimationIndex.ClimbOnBeam && self.player.animation != Player.AnimationIndex.ZeroGPoleGrab) || !self.hands[j + 2].reachedSnapPosition);
+					/* // climbing on pole sprites, may or may not add
+					if ((self.player.animation == Player.AnimationIndex.ClimbOnBeam || self.player.animation == Player.AnimationIndex.HangFromBeam || self.player.animation == Player.AnimationIndex.GetUpOnBeam || self.player.animation == Player.AnimationIndex.ZeroGPoleGrab) && self.hands[j + 2].reachedSnapPosition)
+					{
+						sLeaser.sprites[7 + j].x = vector10.x - camPos.x;
+						sLeaser.sprites[7 + j].y = vector10.y - camPos.y + ((self.player.animation != Player.AnimationIndex.ClimbOnBeam && self.player.animation != Player.AnimationIndex.ZeroGPoleGrab) ? 3f : 0f);
+						sLeaser.sprites[7 + j].isVisible = true;
+					}
+					else
+					{
+						sLeaser.sprites[7 + j].isVisible = false;
+					}*/
+				}
 			}
 		}
 
@@ -218,7 +370,7 @@ namespace NewTerra
 				}
 				catch (ArgumentException)
 				{
-					Debug.Log("Tenacious CWT already attached!");
+					Custom.Log("Tenacious CWT already attached!");
 				}
 			}
 		}
@@ -230,23 +382,6 @@ namespace NewTerra
 			{
 				self.Hypothermia -= 0.75f * self.HypothermiaGain;
 			}
-			
-			/*
-			if (self.grasps[0] != null && self.grasps[1] != null && (self.grasps[2] == null || self.grasps[3] == null))
-			{
-				foreach (var physObj in self.room.physicalObjects[2])
-				{
-					if (self.grasps[2] == null)
-					{
-						self.SlugcatGrab(physObj, 2);
-					}
-					else if (self.grasps[3] == null)
-					{
-						self.SlugcatGrab(physObj, 3);
-					}
-				}
-			}
-			*/
 
 			if (self.grasps[0] != null && self.grasps[1] != null && self.input[0].pckp != self.input[1].pckp)
 			{
@@ -258,19 +393,24 @@ namespace NewTerra
 					}
 				}
 			}
-
-			if (self.grasps[2] != null)
+			if (self.grasps[0] != null && self.grasps[1] != null && self.grasps[2] != null && self.input[0].pckp != self.input[1].pckp)
 			{
-				self.grasps[2].grabbedChunk.MoveFromOutsideMyUpdate(eu, self.firstChunk.pos + new Vector2(-10, 0));
-
-				if (self.grasps[2].grabbed is Weapon weapon)
+				foreach (var physObj in self.room.physicalObjects[2])
 				{
-					//weapon.ChangeMode(Weapon.Mode.Carried);
+					if (self.grasps[3] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
+					{
+						self.SlugcatGrab(physObj, 3);
+					}
 				}
-				
-				if (self.grasps[2].grabbed is Spear spear)
+			}
+
+			for (int i = 0; i < 2; i++)
+			{
+				if (self.grasps[i] is null && self.grasps[i + 2] is not null)
 				{
-					//spear.setRotation = Vector2.up;
+					PhysicalObject obj = self.grasps[i + 2].grabbed;
+					self.ReleaseGrasp(i + 2);
+					self.SlugcatGrab(obj, i);
 				}
 			}
 		}

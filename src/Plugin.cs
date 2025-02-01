@@ -28,10 +28,11 @@ public class Plugin : BaseUnityPlugin
 
 	public void OnEnable()
 	{
+		logger = Logger;
 		On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 		On.RoomSpecificScript.AddRoomSpecificScript += RoomSpecificScript_AddRoomSpecificScript;
 		PlayerHooks playerHooks = new();
-		playerHooks.OnEnable();
+		playerHooks.Apply();
 		WorldHooks worldHooks = new();
 		worldHooks.OnEnable();
 		try
