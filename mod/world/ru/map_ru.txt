@@ -1,0 +1,31 @@
+RU_A01: 603><-565.5><488><-378><0><Riverbed Urban
+RU_B01: -783><163.5><-682><218><1><Riverbed Urban
+RU_S01: -1005><160.5><-796><156><1><
+RU_B02: -426><178.5><-452><216><1><Riverbed Urban
+RU_A02: -114><196.5><-196><214><1><Riverbed Urban
+RU_B03: 45><-94.5><-8><-48><1><Riverbed Urban
+RU_A03: 207><-49.5><128><-4><0><Riverbed Urban
+RU_D01: 543><-52.5><286><2><1><Riverbed Urban
+RU_D02: -198><25.5><-316><32><1><Riverbed Urban
+RU_C01: -591><46.5><-658><104><1><Riverbed Urban
+RU_C02: -120><307.5><-290><310><1><Riverbed Urban
+RU_A04: -42><-268.5><-66><-164><1><Riverbed Urban
+RU_C03: 261><-288><134><-308><1><Riverbed Urban
+RU_B04: 90><136.5><-14><132><1><Riverbed Urban
+OffScreenDen_ru: -591><480><346><192><1><
+RU_B05: -66><-78><-114><6><2><
+Connection: RU_B01,RU_B02,95,21,4,16,0,2
+Connection: RU_B01,RU_S01,4,15,34,16,2,0
+Connection: RU_B01,RU_C01,61,9,23,30,3,1
+Connection: RU_B02,RU_C02,95,25,11,4,0,3
+Connection: RU_B02,RU_A02,87,14,4,14,0,2
+Connection: RU_A02,RU_B04,43,14,2,54,0,2
+Connection: RU_A02,RU_D02,31,15,83,68,3,1
+Connection: RU_B03,RU_D02,2,66,97,26,2,0
+Connection: RU_B03,RU_A03,15,43,8,14,0,2
+Connection: RU_B03,RU_C03,43,7,2,92,0,2
+Connection: RU_B03,RU_A04,9,4,38,30,3,1
+Connection: RU_A03,RU_D01,39,14,15,15,0,2
+Connection: RU_D02,RU_C01,2,46,147,19,2,0
+Connection: RU_C02,RU_B04,133,3,8,67,3,2
+Connection: RU_B04,RU_B05,11,7,42,68,2,1

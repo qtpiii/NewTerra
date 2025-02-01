@@ -1,0 +1,351 @@
+{
+  "frames": {
+    "NTLizardScaleA4.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 37
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 37
+      },
+      "sourceSize": {
+        "w": 5,
+        "h": 37
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB4.png": {
+      "frame": {
+        "x": 5,
+        "y": 0,
+        "w": 5,
+        "h": 31
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 31
+      },
+      "sourceSize": {
+        "w": 5,
+        "h": 37
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleA5.png": {
+      "frame": {
+        "x": 10,
+        "y": 0,
+        "w": 4,
+        "h": 29
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 4,
+        "h": 29
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB5.png": {
+      "frame": {
+        "x": 14,
+        "y": 0,
+        "w": 4,
+        "h": 26
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 26
+      },
+      "sourceSize": {
+        "w": 4,
+        "h": 29
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleA0.png": {
+      "frame": {
+        "x": 18,
+        "y": 0,
+        "w": 8,
+        "h": 18
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 18
+      },
+      "sourceSize": {
+        "w": 8,
+        "h": 18
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleA3.png": {
+      "frame": {
+        "x": 5,
+        "y": 31,
+        "w": 6,
+        "h": 18
+      },
+      "rotated": true,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 18
+      },
+      "sourceSize": {
+        "w": 6,
+        "h": 18
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleA6.png": {
+      "frame": {
+        "x": 14,
+        "y": 26,
+        "w": 5,
+        "h": 17
+      },
+      "rotated": true,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 17
+      },
+      "sourceSize": {
+        "w": 5,
+        "h": 17
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB6.png": {
+      "frame": {
+        "x": 26,
+        "y": 0,
+        "w": 5,
+        "h": 15
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 15
+      },
+      "sourceSize": {
+        "w": 5,
+        "h": 17
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB1.png": {
+      "frame": {
+        "x": 31,
+        "y": 0,
+        "w": 4,
+        "h": 14
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 14
+      },
+      "sourceSize": {
+        "w": 4,
+        "h": 14
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB3.png": {
+      "frame": {
+        "x": 18,
+        "y": 18,
+        "w": 6,
+        "h": 14
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 14
+      },
+      "sourceSize": {
+        "w": 6,
+        "h": 18
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleA1.png": {
+      "frame": {
+        "x": 35,
+        "y": 0,
+        "w": 4,
+        "h": 14
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 14
+      },
+      "sourceSize": {
+        "w": 4,
+        "h": 14
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB0.png": {
+      "frame": {
+        "x": 23,
+        "y": 31,
+        "w": 8,
+        "h": 14
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 14
+      },
+      "sourceSize": {
+        "w": 8,
+        "h": 18
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleA2.png": {
+      "frame": {
+        "x": 32,
+        "y": 14,
+        "w": 6,
+        "h": 10
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 10
+      },
+      "sourceSize": {
+        "w": 6,
+        "h": 10
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NTLizardScaleB2.png": {
+      "frame": {
+        "x": 31,
+        "y": 24,
+        "w": 6,
+        "h": 9
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 9
+      },
+      "sourceSize": {
+        "w": 6,
+        "h": 10
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "NTLizardScales.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 39,
+      "h": 45
+    },
+    "scale": 1
+  }
+}
