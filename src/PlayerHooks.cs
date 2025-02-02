@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil.Cil;
@@ -27,19 +29,52 @@ namespace NewTerra
 				IL.SlugcatHand.Update += SlugcatHandUnhardcode;
 				IL.SlugcatHand.EngageInMovement += SlugcatHandUnhardcode;
 				
-				IL.SlugcatHand.Update += SlugcatHandOnUpdate;
-
+				IL.SlugcatHand.Update += SlugcatHandOnUpdate; // changes "* i"s to "* (i % 2)"
+				
+				IL.Player.GrabUpdate += PlayerOnGrabUpdate; // for grasp cycling
+				
 				On.Creature.Violence += Creature_Violence;
 				On.Creature.ctor += CreatureOnctor;
 				On.Player.Update += Player_Update;
 				On.Player.ctor += Player_ctor;
 				On.Player.TerrainImpact += Player_TerrainImpact;
+				On.Player.SlugcatGrab += PlayerOnSlugcatGrab;
 				IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated; // stupid joar. this unhardcodes how many times a for loop repeats (from 2 to the actual amount of grasps)
 			}
 			catch (Exception ex)
 			{
 				Plugin.logger.LogFatal(ex);
 			}
+		}
+
+		private void PlayerOnGrabUpdate(ILContext il)
+		{
+			ILCursor c = new(il);
+
+			c.GotoNext(
+				x => x.MatchCallOrCallvirt(typeof(Creature).GetMethod(nameof(Creature.SwitchGrasps), BindingFlags.Instance | BindingFlags.Public))
+			);
+			c.Remove();
+			c.EmitDelegate((Player self, int _, int _) =>
+			{
+				if (self.SlugCatClass.value != Plugin.TARDIGOATED_ID)
+				{
+					self.SwitchGrasps(0, 1);
+				}
+				else
+				{
+					// moves all grasps clockwise
+					PhysicalObject?[] objects = self.grasps.Select(x => x is null ? null : x.grabbed).ToArray();
+					self.LoseAllGrasps();
+					if (objects[0] is not null) self.Grab(objects[0], 1, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+					if (objects[1] is not null) self.Grab(objects[1], 3, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+					if (objects[3] is not null) self.Grab(objects[3], 2, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+					if (objects[2] is not null) self.Grab(objects[2], 0, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+				}
+			});
+			UnityEngine.Debug.Log(c);
+			
+			File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "playergrabupdateil.txt"), il.ToString());
 		}
 
 		private void SlugcatHandOnUpdate(ILContext il)
@@ -381,37 +416,92 @@ namespace NewTerra
 			if (self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
 				self.Hypothermia -= 0.75f * self.HypothermiaGain;
-			}
-
-			if (self.grasps[0] != null && self.grasps[1] != null && self.input[0].pckp != self.input[1].pckp)
-			{
-				foreach (var physObj in self.room.physicalObjects[2])
+				
+				Plugin.tardiCWT.TryGetValue(self, out var data);
+				if (self.grasps[0] != null && self.grasps[1] != null && (self.input[0].pckp == true && self.input[1].pckp == false))
 				{
-					if (self.grasps[2] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
+					foreach (var physObj in self.room.physicalObjects[2])
 					{
-						self.SlugcatGrab(physObj, 2);
+						if (self.grasps[2] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
+						{
+							self.SlugcatGrab(physObj, 2);
+						}
 					}
 				}
-			}
-			if (self.grasps[0] != null && self.grasps[1] != null && self.grasps[2] != null && self.input[0].pckp != self.input[1].pckp)
-			{
-				foreach (var physObj in self.room.physicalObjects[2])
+				if (self.grasps[0] != null && self.grasps[1] != null && self.grasps[2] != null && (self.input[0].pckp == true && self.input[1].pckp == false))
 				{
-					if (self.grasps[3] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
+					foreach (var physObj in self.room.physicalObjects[2])
 					{
-						self.SlugcatGrab(physObj, 3);
+						if (self.grasps[3] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
+						{
+							self.SlugcatGrab(physObj, 3);
+						}
 					}
 				}
-			}
 
-			for (int i = 0; i < 2; i++)
-			{
-				if (self.grasps[i] is null && self.grasps[i + 2] is not null)
+				if (self.switchHandsProcess <= 0f)
 				{
-					PhysicalObject obj = self.grasps[i + 2].grabbed;
-					self.ReleaseGrasp(i + 2);
-					self.SlugcatGrab(obj, i);
+					for (int i = 0; i < 2; i++)
+					{
+						if (self.grasps[i] is null && self.grasps[i + 2] is not null)
+						{
+							PhysicalObject obj = self.grasps[i + 2].grabbed;
+							self.ReleaseGrasp(i + 2);
+							self.SlugcatGrab(obj, i);
+						}
+					}
 				}
+
+				if (data.canGrabWithExtraHandsCounter > 0)
+				{
+					data.canGrabWithExtraHandsCounter--;
+				}
+				
+				//UnityEngine.Debug.Log(self.grasps[3] is null);
+				//UnityEngine.Debug.Log(self.room.game.clock);
+			}
+		}
+		
+		private void PlayerOnSlugcatGrab(On.Player.orig_SlugcatGrab orig, Player self, PhysicalObject obj, int graspused)
+		{
+			if (self.SlugCatClass.value != Plugin.TARDIGOATED_ID)
+			{
+				orig(self, obj, graspused);
+			}
+			else
+			{
+				if (self.grasps != null)
+				{
+					int countOfObjTypeHeld = self.grasps.Select(x => x is null ? null : x.grabbed).Count(x => x?.GetType() == obj.GetType());
+					if (obj is Spear && countOfObjTypeHeld >= 2) return;
+				}	
+				if (graspused is 2 or 3 && (obj == self.grasps[0].grabbed || obj == self.grasps[1].grabbed)) return;
+				
+				Plugin.tardiCWT.TryGetValue(self, out var data);
+				if (graspused is 0 or 1)
+				{
+					if (self.grasps[0] is null || self.grasps[1] is null)
+					{
+						data.canGrabWithExtraHandsCounter = 5;
+					}
+					orig(self, obj, graspused);
+					return;
+				}
+
+				if (graspused == 2 && data.CanGrabWithExtraHands)
+				{
+					orig(self, obj, graspused);
+					data.canGrabWithExtraHandsCounter = 5;
+					return;
+				}
+
+				if (graspused == 3 && data.CanGrabWithExtraHands)
+				{
+					orig(self, obj, graspused);
+					return;
+				}
+
+				//data.canGrabWithExtraHandsCounter = 0;
 			}
 		}
 
