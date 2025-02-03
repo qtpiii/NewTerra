@@ -10,6 +10,7 @@
 
 		public bool CanGrabWithExtraHands => canGrabWithExtraHandsCounter <= 0;
 		public int canGrabWithExtraHandsCounter = 0;
+		public int switchGraspsCounter = 0;
 		
 		public int ArmSprite(int i)
 		{

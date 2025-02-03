@@ -63,18 +63,23 @@ namespace NewTerra
 				}
 				else
 				{
-					// moves all grasps clockwise
-					PhysicalObject?[] objects = self.grasps.Select(x => x is null ? null : x.grabbed).ToArray();
-					self.LoseAllGrasps();
-					if (objects[0] is not null) self.Grab(objects[0], 1, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
-					if (objects[1] is not null) self.Grab(objects[1], 3, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
-					if (objects[3] is not null) self.Grab(objects[3], 2, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
-					if (objects[2] is not null) self.Grab(objects[2], 0, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+					//RotateGrasps(self);
 				}
 			});
 			UnityEngine.Debug.Log(c);
 			
 			File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "playergrabupdateil.txt"), il.ToString());
+		}
+
+		public static void RotateGrasps(Player self)
+		{
+			// moves all grasps clockwise
+			PhysicalObject?[] objects = self.grasps.Select(x => x is null ? null : x.grabbed).ToArray();
+			self.LoseAllGrasps();
+			if (objects[0] is not null) self.Grab(objects[0], 1, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+			if (objects[1] is not null) self.Grab(objects[1], 3, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+			if (objects[3] is not null) self.Grab(objects[3], 2, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+			if (objects[2] is not null) self.Grab(objects[2], 0, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
 		}
 
 		private void SlugcatHandOnUpdate(ILContext il)
@@ -412,18 +417,32 @@ namespace NewTerra
 
 		private void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
 		{
+			PhysicalObject grasp2PreUpdate = null;
+			PhysicalObject grasp3PreUpdate = null;
+			if (self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			{
+				if (self.grasps[2] is not null) grasp2PreUpdate = self.grasps[2].grabbed;
+				if (self.grasps[3] is not null) grasp3PreUpdate = self.grasps[3].grabbed;
+			}
 			orig(self, eu);
 			if (self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
 				self.Hypothermia -= 0.75f * self.HypothermiaGain;
 				
 				Plugin.tardiCWT.TryGetValue(self, out var data);
+
+				self.switchHandsCounter = 0;
+				
 				if (self.grasps[0] != null && self.grasps[1] != null && (self.input[0].pckp == true && self.input[1].pckp == false))
 				{
 					foreach (var physObj in self.room.physicalObjects[2])
 					{
 						if (self.grasps[2] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
 						{
+							if ((self.grasps[0].grabbed != null && self.grasps[0].grabbed == physObj) || (self.grasps[1].grabbed != null && self.grasps[1].grabbed == physObj))
+							{
+								continue;
+							}
 							self.SlugcatGrab(physObj, 2);
 						}
 					}
@@ -434,12 +453,16 @@ namespace NewTerra
 					{
 						if (self.grasps[3] == null && Vector2.Distance(physObj.firstChunk.pos, self.firstChunk.pos) < 30)
 						{
+							if ((self.grasps[0].grabbed != null && self.grasps[0].grabbed == physObj) || (self.grasps[1].grabbed != null && self.grasps[1].grabbed == physObj))
+							{
+								continue;
+							}
 							self.SlugcatGrab(physObj, 3);
 						}
 					}
 				}
 
-				if (self.switchHandsProcess <= 0f)
+				if (false)//if (self.switchHandsProcess <= 0f)
 				{
 					for (int i = 0; i < 2; i++)
 					{
@@ -456,9 +479,34 @@ namespace NewTerra
 				{
 					data.canGrabWithExtraHandsCounter--;
 				}
+
+				if (data.switchGraspsCounter > 0)
+				{
+					data.switchGraspsCounter--;
+				}
+				if (self.input[0].pckp && self.input[1].pckp == false)
+				{
+					if (data.switchGraspsCounter > 0)
+					{
+						RotateGrasps(self);
+						data.switchGraspsCounter = 0;
+					}
+					data.switchGraspsCounter = 10;
+				}
 				
-				//UnityEngine.Debug.Log(self.grasps[3] is null);
-				//UnityEngine.Debug.Log(self.room.game.clock);
+				for (int i = 0; i < 2; i++)
+				{
+					if (grasp2PreUpdate != null && self.grasps[i] is not null && self.grasps[i].grabbed == grasp2PreUpdate)
+					{
+						self.grasps[i].Release();
+						self.Grab(grasp2PreUpdate, 3, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+					}
+					if (grasp3PreUpdate != null && self.grasps[i] is not null && self.grasps[i].grabbed == grasp3PreUpdate)
+					{
+						self.grasps[i].Release();
+						self.Grab(grasp3PreUpdate, 3, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
+					}
+				}
 			}
 		}
 		
@@ -470,11 +518,9 @@ namespace NewTerra
 			}
 			else
 			{
-				if (self.grasps != null)
-				{
-					int countOfObjTypeHeld = self.grasps.Select(x => x is null ? null : x.grabbed).Count(x => x?.GetType() == obj.GetType());
-					if (obj is Spear && countOfObjTypeHeld >= 2) return;
-				}	
+				int countOfObjTypeHeld = self.grasps.Select(x => x is null ? null : x.grabbed).Count(x => x?.GetType() == obj.GetType());
+				if (obj is Spear && countOfObjTypeHeld >= 2) return;
+				
 				if (graspused is 2 or 3 && (obj == self.grasps[0].grabbed || obj == self.grasps[1].grabbed)) return;
 				
 				Plugin.tardiCWT.TryGetValue(self, out var data);
@@ -500,8 +546,6 @@ namespace NewTerra
 					orig(self, obj, graspused);
 					return;
 				}
-
-				//data.canGrabWithExtraHandsCounter = 0;
 			}
 		}
 
