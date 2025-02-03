@@ -1,0 +1,5 @@
+Template: NONE
+Grime: 0.25
+Palette: 4990
+PlacedObjects: LightFixture><362.0598><374.4384><HolyFire~17.32051~-10~15, LightFixture><642.298><315.3058><HolyFire~17.32051~-10~75, 
+FadePalette: 3, 0.1086956
