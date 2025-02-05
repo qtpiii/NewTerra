@@ -1,21 +1,23 @@
-RU_A01: 603><-564><488><-378><1><Riverbed Urban
-RU_B01: -774><165><-682><218><1><Riverbed Urban
-RU_S01: -1005><162><-796><156><1><
-RU_B02: -426><180><-452><216><1><Riverbed Urban
-RU_A02: -114><198><-196><214><1><Riverbed Urban
-RU_B03: 105><-93><0><-54><1><Riverbed Urban
-RU_A03: 279><-48><112><2><0><Riverbed Urban
-RU_D01: 612><-51><226><2><1><Riverbed Urban
-RU_D02: -198><27><-316><32><1><Riverbed Urban
-RU_C01: -603><48><-658><104><1><Riverbed Urban
-RU_C02: -120><309><-290><310><1><Riverbed Urban
-RU_A04: 54><-321><-12><-196><1><Riverbed Urban
-RU_C03: 330><-288><170><-282><1><Riverbed Urban
-RU_B04: 90><138><-14><132><1><Riverbed Urban
-RU_B05: -60><-75><-114><6><2><Riverbed Urban
+RU_A01: 678><-549><488><-378><1><Riverbed Urban
+RU_B01: -774><166.5><-682><218><1><Riverbed Urban
+RU_S01: -1005><163.5><-796><156><1><
+RU_B02: -426><181.5><-452><216><1><Riverbed Urban
+RU_A02: -114><199.5><-196><214><1><Riverbed Urban
+RU_B03: 105><-91.5><0><-54><1><Riverbed Urban
+RU_A03: 279><-46.5><112><2><0><Riverbed Urban
+RU_D01: 612><-49.5><226><2><1><Riverbed Urban
+RU_D02: -198><28.5><-316><32><1><Riverbed Urban
+RU_C01: -603><49.5><-658><104><1><Riverbed Urban
+RU_C02: -120><310.5><-290><310><1><Riverbed Urban
+RU_A04: 54><-319.5><-12><-196><1><Riverbed Urban
+RU_C03: 330><-286.5><170><-282><1><Riverbed Urban
+RU_B04: 90><139.5><-14><132><1><Riverbed Urban
+RU_B05: -60><-73.5><-114><6><2><Riverbed Urban
+RU_A05: 240><130.5><130><142><1><Riverbed Urban
+RU_A06: 333><-535.5><170><-370><1><Riverbed Urban
 OffScreenDen_ru: -591><480><346><192><1><
-RU_A05: 240><129><130><142><1><Riverbed Urban
-RU_A06: 333><-537><170><-370><1><Riverbed Urban
+RU_A07: 507><-546><328><-378><1><Riverbed Urban
+Connection: RU_A01,RU_A07,6,4,37,5,3,0
 Connection: RU_B01,RU_B02,95,21,4,16,0,2
 Connection: RU_B01,RU_S01,4,15,34,16,2,0
 Connection: RU_B01,RU_C01,61,9,23,30,3,1
@@ -35,3 +37,4 @@ Connection: RU_A04,RU_A06,33,4,7,31,3,1
 Connection: RU_C03,RU_A06,25,7,23,26,3,1
 Connection: RU_B04,RU_A05,42,18,11,5,0,3
 Connection: RU_B04,RU_B05,11,7,42,68,2,1
+Connection: RU_A06,RU_A07,38,20,6,20,1,2
