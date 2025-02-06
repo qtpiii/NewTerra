@@ -3,11 +3,11 @@ Enter a new world, entirely seperate from what the base game has to offer, in Ne
 *not counting the 9-room tutorial region
 
 Huge thanks to everyone who helped out with this mod, including:
-hoootis, who coded lots of useful (and necessary) features for the mod. It wouldn't be the same without you!
+hootis, who coded lots of useful (and necessary) features for the mod. It wouldn't be the same without you!
 Roasted and Toasted, who composed all of the amazing threat themes, which never ceased to amaze me,
 M4rbleL1ne, who added the Mini Fruit Branch to his entity pack at my request, along with all the other amazingly designed, publicly available creatures and items in the pack,
 Millisec, for the ambient track,
 tarigon_tetradactyl and Detrax, for some of the charming decals included in this mod,
 Sol/prismsoup, for the stunning region artworks,
-April/SomethingStupid and Ovidia/Depressionbomb for arenas,
+aprilWORSTmonth and Ovidia/Depressionbomb for arenas,
 and everybody who joined the development server, as well as everyone in Modhole who supported and encouraged me!
