@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static NewTerra.Enums;
 using MoreSlugcats;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 
 namespace NewTerra
 {
@@ -26,12 +28,45 @@ namespace NewTerra
 				On.Room.Loaded += Room_Loaded;
 
 				On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.AllowedInSubRegion += Track_AllowedInSubRegion;
+
+				//IL.ScavengerTradeSpot.Update += ScavengerTradeSpot_Update;
 			}
 			catch(Exception ex)
 			{
 				Plugin.logger.LogFatal(ex);
 			}
 		}
+
+		//private void ScavengerTradeSpot_Update(MonoMod.Cil.ILContext il)
+		//{
+		//	ILCursor c = new(il);
+
+		//	while (true)
+		//	{
+		//		if (c.TryGotoNext(
+		//				x => x.MatchLdfld<Room>(nameof(UpdatableAndDeletable.room)),
+		//				x => x.MatchLdfld<RainWorldGame>(nameof(Room.game)),
+		//				x => x.MatchLdfld<RainWorld>(nameof(RainWorldGame.rainWorld)),
+		//				x => x.MatchLdfld<InGameTranslator>(nameof(RainWorld.inGameTranslator)),
+		//				x => x.MatchLdstr("Scavenger Merchant")
+		//			))
+		//		{
+		//			c.Index += 4;
+		//			c.EmitDelegate((ScavengerTradeSpot self, string s) =>
+		//			{
+		//				if (self.room.abstractRoom.name.StartsWith("RU_"))
+		//				{
+		//					return "Scrounger Merchant";
+		//				}
+		//				else return s;
+		//			});
+		//		}
+		//		else
+		//		{
+		//			break;
+		//		}
+		//	}
+		//}
 
 		private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{

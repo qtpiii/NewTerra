@@ -1,0 +1,11 @@
+Template: NONE
+Grime: 0.3586957
+Palette: 14
+EffectColorA: 14
+EffectColorB: 18
+Effects: Fog-0.6086956-20-20, Flies-0.3043478-81-104, RockFlea-0.2065217-252-26, RedSwarmer-0.1521739-411-85, 
+PlacedObjects: LightSource><503.0988><309.6739><0.05434782~Environment~-296~195~50~86.60254~1~1~None~0~0, CustomDecal><95.99402><-7.050095><4~623~795~623~791~14~-328~29.99998~0~1~1~rustb1~0.25~0.75~0.25~0.75~0.25~0.75~0.25~0.75, MiniFruitBranch><103.883><324.8506><90~0~2~3~12~-24~9~74~3, MiniFruitBranch><790><451><-278~-17~2~3~-21~-29~-14~63~3, 
+FadePalette: 26, 0.3043478
+MorePalette0: 3, 0.25
+MorePalette1: 22, 0.25
+MorePalette2: 10, 0.1521739
