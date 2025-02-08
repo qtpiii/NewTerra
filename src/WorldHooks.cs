@@ -29,14 +29,15 @@ namespace NewTerra
 
 				On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.AllowedInSubRegion += Track_AllowedInSubRegion;
 
-				//IL.ScavengerTradeSpot.Update += ScavengerTradeSpot_Update;
+				IL.ScavengerTradeSpot.Update += ScavengerTradeSpot_Update;
 			}
 			catch(Exception ex)
 			{
 				Plugin.logger.LogFatal(ex);
 			}
 		}
-
+		
+		// old version
 		//private void ScavengerTradeSpot_Update(MonoMod.Cil.ILContext il)
 		//{
 		//	ILCursor c = new(il);
@@ -67,6 +68,38 @@ namespace NewTerra
 		//		}
 		//	}
 		//}
+		
+		private void ScavengerTradeSpot_Update(ILContext il)
+		{
+			ILCursor c = new(il);
+			while (true) // this while loop isnt needed because theres only one instance of whats being matched in this function, but it will work regardless
+			{
+				if (c.TryGotoNext(
+					    x => x.MatchLdfld<Room>(nameof(UpdatableAndDeletable.room)),
+					    x => x.MatchLdfld<RainWorldGame>(nameof(Room.game)),
+					    x => x.MatchLdfld<RainWorld>(nameof(RainWorldGame.rainWorld)),
+					    x => x.MatchLdfld<InGameTranslator>(nameof(RainWorld.inGameTranslator)),
+					    x => x.MatchLdstr("Scavenger Merchant")
+				    ))
+				{
+					c.Index += 5; // used to be 4, needs to be 5 so it can go after the ldstr instruction
+					c.Emit(OpCodes.Ldarg_0); // pushes "self" onto the stack so it can be used by the function below
+					// the function this EmitDelegate emits eats the "Scavenger Merchant" string so that a c.Remove() isnt used
+					c.EmitDelegate((string s, ScavengerTradeSpot self) => // switched order of arguments because the "Scavenger Merchant" string is loaded before ldarg_0
+					{
+						if (self.room.abstractRoom.name.StartsWith("RU_"))
+						{
+							return "Scrounger Merchant";
+						}
+						return s;
+					});
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
 
 		private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{
