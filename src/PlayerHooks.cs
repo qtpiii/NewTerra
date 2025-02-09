@@ -187,11 +187,15 @@ namespace NewTerra
 		private void PlayerGraphicsOnReset(On.PlayerGraphics.orig_Reset orig, PlayerGraphics self)
 		{
 			orig(self);
-			
-			self.hands[2].Reset(self.player.bodyChunks[0].pos);
-			self.hands[3].Reset(self.player.bodyChunks[0].pos);
-			Plugin.tardiCWT.TryGetValue(self.player, out var data);
-			data.spritesInitialized = false;
+
+			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			{
+				self.hands[2].Reset(self.player.bodyChunks[0].pos);
+				self.hands[3].Reset(self.player.bodyChunks[0].pos);
+				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				if (data == null) return;
+				data.spritesInitialized = false;
+			}
 		}
 		
 		private void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
@@ -219,7 +223,9 @@ namespace NewTerra
 
 			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
+				UnityEngine.Debug.Log("AAAAUGH!!");
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				if (data == null) return;
 				
 				if (data.spritesInitialized == false) // trust nojoardy. (sprites might be initiated twice :gunchie: and this is used in addtocontainer :gunched:)
 				{
@@ -232,6 +238,9 @@ namespace NewTerra
 
 				data.startOfSprites = sLeaser.sprites.Length;
 				Array.Resize(ref sLeaser.sprites, sLeaser.sprites.Length + data.totalAddedSprites);
+				
+				UnityEngine.Debug.Log(data.startOfSprites);
+				UnityEngine.Debug.Log("im peeling.");
 
 				for (int i = 0; i < 2; i++)
 				{
@@ -251,10 +260,15 @@ namespace NewTerra
 			else
 			{
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				if (data == null)
+				{
+					UnityEngine.Debug.Log("guh"); 
+					return;
+				}
 				newContatiner ??= rCam.ReturnFContainer("Midground");
 				foreach (int spriteIndex in (int[])[0, 1, 2, 3, 4, data.startOfSprites, data.startOfSprites + 1, 5, 6, 7, 8, 9, 10, 11])
 				{
-					if (!data.spritesInitialized) return;
+					if (!data.spritesInitialized || spriteIndex > sLeaser.sprites.Length - 1) return;
 					
 					sLeaser.sprites[spriteIndex].RemoveFromContainer();
 					
@@ -285,6 +299,11 @@ namespace NewTerra
 				}
 
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
+				if (data == null || data.startOfSprites > sLeaser.sprites.Length - 1)
+				{
+					data.startOfSprites = sLeaser.sprites.Length - 2;
+					return;
+				}
 				
 				// 90% of the code in this for loop and "vector" and "vector2" are decompiled code :grape:
 				Vector2 vector = Vector2.Lerp(self.drawPositions[0, 1], self.drawPositions[0, 0], timeStacker);
@@ -406,6 +425,7 @@ namespace NewTerra
 				
 				try
 				{
+					UnityEngine.Debug.Log("women penis and boobs");
 					Plugin.tardiCWT.Add(self, new TardiData()); // attach cwt
 				}
 				catch (ArgumentException)
@@ -430,6 +450,7 @@ namespace NewTerra
 				self.Hypothermia -= 0.75f * self.HypothermiaGain;
 				
 				Plugin.tardiCWT.TryGetValue(self, out var data);
+				if (data == null) return;
 
 				self.switchHandsCounter = 0;
 				
@@ -524,6 +545,7 @@ namespace NewTerra
 				if (graspused is 2 or 3 && (obj == self.grasps[0].grabbed || obj == self.grasps[1].grabbed)) return;
 				
 				Plugin.tardiCWT.TryGetValue(self, out var data);
+				if (data == null) return;
 				if (graspused is 0 or 1)
 				{
 					if (self.grasps[0] is null || self.grasps[1] is null)
