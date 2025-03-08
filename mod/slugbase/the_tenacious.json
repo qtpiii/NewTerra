@@ -10,7 +10,7 @@
 		"walk_speed": 0.8,
 		"crouch_stealth": 1.8,
 		"throw_skill": 0,
-		"lung_capacity": 4,
+		"lung_capacity": 3,
 		"loudness": 1.5,
 		
 		"alignments": {
