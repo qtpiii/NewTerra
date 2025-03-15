@@ -1,1 +1,2 @@
+AmbientSounds: OMNI><am_win_hilltop.ogg><709.3493><385.9236><0.1056048><1, OMNI><am_ind-utility02.ogg><624.6615><223.3142><0.5><1, 
 FadePalette: 4988, 0.8043478

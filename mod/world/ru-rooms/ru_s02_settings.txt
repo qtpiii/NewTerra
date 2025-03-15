@@ -1,3 +1,4 @@
 Palette: 4988
 PlacedObjects: DayNightSettings><3336.052><263.028><587~68.66025~4985~10, LightSource><486.7901><334.696><0.02173913~Environment~-111~173~50~86.60254~1~1~None~0~0, CustomDecal><304.2975><122.6943><-4~349~364~353~354~4~-289~-55~0~1~1~rustb3~0.25~0.75~0.25~0.75~0.25~0.75~0.25~0.75, CustomDecal><451.0001><260><-4~212~186~168~221~7~-344~-117~0~1~1~yellowrust2~0.05434782~0.75~0.05434782~0.75~0.05434782~0.75~0.05434782~0.75, ShelterBhvrManager><-112.0971><309.1291><100~50~False~False~4~False~3~6~20~40~60~120~120~120~False, ShelterBhvrPlacedDoor><263.937><329.071><1^0, 
+AmbientSounds: OMNI><am_win_hilltop.ogg><709.3493><385.9236><0><1, OMNI><am_env-citytone.ogg><351.8445><470.3741><0.2525363><1, OMNI><am_ind-utility02.ogg><706.9883><115.8275><0.5><1, OMNI><so_ind-mechhum01.ogg><798.7432><212.9316><0.6005322><1, 
 FadePalette: 4988, 1
