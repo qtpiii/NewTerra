@@ -19,20 +19,21 @@ namespace NewTerra
 		{
 			try
 			{
+				
 				On.PlayerGraphics.ctor += PlayerGraphics_ctor;
 				On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
 				On.PlayerGraphics.InitiateSprites += PlayerGraphicsOnInitiateSprites;
+				On.PlayerGraphics.AddToContainer += PlayerGraphicsOnAddToContainer; // PROBLEM HERE
 				On.PlayerGraphics.Update += PlayerGraphicsOnUpdate;
 				On.PlayerGraphics.Reset += PlayerGraphicsOnReset;
-				On.PlayerGraphics.AddToContainer += PlayerGraphicsOnAddToContainer;
 				
 				IL.SlugcatHand.Update += SlugcatHandUnhardcode;
 				IL.SlugcatHand.EngageInMovement += SlugcatHandUnhardcode;
-				
+
 				IL.SlugcatHand.Update += SlugcatHandOnUpdate; // changes "* i"s to "* (i % 2)"
-				
+
 				IL.Player.GrabUpdate += PlayerOnGrabUpdate; // for grasp cycling
-				
+
 				On.Creature.Violence += Creature_Violence;
 				On.Creature.ctor += CreatureOnctor;
 				On.Player.Update += Player_Update;
@@ -66,9 +67,6 @@ namespace NewTerra
 					//RotateGrasps(self);
 				}
 			});
-			UnityEngine.Debug.Log(c);
-			
-			File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "playergrabupdateil.txt"), il.ToString());
 		}
 
 		public static void RotateGrasps(Player self)
@@ -111,7 +109,7 @@ namespace NewTerra
 		private void SlugcatHandUnhardcode(ILContext il)
 		{
 			ILCursor c = new(il);
-			
+
 			// goes to every "limbNumber == 0 ?" in the method and replaces it with "limbNumber % 2 != 0 ?"
 			while (true)
 			{
@@ -143,7 +141,7 @@ namespace NewTerra
 				{
 					break;
 				}
-				
+
 				InjectDelegate:
 				{
 					c.Index += 2;
@@ -168,7 +166,7 @@ namespace NewTerra
 			{
 				return i % 2 != 0 ? 1 : 0;
 			});
-			
+
 			c.GotoNext(
 				x => x.MatchLdloc(0),
 				x => x.MatchLdcI4(2),
@@ -183,7 +181,7 @@ namespace NewTerra
 		}
 
 		#region graphics
-		
+
 		private void PlayerGraphicsOnReset(On.PlayerGraphics.orig_Reset orig, PlayerGraphics self)
 		{
 			orig(self);
@@ -197,7 +195,7 @@ namespace NewTerra
 				data.spritesInitialized = false;
 			}
 		}
-		
+
 		private void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
 		{
 			orig(self);
@@ -216,17 +214,16 @@ namespace NewTerra
 				}
 			}
 		}
-		
+
 		private void PlayerGraphicsOnInitiateSprites(On.PlayerGraphics.orig_InitiateSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
 		{
 			orig(self, sLeaser, rCam);
 
 			if (self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
-				UnityEngine.Debug.Log("AAAAUGH!!");
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
 				if (data == null) return;
-				
+
 				if (data.spritesInitialized == false) // trust nojoardy. (sprites might be initiated twice :gunchie: and this is used in addtocontainer :gunched:)
 				{
 					data.spritesInitialized = true;
@@ -238,9 +235,6 @@ namespace NewTerra
 
 				data.startOfSprites = sLeaser.sprites.Length;
 				Array.Resize(ref sLeaser.sprites, sLeaser.sprites.Length + data.totalAddedSprites);
-				
-				UnityEngine.Debug.Log(data.startOfSprites);
-				UnityEngine.Debug.Log("im peeling.");
 
 				for (int i = 0; i < 2; i++)
 				{
@@ -250,8 +244,8 @@ namespace NewTerra
 				self.AddToContainer(sLeaser, rCam, null);
 			}
 		}
-		
-		private void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner)
+
+		private void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner) // PROBLEM HERE
 		{
 			if (self.player.SlugCatClass.value != Plugin.TARDIGOATED_ID)
 			{
@@ -260,19 +254,17 @@ namespace NewTerra
 			else
 			{
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
-				if (data == null)
-				{
-					UnityEngine.Debug.Log("guh"); 
-					return;
-				}
+				if (data == null) return;
+				if (data.startOfSprites == 0) return;
 				newContatiner ??= rCam.ReturnFContainer("Midground");
 				foreach (int spriteIndex in (int[])[0, 1, 2, 3, 4, data.startOfSprites, data.startOfSprites + 1, 5, 6, 7, 8, 9, 10, 11])
 				{
-					if (!data.spritesInitialized || spriteIndex > sLeaser.sprites.Length - 1) return;
-					
+					if (!data.spritesInitialized || spriteIndex > sLeaser.sprites.Length - 1) continue;
+					//UnityEngine.Debug.Log(spriteIndex);
+
 					sLeaser.sprites[spriteIndex].RemoveFromContainer();
-					
-					if ((spriteIndex > 6 && spriteIndex < 9) || spriteIndex > 9)
+
+					if (spriteIndex is > 6 and < 9 or > 9)
 					{
 						rCam.ReturnFContainer("Foreground").AddChild(sLeaser.sprites[spriteIndex]);
 					}
@@ -283,7 +275,7 @@ namespace NewTerra
 				}
 			}
 		}
-		
+
 		private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
 		{
 			orig(self, sLeaser, rCam, timeStacker, camPos);
@@ -304,7 +296,7 @@ namespace NewTerra
 					data.startOfSprites = sLeaser.sprites.Length - 2;
 					return;
 				}
-				
+
 				// 90% of the code in this for loop and "vector" and "vector2" are decompiled code :grape:
 				Vector2 vector = Vector2.Lerp(self.drawPositions[0, 1], self.drawPositions[0, 0], timeStacker);
 				Vector2 vector2 = Vector2.Lerp(self.drawPositions[1, 1], self.drawPositions[1, 0], timeStacker);
