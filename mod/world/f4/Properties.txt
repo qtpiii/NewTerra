@@ -1,0 +1,11 @@
+
+overseersSpawnChance: 0
+playerGuideOverseerSpawnChance: 0
+pupSpawnChance: 0.2
+earlyCycleChance: 0
+kelpColor: 0.3, 0.3, 0.15
+mudColor: 0.4, 0.2, 0.15
+batsPerActiveSwarmRoom: 4
+Room Setting Templates: Default
+Subregion: Storm Drain
+Subregion: Fallen Archipelago
