@@ -1,0 +1,8 @@
+priming : true
+size : 1
+radius : 4
+echosong : ELSE_ALEPH_1
+room : RU_A22
+defaultflip : 0
+minkarma : 1
+minkarmacap : 2
