@@ -42,6 +42,7 @@ namespace NewTerra
 
 		private void Room_Update(On.Room.orig_Update orig, Room self)
 		{
+			orig(self);
 			if (self.roomSettings.name.StartsWith("RU_"))
 			{
 				self.roomSettings.placedObjects.ForEach(obj =>
