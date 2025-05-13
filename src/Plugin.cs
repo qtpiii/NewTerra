@@ -32,11 +32,11 @@ public class Plugin : BaseUnityPlugin
 		On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 		On.RoomSpecificScript.AddRoomSpecificScript += RoomSpecificScript_AddRoomSpecificScript;
 		PlayerHooks playerHooks = new();
-		playerHooks.Apply();
 		WorldHooks worldHooks = new();
-		worldHooks.OnEnable();
 		try
 		{
+			playerHooks.Apply();
+			worldHooks.Apply();
 			GlangleFruit.Apply();
 			__SwitchToBepinexLogger(Logger);
 			_AddBGLabels();

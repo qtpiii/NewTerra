@@ -18,7 +18,7 @@ namespace NewTerra
 
 		public CurrWeather currWeather;
 
-		public void OnEnable()
+		public void Apply()
 		{
 			try
 			{
@@ -38,10 +38,12 @@ namespace NewTerra
 			{
 				Plugin.logger.LogFatal(ex);
 			}
+			Plugin.logger.LogWarning("im gay");
 		}
 
 		private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{
+			Plugin.logger.LogWarning("im room.loaded");
 			orig(self);
 			if (self.roomSettings.name.StartsWith("RU_") || self.roomSettings.name.StartsWith("AW_"))
 			{
@@ -109,6 +111,7 @@ namespace NewTerra
 
 		private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
 		{
+			Plugin.logger.LogWarning("im world.ctor");
 			orig(self, game, region, name, singleRoomWorld);
 			List<CurrWeather> weatherpatterns = new List<CurrWeather>
 			{
@@ -138,6 +141,7 @@ namespace NewTerra
 
 		private void Room_Update(On.Room.orig_Update orig, Room self)
 		{
+			Plugin.logger.LogWarning("im room.update");
 			orig(self);
 			if (self.roomSettings.name.StartsWith("RU_"))
 			{
@@ -188,6 +192,7 @@ namespace NewTerra
 
 		private void ScavengerTradeSpot_Update(ILContext il)
 		{
+			Plugin.logger.LogWarning("im scavengertradespot.update");
 			ILCursor c = new(il);
 			while (true) // this while loop isnt needed because theres only one instance of whats being matched in this function, but it will work regardless
 			{
@@ -220,6 +225,7 @@ namespace NewTerra
 		
 		private bool Track_AllowedInSubRegion(On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.orig_AllowedInSubRegion orig, Music.ProceduralMusic.ProceduralMusicInstruction.Track self, string subRegion)
 		{
+			Plugin.logger.LogWarning("im track.allowedinsubregion");
 			if (self.subRegions == null)
 			{
 				return true;
