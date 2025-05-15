@@ -1,4 +1,4 @@
-DangerType: AerieBlizzard
+DangerType: Blizzard
 RainIntensity: 0.2
 RumbleIntensity: 0
 CeilingDrips: 0.15

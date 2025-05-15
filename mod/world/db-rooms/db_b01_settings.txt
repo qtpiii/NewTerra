@@ -1,0 +1,8 @@
+Template: db_settingstemplate_outside
+WaveSpeed: 0.4997666
+WaveLength: 0.9998833
+WaveAmplitude: 3.550501E-07
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+PlacedObjects: LightSource><-54.27234><1559.699><0.2065217~Environment~682~-371~188~-275.3975~0~1~None~0~0, LightSource><62><1204><0.2065217~Environment~682~-371~188~-275.3975~0~1~None~0~0, LightSource><55><736><0.2065217~Environment~682~-371~188~-275.3975~0~1~None~0~0, LightSource><-79><851><0.2065217~Environment~704~-144~188~-275.3975~0~1~None~0~0, LightSource><371><1477><0.2065217~Environment~449~-130~188~-275.3975~0~1~None~0~0, LightSource><-84><258><0.1086956~Environment~591~-139~208~-108.3975~0~1~None~0~0, LightSource><-111><1611><0.1086956~Environment~1349~-762~208~-108.3975~0~1~None~0~0, SnowSource><219.6927><1389.196><Radial~308~34~143~-111.3975~0.5~1, SnowSource><288><1130><Radial~178~-100~143~-111.3975~0.5~1, SnowSource><118><1494><Radial~319~-229~143~-111.3975~0.6086956~1, SnowSource><506><1487><Radial~171~-134~143~-111.3975~0.6086956~1, SnowSource><583><958><Radial~-187~79~57~40.60251~0.5~1, SnowSource><190><254><Radial~-206~166~57~40.60251~0.6086956~1, SnowSource><178><614><Radial~369~72~143~-111.3975~0.6086956~1, SnowSource><524><618><Radial~190~16~143~-111.3975~0.4021739~1, SnowSource><687><1293><Radial~190~16~143~-111.3975~0.4021739~1, 
+FadePalette: 40, 0.1, 0.05
