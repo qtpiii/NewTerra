@@ -42,69 +42,73 @@ namespace NewTerra
 
 		private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{
+			if (self.world.name is "RU" or "AW")
+			{
+				switch (currWeather)
+				{
+					case CurrWeather.Sunny:
+						self.roomSettings.Clouds = 0.1f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Brightness, 0.05f, false));
+						break;
+					case CurrWeather.Cloudy:
+						self.roomSettings.Clouds = 0.3f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Bloom, 0.1f, false));
+						break;
+					case CurrWeather.Rainy:
+						self.roomSettings.Clouds = 0.7f;
+						self.roomSettings.CeilingDrips = 0.7f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 0.8f, false));
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Fog, 0.2f, false));
+						break;
+					case CurrWeather.Stormy:
+						self.roomSettings.Clouds = 1f;
+						self.roomSettings.CeilingDrips = 1f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 1f, false));
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.05f, false));
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Fog, 0.5f, false));
+						var skLightning = new RoomSettings.RoomEffect(WatcherEnums.RoomEffectType.SKLightning, 1f, false);
+						skLightning.extraAmounts[0] = 0.2f;
+						skLightning.extraAmounts[1] = 1f;
+						self.roomSettings.effects.Add(skLightning);
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
+						break;
+				}
+				UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
+			}
+			if (self.world.name is "DB")
+			{
+				switch (currWeather)
+				{
+					case CurrWeather.Sunny:
+						self.roomSettings.RainIntensity = 0.1f;
+						self.roomSettings.Clouds = 0.1f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.1f, false));
+						break;
+					case CurrWeather.Cloudy:
+						self.roomSettings.RainIntensity = 0.2f;
+						self.roomSettings.Clouds = 0.3f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.05f, false));
+						break;
+					case CurrWeather.Rainy:
+						self.roomSettings.RainIntensity = 0.6f;
+						self.roomSettings.Clouds = 0.7f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Desaturation, 0.1f, false));
+						break;
+					case CurrWeather.Stormy:
+						for (int i = 0; i < 1000; i++)
+						{
+							UnityEngine.Debug.Log("Hi");
+						}
+						self.roomSettings.RainIntensity = 1f;
+						self.roomSettings.Clouds = 1f;
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
+						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Desaturation, 0.4f, false));
+						break;
+				}
+				UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
+			}
 			orig(self);
-			if (self.roomSettings.name.StartsWith("RU_") || self.roomSettings.name.StartsWith("AW_"))
-			{
-				switch (currWeather)
-				{
-				case CurrWeather.Sunny:
-					self.roomSettings.Clouds = 0.1f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Brightness, 0.05f, false));
-					break;
-				case CurrWeather.Cloudy:
-					self.roomSettings.Clouds = 0.3f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Bloom, 0.1f, false));
-					break;
-				case CurrWeather.Rainy:
-					self.roomSettings.Clouds = 0.7f;
-					self.roomSettings.CeilingDrips = 0.7f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 0.8f, false));
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Fog, 0.2f, false));
-					break;
-				case CurrWeather.Stormy:
-					self.roomSettings.Clouds = 1f;
-					self.roomSettings.CeilingDrips = 1f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 1f, false));
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.05f, false));
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Fog, 0.5f, false));
-					var skLightning = new RoomSettings.RoomEffect(WatcherEnums.RoomEffectType.SKLightning, 1f, false);
-					skLightning.extraAmounts[0] = 0.2f;
-					skLightning.extraAmounts[1] = 1f;
-					self.roomSettings.effects.Add(skLightning);
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
-					break;
-				}
-				Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
-			}
-			if (self.roomSettings.name.StartsWith("DB_"))
-			{
-				switch (currWeather)
-				{
-				case CurrWeather.Sunny:
-					self.roomSettings.RainIntensity = 0.1f;
-					self.roomSettings.Clouds = 0.1f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.1f, false));
-					break;
-				case CurrWeather.Cloudy:
-					self.roomSettings.RainIntensity = 0.2f;
-					self.roomSettings.Clouds = 0.3f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.05f, false));
-					break;
-				case CurrWeather.Rainy:
-					self.roomSettings.RainIntensity = 0.6f;
-					self.roomSettings.Clouds = 0.7f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Desaturation, 0.1f, false));
-					break;
-				case CurrWeather.Stormy:
-					self.roomSettings.RainIntensity = 1f;
-					self.roomSettings.Clouds = 1f;
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
-					self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Desaturation, 0.4f, false));
-					break;
-				}
-				Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
-			}
 		}
 
 		private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
@@ -124,7 +128,6 @@ namespace NewTerra
 
 			if (game != null && game.IsStorySession)
 			{
-				Plugin.logger.LogInfo("Hi! im ermtime. hello");
 				if (game.GetStorySession.saveState.cycleNumber == 0)
 				{
 					currWeather = CurrWeather.Cloudy;
@@ -133,7 +136,7 @@ namespace NewTerra
 				{
 					currWeather = weatherpatterns[rnd.Next(weatherpatterns.Count)];
 				}
-				Debug.Log("Weather set to " + currWeather);
+				UnityEngine.Debug.Log("Weather set to " + currWeather);
 			}
 		}
 
