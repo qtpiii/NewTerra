@@ -49,7 +49,7 @@ public class Plugin : BaseUnityPlugin
 		{
 			logger.LogFatal(ex);
 		}
-		logger.LogWarning("boy pussy and boobs");
+		//logger.LogWarning("boy pussy and boobs");
 	}
 
 	private void _AddBGLabels()

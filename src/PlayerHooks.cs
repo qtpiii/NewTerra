@@ -40,7 +40,7 @@ namespace NewTerra
 				On.Player.ctor += Player_ctor;
 				On.Player.TerrainImpact += Player_TerrainImpact;
 				On.Player.SlugcatGrab += PlayerOnSlugcatGrab;
-				IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated; // stupid joar. this unhardcodes how many times a for loop repeats (from 2 to the actual amount of grasps)
+				//IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated; // stupid joar. this unhardcodes how many times a for loop repeats (from 2 to the actual amount of grasps)
 			}
 			catch (Exception ex)
 			{
@@ -245,7 +245,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner) // PROBLEM HERE
+		private void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner)
 		{
 			if (self.player.SlugCatClass.value != Plugin.TARDIGOATED_ID)
 			{
@@ -257,7 +257,7 @@ namespace NewTerra
 				if (data == null) return;
 				if (data.startOfSprites == 0) return;
 				newContatiner ??= rCam.ReturnFContainer("Midground");
-				foreach (int spriteIndex in (int[])[0, 1, 2, 3, 4, data.startOfSprites, data.startOfSprites + 1, 5, 6, 7, 8, 9, 10, 11])
+				foreach (int spriteIndex in (int[])[data.startOfSprites, data.startOfSprites + 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
 				{
 					if (!data.spritesInitialized || spriteIndex > sLeaser.sprites.Length - 1) continue;
 					//UnityEngine.Debug.Log(spriteIndex);

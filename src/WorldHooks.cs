@@ -32,18 +32,16 @@ namespace NewTerra
 
 				On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.AllowedInSubRegion += Track_AllowedInSubRegion;
 
-				IL.ScavengerTradeSpot.Update += ScavengerTradeSpot_Update;
+				//IL.ScavengerTradeSpot.Update += ScavengerTradeSpot_Update;
 			}
 			catch(Exception ex)
 			{
 				Plugin.logger.LogFatal(ex);
 			}
-			Plugin.logger.LogWarning("im gay");
 		}
 
 		private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{
-			Plugin.logger.LogWarning("im room.loaded");
 			orig(self);
 			if (self.roomSettings.name.StartsWith("RU_") || self.roomSettings.name.StartsWith("AW_"))
 			{
@@ -111,7 +109,6 @@ namespace NewTerra
 
 		private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
 		{
-			Plugin.logger.LogWarning("im world.ctor");
 			orig(self, game, region, name, singleRoomWorld);
 			List<CurrWeather> weatherpatterns = new List<CurrWeather>
 			{
@@ -127,6 +124,7 @@ namespace NewTerra
 
 			if (game != null && game.IsStorySession)
 			{
+				Plugin.logger.LogInfo("Hi! im ermtime. hello");
 				if (game.GetStorySession.saveState.cycleNumber == 0)
 				{
 					currWeather = CurrWeather.Cloudy;
@@ -141,7 +139,6 @@ namespace NewTerra
 
 		private void Room_Update(On.Room.orig_Update orig, Room self)
 		{
-			Plugin.logger.LogWarning("im room.update");
 			orig(self);
 			if (self.roomSettings.name.StartsWith("RU_"))
 			{
@@ -225,7 +222,6 @@ namespace NewTerra
 		
 		private bool Track_AllowedInSubRegion(On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.orig_AllowedInSubRegion orig, Music.ProceduralMusic.ProceduralMusicInstruction.Track self, string subRegion)
 		{
-			Plugin.logger.LogWarning("im track.allowedinsubregion");
 			if (self.subRegions == null)
 			{
 				return true;
