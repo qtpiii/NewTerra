@@ -49,7 +49,6 @@ namespace NewTerra
 					case CurrWeather.Sunny:
 						self.roomSettings.Clouds = 0.1f;
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightBurn, 0.15f, false));
-						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Brightness, 0.05f, false));
 						break;
 					case CurrWeather.Cloudy:
 						self.roomSettings.Clouds = 0.3f;
@@ -67,14 +66,14 @@ namespace NewTerra
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.LightRain, 1f, false));
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.HeavyRain, 0.05f, false));
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Fog, 0.5f, false));
-						var skLightning = new RoomSettings.RoomEffect(WatcherEnums.RoomEffectType.SKLightning, 1f, false);
+						var skLightning = new RoomSettings.RoomEffect(WatcherEnums.RoomEffectType.SKLightning, 0.2f, false);
 						skLightning.extraAmounts[0] = 0.2f;
 						skLightning.extraAmounts[1] = 1f;
 						self.roomSettings.effects.Add(skLightning);
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
 						break;
 				}
-				UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
+				//UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
 			}
 			if (self.world.name is "DB")
 			{
@@ -96,17 +95,17 @@ namespace NewTerra
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Desaturation, 0.1f, false));
 						break;
 					case CurrWeather.Stormy:
-						for (int i = 0; i < 1000; i++)
-						{
-							UnityEngine.Debug.Log("Hi");
-						}
 						self.roomSettings.RainIntensity = 1f;
 						self.roomSettings.Clouds = 1f;
+						var skLightning = new RoomSettings.RoomEffect(WatcherEnums.RoomEffectType.SKLightning, 0.15f, false);
+						skLightning.extraAmounts[0] = 0.15f;
+						skLightning.extraAmounts[1] = 0.75f;
+						self.roomSettings.effects.Add(skLightning);
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Darkness, 0.2f, false));
 						self.roomSettings.effects.Add(new RoomSettings.RoomEffect(RoomSettings.RoomEffect.Type.Desaturation, 0.4f, false));
 						break;
 				}
-				UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
+				//UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
 			}
 			orig(self);
 		}
@@ -143,7 +142,7 @@ namespace NewTerra
 		private void Room_Update(On.Room.orig_Update orig, Room self)
 		{
 			orig(self);
-			if (self.roomSettings.name.StartsWith("RU_"))
+			if (self.world.name is "RU")
 			{
 				self.roomSettings.placedObjects.ForEach(obj =>
 				{
@@ -246,7 +245,7 @@ namespace NewTerra
 		private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
 		{
 			orig(self, eu);
-			if (self.room.roomSettings.name.StartsWith("RU_") || self.room.roomSettings.name.StartsWith("AW_"))
+			if (self.room.world.name is "RU" or "AW")
 			{
 				self.floodingSound.Volume = 0;
 			}
