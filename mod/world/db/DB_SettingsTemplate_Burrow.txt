@@ -5,7 +5,7 @@ WetTerrain: OFF
 CeilingDrips: 0.25
 Clouds: 0.5
 Grime: 0.25
-Palette: 4994
+Palette: 4972
 EffectColorA: 10
 EffectColorB: 9
 Effects: Coldness-0.05-30-107, Beetle-0.1-299-60, Flies-0.2-38.53751-130.2667,

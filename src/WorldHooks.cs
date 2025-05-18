@@ -24,7 +24,7 @@ namespace NewTerra
 			{
 				On.World.ctor += World_ctor;
 
-				On.Room.Loaded += Room_Loaded;
+				//On.Room.Loaded += Room_Loaded;
 
 				On.RoomRain.Update += RoomRain_Update;
 
