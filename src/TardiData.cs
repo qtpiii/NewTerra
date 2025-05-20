@@ -12,7 +12,7 @@
 		public int canGrabWithExtraHandsCounter = 0;
 		public int switchGraspsCounter = 0;
 
-		public float poisonStunTime = 0.0f;
+		public float poisonStunAmount = 0.0f;
 		public int poisonStunCounter = 0;
 		public int poisonStunLimit = 0;
 

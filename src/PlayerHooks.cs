@@ -293,6 +293,10 @@ namespace NewTerra
 						sLeaser.sprites[index].SetElementByName("Tardi" + name);
 					}
 				}
+				if (self.player.Stunned && self.player.injectedPoison > 0f)
+				{
+					sLeaser.sprites[9].element = Futile.atlasManager.GetElementWithName("TardiPoisonFace");
+				}
 
 				Plugin.tardiCWT.TryGetValue(self.player, out var data);
 				if (data == null || data.startOfSprites > sLeaser.sprites.Length - 1)
@@ -407,11 +411,11 @@ namespace NewTerra
 				{
 					player.slowMovementStun = Math.Max(player.slowMovementStun, Mathf.RoundToInt(player.injectedPoison * 8f));
 					player.drown = Mathf.Max(player.drown, player.injectedPoison * 0.25f);
-					player.aerobicLevel = Mathf.Max(player.aerobicLevel, player.injectedPoison);
+					player.aerobicLevel = Mathf.Max(player.aerobicLevel, player.injectedPoison * 1.5f);
 					if (player.graphicsModule != null)
 					{
 						PlayerGraphics playerGraphics = player.graphicsModule as PlayerGraphics;
-						playerGraphics.malnourished = Mathf.Max(playerGraphics.malnourished, player.injectedPoison * 1.5f);
+						playerGraphics.malnourished = Mathf.Max(playerGraphics.malnourished, player.injectedPoison);
 					}
 					player.injectedPoison -= 0.0005f;
 					if (player.injectedPoison >= 1.5f && !player.dead)
@@ -422,14 +426,14 @@ namespace NewTerra
 
 				Plugin.tardiCWT.TryGetValue(player, out var data);
 				if (data == null) return;
-				if (data.poisonStunCounter >= 30 || data.poisonStunLimit >= 400)
+				if (data.poisonStunCounter >= 20 || data.poisonStunLimit >= 400)
 				{
-					if (data.poisonStunTime > 0f)
+					if (data.poisonStunAmount > 0f)
 					{
-						player.Stun(Mathf.RoundToInt(Mathf.Lerp(20, 400, data.poisonStunTime * 1.5f)));
-						player.aerobicLevel = Mathf.Max(player.aerobicLevel, Mathf.Max(player.injectedPoison * 2f, 1.5f));
-						data.poisonStunTime = 0f;
-						data.poisonStunLimit = -400;
+						player.Stun(Mathf.RoundToInt(Mathf.Lerp(20, 200, data.poisonStunAmount * 1.5f)));
+						player.aerobicLevel = Mathf.Max(player.aerobicLevel, player.injectedPoison * 2f);
+						data.poisonStunAmount = 0f;
+						data.poisonStunLimit = -1600;
 					}
 				}
 			}
@@ -467,7 +471,11 @@ namespace NewTerra
 			{
 				Plugin.tardiCWT.TryGetValue(player, out var data);
 				if (data == null) return;
-				data.poisonStunTime += amount;
+				data.poisonStunAmount += amount;
+				if (data.poisonStunCounter >= 20)
+				{
+					if (data.poisonStunLimit < 0) data.poisonStunLimit = 0;
+				}
 				data.poisonStunCounter = 0;
 				data.poisonStunLimit += 1;
 			}
@@ -523,7 +531,7 @@ namespace NewTerra
 				Plugin.tardiCWT.TryGetValue(self, out var data);
 				if (data == null) return;
 
-				if (data.poisonStunCounter < 30)
+				if (data.poisonStunCounter < 20)
 				{
 					data.poisonStunCounter += 1;
 				}

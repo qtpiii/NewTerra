@@ -81,6 +81,7 @@ public class Plugin : BaseUnityPlugin
 		{
 			Futile.atlasManager.LoadAtlas("atlases/NT_VultureMasks");
 			Futile.atlasManager.LoadAtlas("atlases/DangleSeed");
+			Futile.atlasManager.LoadAtlas("atlases/TardiPoisonFace");
 			Futile.atlasManager.LoadAtlas("atlases/body");
 			Futile.atlasManager.LoadAtlas("atlases/face");
 			Futile.atlasManager.LoadAtlas("atlases/head");
