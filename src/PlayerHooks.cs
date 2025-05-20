@@ -34,6 +34,10 @@ namespace NewTerra
 
 				IL.Player.GrabUpdate += PlayerOnGrabUpdate; // for grasp cycling
 
+				IL.Creature.Update += IL_Creature_Update;
+
+				On.Creature.Update += Creature_Update;
+				On.Creature.InjectPoison += Creature_InjectPoison;
 				On.Creature.Violence += Creature_Violence;
 				On.Creature.ctor += CreatureOnctor;
 				On.Player.Update += Player_Update;
@@ -394,6 +398,81 @@ namespace NewTerra
 
 		#region gameplay
 
+		private void Creature_Update(On.Creature.orig_Update orig, Creature self, bool eu)
+		{
+			orig(self, eu);
+			if (self is Player player && player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			{
+				if (player.injectedPoison > 0f)
+				{
+					player.slowMovementStun = Math.Max(player.slowMovementStun, Mathf.RoundToInt(player.injectedPoison * 8f));
+					player.drown = Mathf.Max(player.drown, player.injectedPoison * 0.25f);
+					player.aerobicLevel = Mathf.Max(player.aerobicLevel, player.injectedPoison);
+					if (player.graphicsModule != null)
+					{
+						PlayerGraphics playerGraphics = player.graphicsModule as PlayerGraphics;
+						playerGraphics.malnourished = Mathf.Max(playerGraphics.malnourished, player.injectedPoison * 1.5f);
+					}
+					player.injectedPoison -= 0.0005f;
+					if (player.injectedPoison >= 1.5f && !player.dead)
+					{
+						player.Die();
+					}
+				}
+
+				Plugin.tardiCWT.TryGetValue(player, out var data);
+				if (data == null) return;
+				if (data.poisonStunCounter >= 30 || data.poisonStunLimit >= 400)
+				{
+					if (data.poisonStunTime > 0f)
+					{
+						player.Stun(Mathf.RoundToInt(Mathf.Lerp(20, 400, data.poisonStunTime * 1.5f)));
+						player.aerobicLevel = Mathf.Max(player.aerobicLevel, Mathf.Max(player.injectedPoison * 2f, 1.5f));
+						data.poisonStunTime = 0f;
+						data.poisonStunLimit = -400;
+					}
+				}
+			}
+		}
+
+		private void IL_Creature_Update(ILContext il)
+		{
+			ILCursor c = new(il);
+
+			ILLabel ilLabel = il.DefineLabel();
+
+			c.GotoNext(
+				MoveType.After,
+				x => x.MatchLdarg(0),
+				x => x.MatchLdfld<Creature>(nameof(Creature.injectedPoison)),
+			 	x => x.MatchLdcR4(0),
+				x => x.MatchBleUn(out ilLabel)
+				);
+			c.Emit(OpCodes.Ldarg_0);
+			c.EmitDelegate<Func<Creature, bool>>((Creature creature) =>
+			{
+				if (creature is Player player)
+				{
+					if (player.SlugCatClass.value == Plugin.TARDIGOATED_ID) return true;
+				}
+				return false;
+			});
+			c.Emit(OpCodes.Brtrue, ilLabel);
+		}
+
+		private void Creature_InjectPoison(On.Creature.orig_InjectPoison orig, Creature self, float amount, Color poisonColor)
+		{
+			orig(self, amount, poisonColor);
+			if (self is Player player && player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
+			{
+				Plugin.tardiCWT.TryGetValue(player, out var data);
+				if (data == null) return;
+				data.poisonStunTime += amount;
+				data.poisonStunCounter = 0;
+				data.poisonStunLimit += 1;
+			}
+		}
+
 		private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
 		{
 			if (self != null && self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
@@ -440,9 +519,14 @@ namespace NewTerra
 			if (self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
 				self.Hypothermia -= 0.75f * self.HypothermiaGain;
-				
+
 				Plugin.tardiCWT.TryGetValue(self, out var data);
 				if (data == null) return;
+
+				if (data.poisonStunCounter < 30)
+				{
+					data.poisonStunCounter += 1;
+				}
 
 				self.switchHandsCounter = 0;
 				

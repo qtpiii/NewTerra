@@ -63,7 +63,7 @@ RU_S04 : RU_B20, DISCONNECTED : SHELTER
 END ROOMS
 CREATURES
 
-RU_B06 : 5-TentaclePlant-{Ignorecycle}, 6-SmallCentipede-{Ignorecycle}-2, 9-Leech-7, 4-WhiteLizard-{Ignorecycle}
+RU_B06 : 5-TentaclePlant-{Ignorecycle}, 6-SmallCentipede-{Ignorecycle}-2, 9-Leech-{Ignorecycle}-7, 4-WhiteLizard-{Ignorecycle}
 OFFSCREEN : 0-Scrounger-5, 0-Scrounger-{Night}-6, 0-minileviathan-3
 RU_B08 : 5-TentaclePlant-{Ignorecycle}, 4-Snail-3
 RU_C09 : 3-TentaclePlant-{Ignorecycle}
@@ -73,24 +73,34 @@ RU_B19 : 4-Centipede-{Ignorecycle}
 RU_C07 : 3-Centipede-{Ignorecycle}
 RU_A21 : 3-PinkLizard-{Ignorecycle}
 RU_A20 : 3-PinkLizard-{Ignorecycle}
-RU_H01 : 4-WaterSpitter, 3-Snail-2
+RU_H01 : 4-WaterSpitter, 3-Snail-2, 2-WaterSpitter
 RU_A07 : 3-WaterSpitter
 RU_C05 : 3-Centipede-{Ignorecycle}
-RU_A04 : 3-RedCentipede-{Night}
+RU_A04 : 3-RedCentipede-{Night}, 4-BlueLizard, 4-CyanLizard-{Night}
 RU_B15 : 10-RedCentipede-{Night}, 12-Centipede-{Ignorecycle}, 6-WhiteLizard-{Ignorecycle}
-RU_C08 : 5-SmallCentipede-{Ignorecycle}-2, 3-PinkLizard-{Ignorecycle}, 4-CyanLizard-{Night}
-RU_B13 : 3-BlueLizard
+RU_C08 : 5-SmallCentipede-{Ignorecycle}-2, 3-PinkLizard-{Ignorecycle}, 4-CyanLizard-{Night}, 2-Centipede-{Ignorecycle}
+RU_B13 : 3-BlueLizard, 2-Centipede-{Ignorecycle}
 RU_B05 : 4-WhiteLizard-{Ignorecycle}
 RU_C01 : 6-BlueLizard
 LINEAGE : RU_C01 : 4 : PinkLizard-{Ignorecycle}-0.3, White-{Ignorecycle}-0
 RU_B02 : 4-BlueLizard, 5-CyanLizard-{Night}
-RU_D02 : 8-Centipede-{Ignorecycle}-2
-RU_C06 : 5-Snail-2
+RU_D02 : 8-Centipede-{Ignorecycle}-2, 7-PinkLizard
+RU_C06 : 5-Snail-2, 3-Salamander, 4-SeaLeech-{Ignorecycle}
 RU_B11 : 2-Snail-2
 RU_A02 : 3-Snail-2
 RU_A05 : 2-BigNeedleWorm, 2-SmallNeedleWorm-3
-RU_B10 : 5-Leech-4
-RU_C04 : 5-Leech-4, 4-BlueLizard, 3-CyanLizard-{Night}
+RU_B10 : 5-Leech-{Ignorecycle}-4, 4-CyanLizard-{Night}
+RU_C04 : 5-Leech-{Ignorecycle}-4, 4-BlueLizard, 3-CyanLizard-{Night}
 RU_A06 : 4-BlueLizard
-RU_C03 : 2-PinkLizard-{Ignorecycle}
+RU_C03 : 2-PinkLizard-{Ignorecycle}, 4-Centipede-{Ignorecycle}
+RU_B07 : 3-Centipede-{Ignorecycle}
+RU_B16 : 2-BlueLizard, 3-CyanLizard-{Night}
+RU_A17 : 1-BlueLizard
+RU_A12 : 4-Salamander
+RU_A01 : 5-Salamander
+RU_B03 : 4-WhiteLizard-{Ignorecycle}
+RU_B17 : 4-PinkLizard-{Ignorecycle}, 3-BlueLizard
+RU_A18 : 3-BlueLizard
+RU_A19 : 2-CyanLizard-{Night}
+RU_B14 : 3-WhiteLizard
 END CREATURES

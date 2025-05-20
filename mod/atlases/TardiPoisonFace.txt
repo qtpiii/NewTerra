@@ -1,0 +1,20 @@
+{
+"frames": {
+"TardiPoisonFace.png":
+{
+	"frame": {"x":0,"y":0,"w":46,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":48},
+	"sourceSize": {"w":46,"h":48}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "TardiPoisonFace.png",
+	"format": "RGBA8888",
+	"size": {"w":46,"h":48},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3dab4827439779e92017ec94a4d70305:fc9cb8802b5ea288d1f3d56a3ee5e7d0:d5b470ee17308bc246580d358ea3640d$"
+}
+}

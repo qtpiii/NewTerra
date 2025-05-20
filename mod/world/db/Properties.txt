@@ -7,3 +7,4 @@ batsPerActiveSwarmRoom: 5
 Room Setting Templates: Inside, Outside, Burrow, Crypt
 Subregion: Cursory Burrow
 Subregion: Necrotic Crypt
+mudColor: 0.25, 0.075, 0.05
