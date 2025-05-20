@@ -293,7 +293,7 @@ namespace NewTerra
 						sLeaser.sprites[index].SetElementByName("Tardi" + name);
 					}
 				}
-				if (self.player.Stunned && self.player.injectedPoison > 0f)
+				if (!self.player.dead && self.player.Stunned && self.player.injectedPoison > 0f)
 				{
 					sLeaser.sprites[9].element = Futile.atlasManager.GetElementWithName("TardiPoisonFace");
 				}
@@ -426,7 +426,7 @@ namespace NewTerra
 
 				Plugin.tardiCWT.TryGetValue(player, out var data);
 				if (data == null) return;
-				if (data.poisonStunCounter >= 20 || data.poisonStunLimit >= 400)
+				if (data.poisonStunCounter >= 10 || data.poisonStunLimit >= 200)
 				{
 					if (data.poisonStunAmount > 0f)
 					{
@@ -471,7 +471,7 @@ namespace NewTerra
 			{
 				Plugin.tardiCWT.TryGetValue(player, out var data);
 				if (data == null) return;
-				data.poisonStunAmount += amount;
+				data.poisonStunAmount += amount * 2;
 				if (data.poisonStunCounter >= 20)
 				{
 					if (data.poisonStunLimit < 0) data.poisonStunLimit = 0;
@@ -531,7 +531,7 @@ namespace NewTerra
 				Plugin.tardiCWT.TryGetValue(self, out var data);
 				if (data == null) return;
 
-				if (data.poisonStunCounter < 20)
+				if (data.poisonStunCounter < 30)
 				{
 					data.poisonStunCounter += 1;
 				}
