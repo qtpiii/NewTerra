@@ -1,2 +1,2 @@
-PlacedObjects: LightSource><790.9258><420.3454><0.05434782~Environment~306~117~110~-214.3975~1~1~None~0~0, LightSource><1244><409><0.05434782~Environment~438~131~110~-214.3975~1~1~None~0~0, Physalis><1401.584><593.6111><0~0~2~3, 
+PlacedObjects: LightSource><790.9258><420.3454><0.05434782~Environment~306~117~110~-214.3975~0~1~None~0~0, LightSource><1244><409><0.05434782~Environment~438~131~110~-214.3975~0~1~None~0~0, Physalis><1464.584><583.6111><0~0~2~3, 
 FadePalette: 4972, 0.6521739, 0.75

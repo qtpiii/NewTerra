@@ -2,7 +2,7 @@ ROOMS
 
 RU_A01 : RU_B12, RU_H01, RU_A07
 RU_B01 : RU_B02, RU_S01, RU_C01
-RU_S01 : DISCONNECTED, RU_B01 : SHELTER
+RU_S01 : RU_R01, RU_B01 : SHELTER
 RU_B02 : RU_C02, RU_B01, RU_A02
 RU_A02 : RU_B02, RU_B04, RU_D02
 RU_B03 : RU_D02, RU_A03, RU_C03, RU_A04
@@ -60,6 +60,8 @@ RU_A22 : RU_B18
 RU_B19 : RU_B18, RU_A21
 RU_B20 : RU_S04, RU_B17
 RU_S04 : RU_B20, DISCONNECTED : SHELTER
+RU_R01 : RU_S01, DISCONNECTED
+
 END ROOMS
 CREATURES
 
@@ -78,7 +80,7 @@ RU_A07 : 3-WaterSpitter
 RU_C05 : 3-Centipede-{Ignorecycle}
 RU_A04 : 3-RedCentipede-{Night}, 4-BlueLizard, 4-CyanLizard-{Night}
 RU_B15 : 10-RedCentipede-{Night}, 12-Centipede-{Ignorecycle}, 6-WhiteLizard-{Ignorecycle}
-RU_C08 : 5-SmallCentipede-{Ignorecycle}-2, 3-PinkLizard-{Ignorecycle}, 4-CyanLizard-{Night}, 2-Centipede-{Ignorecycle}
+RU_C08 : 5-SmallCentipede-{Ignorecycle}-2, 3-PinkLizard-{Ignorecycle}, 2-Centipede-{Ignorecycle}, 4-CyanLizard-{Night}
 RU_B13 : 3-BlueLizard, 2-Centipede-{Ignorecycle}
 RU_B05 : 4-WhiteLizard-{Ignorecycle}
 RU_C01 : 6-BlueLizard
@@ -97,10 +99,11 @@ RU_B07 : 3-Centipede-{Ignorecycle}
 RU_B16 : 2-BlueLizard, 3-CyanLizard-{Night}
 RU_A17 : 1-BlueLizard
 RU_A12 : 4-Salamander
-RU_A01 : 5-Salamander
+RU_A01 : 5-Salamander, 3-BigNeedleWorm, 3-SmallNeedleWorm-2
 RU_B03 : 4-WhiteLizard-{Ignorecycle}
 RU_B17 : 4-PinkLizard-{Ignorecycle}, 3-BlueLizard
 RU_A18 : 3-BlueLizard
 RU_A19 : 2-CyanLizard-{Night}
 RU_B14 : 3-WhiteLizard
+RU_B09 : 3-BigNeedleWorm, 3-SmallNeedleWorm-3
 END CREATURES

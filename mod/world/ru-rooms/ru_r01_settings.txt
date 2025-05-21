@@ -1,0 +1,3 @@
+PlacedObjects: DeepProcessing><577.2052><264.6949><0~40~40~40~40~0~-17~132~0.3478261~1~1, 
+FadePalette: 4986, 0.5, 0.25
+MorePalette0: 8, 0.25, 0.1521739

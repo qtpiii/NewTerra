@@ -1,0 +1,9 @@
+WaveSpeed: 0.4987727
+WaveLength: 0.9993864
+WaveAmplitude: 4.724198E-12
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Palette: 4990
+PlacedObjects: ScavengerOutpost><1621.486><252.9495><-95~259~0~0~0.22147~69~28, LightSource><1250.401><322.1184><0.02173913~Environment~371~99~50~86.60254~1~1~None~0~0, LightSource><1604><491><0.02173913~Environment~410~-146~50~86.60254~1~1~None~0~0, LightSource><1774><360><0.02173913~Environment~224~-80~50~86.60254~1~1~None~0~0, LightSource><1890><404><0.02173913~Environment~260~-82~50~86.60254~1~1~None~0~0, LightSource><2104><432><0.02173913~Environment~265~-84~50~86.60254~1~1~None~0~0, LightSource><2293><354><0.02173913~Environment~324~-43~50~86.60254~1~1~None~0~0, LightSource><2417><427><0.02173913~Environment~176~-20~50~86.60254~1~1~None~0~0, LightSource><2513><331><0.02173913~Environment~204~-5~50~86.60254~1~1~None~0~0, LightSource><2823><349><0.02173913~Environment~249~31~50~86.60254~1~1~None~0~0, LightSource><2471><289><0.02173913~Environment~249~31~50~86.60254~1~1~None~0~0, LightSource><2335><287><0.02173913~Environment~185~9~50~86.60254~1~1~None~0~0, LightSource><2254><417><0.02173913~Environment~184~6~50~86.60254~1~1~None~0~0, LightSource><2798><443><0.02173913~Environment~201~8~50~86.60254~1~1~None~0~0, LightSource><2678><393><0.02173913~Environment~201~8~50~86.60254~1~1~None~0~0, LightSource><2824><242><0.02173913~Environment~201~8~50~86.60254~1~1~None~0~0, 
+FadePalette: 4972, 0.8043478, 0.6086956, 0.4021739
+MorePalette0: 4989, 0.3043478, 0.2065217, 0.1086956
