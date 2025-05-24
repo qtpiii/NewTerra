@@ -1,5 +1,5 @@
 Palette: 4987
-PlacedObjects: DayNightSettings><3336.052><263.028><587~68.66025~4985~10, ShelterBhvrManager><-17.10855><355.832><100~50~False~False~4~False~3~6~20~40~60~120~120~120~False, ShelterBhvrPlacedDoor><253.6076><326.5814><1^0, CustomDecal><292.9239><122.1512><-6~363~388~392~370~-32~-275~74~0~1~0.5~rustb2~0.25~0.7065217~0.25~0.7065217~0.25~0.7065217~0.25~0.7065217, ShelterBhvrSpawnPosition><431.3123><309.4401><, ShelterBhvrSpawnPosition><533.8115><311.1834><, 
+PlacedObjects: DayNightSettings><3336.052><263.028><587~68.66025~4985~10, ShelterBhvrManager><-17.10855><355.832><100~50~False~False~4~False~3~6~20~40~60~120~120~120~False, ShelterBhvrPlacedDoor><253.6076><326.5814><1^0, CustomDecal><292.9239><122.1512><-6~363~388~392~370~-32~-275~74~0~1~0.5~rustb2~0~0.7065217~0~0.7065217~0~0.7065217~0~0.7065217, ShelterBhvrSpawnPosition><431.3123><309.4401><, ShelterBhvrSpawnPosition><533.8115><311.1834><, 
 AmbientSounds: OMNI><am_win_hilltop.ogg><709.3493><385.9236><0><1, SPOT><so_ind-generator.ogg><679.8188><156.1654><0.4021739><1><479.8188><333.1654><-115.3553><-23.35535><0><0.252174, 
 FadePalette: 4989, 0.8043478
-MorePalette0: 4988, 0.2065217
+MorePalette0: 4978, 0.2065217
