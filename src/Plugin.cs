@@ -37,8 +37,6 @@ public class Plugin : BaseUnityPlugin
 		{
 			playerHooks.Apply();
 			worldHooks.Apply();
-			GlangleFruit.Apply();
-			__SwitchToBepinexLogger(Logger);
 			_AddBGLabels();
 		}
 		catch (FileNotFoundException)
