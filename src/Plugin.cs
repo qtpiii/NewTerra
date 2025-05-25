@@ -35,6 +35,7 @@ public class Plugin : BaseUnityPlugin
 		{
 			PlayerHooks.Apply();
 			WorldHooks.Apply();
+			DayCycle.Apply();
 		}
 		catch (FileNotFoundException)
 		{

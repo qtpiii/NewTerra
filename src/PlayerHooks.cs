@@ -19,7 +19,6 @@ namespace NewTerra
 		{
 			try
 			{
-				
 				On.PlayerGraphics.ctor += PlayerGraphics_ctor;
 				On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
 				On.PlayerGraphics.InitiateSprites += PlayerGraphicsOnInitiateSprites;
@@ -34,7 +33,7 @@ namespace NewTerra
 
 				IL.Player.GrabUpdate += PlayerOnGrabUpdate; // for grasp cycling
 
-				IL.Creature.Update += IL_Creature_Update;
+				IL.Creature.Update += IL_Creature_Update; // poison resistance
 
 				On.Creature.Update += Creature_Update;
 				On.Creature.InjectPoison += Creature_InjectPoison;
@@ -44,7 +43,7 @@ namespace NewTerra
 				On.Player.ctor += Player_ctor;
 				On.Player.TerrainImpact += Player_TerrainImpact;
 				On.Player.SlugcatGrab += PlayerOnSlugcatGrab;
-				//IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated; // stupid joar. this unhardcodes how many times a for loop repeats (from 2 to the actual amount of grasps)
+				IL.Player.GraphicsModuleUpdated += PlayerOnGraphicsModuleUpdated; // stupid joar. this unhardcodes how many times a for loop repeats (from 2 to the actual amount of grasps)
 			}
 			catch (Exception ex)
 			{
@@ -76,7 +75,7 @@ namespace NewTerra
 		public static void RotateGrasps(Player self)
 		{
 			// moves all grasps clockwise
-			PhysicalObject?[] objects = self.grasps.Select(x => x is null ? null : x.grabbed).ToArray();
+			PhysicalObject[] objects = self.grasps.Select(x => x?.grabbed).ToArray();
 			self.LoseAllGrasps();
 			if (objects[0] is not null) self.Grab(objects[0], 1, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
 			if (objects[1] is not null) self.Grab(objects[1], 3, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
@@ -123,7 +122,11 @@ namespace NewTerra
 					    x => x.MatchBr(out _)
 				    ))
 				{
-					goto InjectDelegate;
+					c.Index += 2;
+					c.EmitDelegate<Func<int, int>>((i) =>
+					{
+						return i % 2 != 0 ? 1 : 0;
+					});
 				}
 				else if (c.TryGotoNext(
 					         x => x.MatchLdarg(0),
@@ -131,7 +134,11 @@ namespace NewTerra
 					         x => x.MatchBrfalse(out _)
 				         ))
 				{
-					goto InjectDelegate;
+					c.Index += 2;
+					c.EmitDelegate<Func<int, int>>((i) =>
+					{
+						return i % 2 != 0 ? 1 : 0;
+					});
 				}
 				else if (c.TryGotoNext(
 					         x => x.MatchLdarg(0),
@@ -139,49 +146,32 @@ namespace NewTerra
 					         x => x.MatchBrtrue(out _)
 				         ))
 				{
-					goto InjectDelegate;
-				}
-				else
-				{
-					break;
-				}
-
-				InjectDelegate:
-				{
 					c.Index += 2;
 					c.EmitDelegate<Func<int, int>>((i) =>
 					{
 						return i % 2 != 0 ? 1 : 0;
 					});
 				}
+				else
+				{
+					break;
+				}
 			}
 		}
 
+		// responsible for carrying objects for some reason
 		private static void PlayerOnGraphicsModuleUpdated(ILContext il)
 		{
 			ILCursor c = new(il);
 
+			// binds to first for loop
 			c.GotoNext(
+				MoveType.After,
 				x => x.MatchLdloc(0),
-				x => x.MatchBrfalse(out _)
+				x => x.MatchLdcI4(2)
 			);
-			c.Index += 1;
-			c.EmitDelegate((int i) =>
-			{
-				return i % 2 != 0 ? 1 : 0;
-			});
-
-			c.GotoNext(
-				x => x.MatchLdloc(0),
-				x => x.MatchLdcI4(2),
-				x => x.MatchBlt(out _)
-			);
-			c.Index += 2;
-			c.Emit(OpCodes.Ldarg_0);
-			c.EmitDelegate<Func<int, Player, int>>((int grasps, Player player) =>
-			{
-				return player.grasps.Length;
-			});
+			c.Emit(OpCodes.Ldarg_0); // push `this` onto stack
+			c.EmitDelegate((int orig, Player self) => self.grasps.Length);
 		}
 
 		#region graphics
@@ -268,7 +258,7 @@ namespace NewTerra
 
 					sLeaser.sprites[spriteIndex].RemoveFromContainer();
 
-					if (spriteIndex is > 6 and < 9 or > 9)
+					if (spriteIndex is > 6 and < 9 or > 9 and < 12)
 					{
 						rCam.ReturnFContainer("Foreground").AddChild(sLeaser.sprites[spriteIndex]);
 					}
@@ -504,7 +494,6 @@ namespace NewTerra
 				
 				try
 				{
-					UnityEngine.Debug.Log("women penis and boobs");
 					Plugin.tardiCWT.Add(self, new TardiData()); // attach cwt
 				}
 				catch (ArgumentException)
@@ -626,8 +615,6 @@ namespace NewTerra
 				int countOfObjTypeHeld = self.grasps.Select(x => x is null ? null : x.grabbed).Count(x => x?.GetType() == obj.GetType());
 				if (obj is Spear && countOfObjTypeHeld >= 2) return;
 				
-				if (graspused is 2 or 3 && (obj == self.grasps[0].grabbed || obj == self.grasps[1].grabbed)) return;
-				
 				Plugin.tardiCWT.TryGetValue(self, out var data);
 				if (data == null) return;
 				if (graspused is 0 or 1)
@@ -639,6 +626,8 @@ namespace NewTerra
 					orig(self, obj, graspused);
 					return;
 				}
+				
+				if (graspused is 2 or 3 && (obj == self.grasps[0].grabbed || obj == self.grasps[1].grabbed)) return;
 
 				if (graspused == 2 && data.CanGrabWithExtraHands)
 				{
