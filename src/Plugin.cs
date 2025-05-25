@@ -31,13 +31,10 @@ public class Plugin : BaseUnityPlugin
 		logger = Logger;
 		On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 		On.RoomSpecificScript.AddRoomSpecificScript += RoomSpecificScript_AddRoomSpecificScript;
-		PlayerHooks playerHooks = new();
-		WorldHooks worldHooks = new();
 		try
 		{
-			playerHooks.Apply();
-			worldHooks.Apply();
-			_AddBGLabels();
+			PlayerHooks.Apply();
+			WorldHooks.Apply();
 		}
 		catch (FileNotFoundException)
 		{
@@ -48,12 +45,6 @@ public class Plugin : BaseUnityPlugin
 			logger.LogFatal(ex);
 		}
 		//logger.LogWarning("boy pussy and boobs");
-	}
-
-	private void _AddBGLabels()
-	{
-		//BlackGlare.API.Labels.AddObjectLabel<Player>((p) => "Goated").AddCondition((p) => p.SlugCatClass.value == TARDIGOATED_ID);
-		// BlackGlare.API.Labels.AddObjectLabel<GlangleFruit>((f) => $"yummers x{f.GAbs.bitesLeft}");
 	}
 
 	#region misc hooks

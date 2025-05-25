@@ -13,9 +13,9 @@ using UnityEngine;
 
 namespace NewTerra
 {
-	internal class PlayerHooks
+	public static class PlayerHooks
 	{
-		public void Apply()
+		public static void Apply()
 		{
 			try
 			{
@@ -52,7 +52,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerOnGrabUpdate(ILContext il)
+		private static void PlayerOnGrabUpdate(ILContext il)
 		{
 			ILCursor c = new(il);
 
@@ -84,7 +84,7 @@ namespace NewTerra
 			if (objects[2] is not null) self.Grab(objects[2], 0, 0, Creature.Grasp.Shareability.CanOnlyShareWithNonExclusive, 0.5f, false, true);
 		}
 
-		private void SlugcatHandOnUpdate(ILContext il)
+		private static void SlugcatHandOnUpdate(ILContext il)
 		{
 			ILCursor c = new(il);
 
@@ -110,7 +110,7 @@ namespace NewTerra
 			}
 		}
 
-		private void SlugcatHandUnhardcode(ILContext il)
+		private static void SlugcatHandUnhardcode(ILContext il)
 		{
 			ILCursor c = new(il);
 
@@ -157,7 +157,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerOnGraphicsModuleUpdated(ILContext il)
+		private static void PlayerOnGraphicsModuleUpdated(ILContext il)
 		{
 			ILCursor c = new(il);
 
@@ -186,7 +186,7 @@ namespace NewTerra
 
 		#region graphics
 
-		private void PlayerGraphicsOnReset(On.PlayerGraphics.orig_Reset orig, PlayerGraphics self)
+		private static void PlayerGraphicsOnReset(On.PlayerGraphics.orig_Reset orig, PlayerGraphics self)
 		{
 			orig(self);
 
@@ -200,7 +200,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
+		private static void PlayerGraphicsOnUpdate(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
 		{
 			orig(self);
 
@@ -219,7 +219,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerGraphicsOnInitiateSprites(On.PlayerGraphics.orig_InitiateSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
+		private static void PlayerGraphicsOnInitiateSprites(On.PlayerGraphics.orig_InitiateSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
 		{
 			orig(self, sLeaser, rCam);
 
@@ -249,7 +249,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner)
+		private static void PlayerGraphicsOnAddToContainer(On.PlayerGraphics.orig_AddToContainer orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer newContatiner)
 		{
 			if (self.player.SlugCatClass.value != Plugin.TARDIGOATED_ID)
 			{
@@ -280,7 +280,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
+		private static void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
 		{
 			orig(self, sLeaser, rCam, timeStacker, camPos);
 			if (self.player != null && self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
@@ -362,7 +362,7 @@ namespace NewTerra
 			}
 		}
 
-		private void PlayerGraphics_ctor(On.PlayerGraphics.orig_ctor orig, PlayerGraphics self, PhysicalObject ow)
+		private static void PlayerGraphics_ctor(On.PlayerGraphics.orig_ctor orig, PlayerGraphics self, PhysicalObject ow)
 		{
 			orig(self, ow);
 			if (self.player != null && self.player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
@@ -402,7 +402,7 @@ namespace NewTerra
 
 		#region gameplay
 
-		private void Creature_Update(On.Creature.orig_Update orig, Creature self, bool eu)
+		private static void Creature_Update(On.Creature.orig_Update orig, Creature self, bool eu)
 		{
 			orig(self, eu);
 			if (self is Player player && player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
@@ -439,7 +439,7 @@ namespace NewTerra
 			}
 		}
 
-		private void IL_Creature_Update(ILContext il)
+		private static void IL_Creature_Update(ILContext il)
 		{
 			ILCursor c = new(il);
 
@@ -464,7 +464,7 @@ namespace NewTerra
 			c.Emit(OpCodes.Brtrue, ilLabel);
 		}
 
-		private void Creature_InjectPoison(On.Creature.orig_InjectPoison orig, Creature self, float amount, Color poisonColor)
+		private static void Creature_InjectPoison(On.Creature.orig_InjectPoison orig, Creature self, float amount, Color poisonColor)
 		{
 			orig(self, amount, poisonColor);
 			if (self is Player player && player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
@@ -481,7 +481,7 @@ namespace NewTerra
 			}
 		}
 
-		private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
+		private static void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
 		{
 			if (self != null && self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
@@ -495,7 +495,7 @@ namespace NewTerra
 			orig(self, chunk, direction, speed, firstContact);
 		}
 
-		private void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
+		private static void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
 		{
 			orig(self, abstractCreature, world);
 			if (self.SlugCatClass.value == Plugin.TARDIGOATED_ID)
@@ -514,7 +514,7 @@ namespace NewTerra
 			}
 		}
 
-		private void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
+		private static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
 		{
 			PhysicalObject grasp2PreUpdate = null;
 			PhysicalObject grasp3PreUpdate = null;
@@ -615,7 +615,7 @@ namespace NewTerra
 			}
 		}
 		
-		private void PlayerOnSlugcatGrab(On.Player.orig_SlugcatGrab orig, Player self, PhysicalObject obj, int graspused)
+		private static void PlayerOnSlugcatGrab(On.Player.orig_SlugcatGrab orig, Player self, PhysicalObject obj, int graspused)
 		{
 			if (self.SlugCatClass.value != Plugin.TARDIGOATED_ID)
 			{
@@ -655,7 +655,7 @@ namespace NewTerra
 			}
 		}
 
-		private void Creature_Violence(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
+		private static void Creature_Violence(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
 		{
 			if (self is Player player && player != null && player.SlugCatClass.value == Plugin.TARDIGOATED_ID)
 			{
@@ -680,7 +680,7 @@ namespace NewTerra
 		}
 		
 		// for changing the length of the grasps array
-		private void CreatureOnctor(On.Creature.orig_ctor orig, Creature self, AbstractCreature abstractcreature, World world)
+		private static void CreatureOnctor(On.Creature.orig_ctor orig, Creature self, AbstractCreature abstractcreature, World world)
 		{
 			orig(self, abstractcreature, world);
 			

@@ -13,12 +13,12 @@ using MonoMod.Cil;
 
 namespace NewTerra
 {
-	public class WorldHooks
+	public static class WorldHooks
 	{
 
-		public CurrWeather currWeather;
+		public static CurrWeather currWeather;
 
-		public void Apply()
+		public static void Apply()
 		{
 			try
 			{
@@ -40,7 +40,7 @@ namespace NewTerra
 			}
 		}
 
-		private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
+		private static void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{
 			if (self.world.name is "RU" or "AW")
 			{
@@ -110,7 +110,7 @@ namespace NewTerra
 			orig(self);
 		}
 
-		private void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
+		private static void World_ctor(On.World.orig_ctor orig, World self, RainWorldGame game, Region region, string name, bool singleRoomWorld)
 		{
 			orig(self, game, region, name, singleRoomWorld);
 			List<CurrWeather> weatherpatterns = new List<CurrWeather>
@@ -139,7 +139,7 @@ namespace NewTerra
 			}
 		}
 
-		private void Room_Update(On.Room.orig_Update orig, Room self)
+		private static void Room_Update(On.Room.orig_Update orig, Room self)
 		{
 			orig(self);
 			if (self.world.name is "RU")
@@ -189,7 +189,7 @@ namespace NewTerra
 		//	}
 		//}
 
-		private void ScavengerTradeSpot_Update(ILContext il)
+		private static void ScavengerTradeSpot_Update(ILContext il)
 		{
 			Plugin.logger.LogWarning("im scavengertradespot.update");
 			ILCursor c = new(il);
@@ -222,7 +222,7 @@ namespace NewTerra
 			}
 		}
 		
-		private bool Track_AllowedInSubRegion(On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.orig_AllowedInSubRegion orig, Music.ProceduralMusic.ProceduralMusicInstruction.Track self, string subRegion)
+		private static bool Track_AllowedInSubRegion(On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.orig_AllowedInSubRegion orig, Music.ProceduralMusic.ProceduralMusicInstruction.Track self, string subRegion)
 		{
 			if (self.subRegions == null)
 			{
@@ -242,7 +242,7 @@ namespace NewTerra
 			return (weathertruth != false) && (regiontruth != false);
 		}
 
-		private void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
+		private static void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
 		{
 			orig(self, eu);
 			if (self.room.world.name is "RU" or "AW")
