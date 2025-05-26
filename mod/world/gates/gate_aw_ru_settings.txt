@@ -1,0 +1,2 @@
+FadePalette: 4986, 0.5
+MorePalette0: 4979, 0.5
