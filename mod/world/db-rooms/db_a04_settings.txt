@@ -1,0 +1,2 @@
+Template: db_settingstemplate_crypt
+PlacedObjects: LightSource><460.6942><422.1921><0.02173913~Environment~136~123~271~57.60254~0~1~None~0~0, LightSource><466><354><0.02173913~Environment~136~123~271~57.60254~0~1~None~0~0, LightSource><444><406><0.02173913~Environment~223~122~271~57.60254~0~1~None~0~0, LightSource><467><245><0.02173913~Environment~171~150~271~57.60254~0~1~None~0~0, LightSource><303><414><0.02173913~Environment~125~74~271~57.60254~0~1~None~0~0, LightSource><662><414><0.02173913~Environment~125~74~271~57.60254~0~1~None~0~0, 
