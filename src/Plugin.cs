@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using BepInEx;
 using BepInEx.Logging;
+using NewTerra.DayCycle;
 using UnityEngine;
 
 namespace NewTerra;
@@ -35,7 +36,7 @@ public class Plugin : BaseUnityPlugin
 		{
 			PlayerHooks.Apply();
 			WorldHooks.Apply();
-			DayCycle.Apply();
+			DayCycleHooks.Apply();
 		}
 		catch (FileNotFoundException)
 		{
