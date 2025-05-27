@@ -1,0 +1,3 @@
+Base : Ashen Ruin
+Ashen Ruin : 1 : Windswept Dunes
+Five Pebbles : 2 : Fallen God

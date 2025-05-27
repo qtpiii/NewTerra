@@ -1,3 +1,3 @@
 Template: db_settingstemplate_crypt
 PlacedObjects: LightSource><531.5908><322.6289><0.02173913~Environment~-107~151~50~86.60254~0~1~None~0~0, LightSource><288><323><0.01086957~Environment~-107~151~50~86.60254~0~1~None~0~0, LightSource><449><431><0.01086957~Environment~-85~101~50~86.60254~0~1~None~0~0, LightSource><587><303><0.01086957~Environment~-161~130~50~86.60254~0~1~None~0~0, 
-FadePalette: 10, 0.3043478
+FadePalette: 10, 0.4021739

@@ -1,0 +1,9 @@
+
+overseersSpawnChance: 0
+playerGuideOverseerSpawnChance: 0
+pupSpawnChance: 0.0
+earlyCycleChance: 0
+batsPerActiveSwarmRoom: 4
+Room Setting Templates: Default, Iterator
+Subregion: Ashen Ruin
+Subregion: Five Pebbles

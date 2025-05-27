@@ -5,5 +5,5 @@ CeilingDrips: 0.2
 Clouds: 0.65
 Grime: 0.5
 Palette: 4990
-Effects: ReplaceEffectColorB-0.05-323.0812-56.97778-Color-0.3557299-0.1005319-0.03866645, Flies-0.3-38.53751-130.2667, RockFlea-0.10-51.34375-79.06667, SeedBats-1-282.5677-49.91111,
+Effects: ReplaceEffectColorB-0.05-323.0812-56.97778-Color-0.3557299-0.1005319-0.03866645, Flies-0.3-38.53751-130.2667, RockFlea-0.10-51.34375-79.06667, SeedBats-1-282.5677-49.91111, Fog-0.6-0-0,
 AmbientSounds: OMNI><newterra-slowdown.ogg><714.2828><490.0455><0.159737><0.8051216, OMNI><am_sub-cavetone.ogg><689.5208><159.3211><0.3530678><1, 
