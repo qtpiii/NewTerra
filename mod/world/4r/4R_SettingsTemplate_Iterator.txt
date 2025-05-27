@@ -1,0 +1,19 @@
+DangerType: None
+Grime: 0.15
+CeilingDrips: 0.1
+Clouds: 0.65
+Palette: 4980
+EffectColorB: 11
+TerrainLight: 0.35
+TerrainStainAmount: 0.7
+TerrainStainBrightness: 0.35
+TerrainStainHeight: 1
+TerrainWaves: 0.25
+TerrainGooHeight: 0.05
+TerrainGrain: 1
+TerrainDepth: -0.1
+TerrainSkyFade: 1
+TerrainPalette: ashenruin
+Effects: Bloom-0.25-15-92, RockFlea-0.15-286-24, ModifyEffectColorB-0.9,1,0.55-291.375-82.6, 
+AmbientSounds: OMNI><AM_WIN-StrongWnd2.ogg><732.6763><505.6556><0.3586957><1.156522,
+WetTerrain: OFF
