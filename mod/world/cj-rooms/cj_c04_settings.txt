@@ -1,0 +1,4 @@
+Template: cj_settingstemplate_sundown
+Effects: VoidMelt-0.5-30-30, 
+PlacedObjects: LightSource><308.6619><184.6795><0.1086954~EffectColor1~75~319~-68~154.6025~0~0~None~0~0, LightSource><641><368><0.1086954~EffectColor1~75~319~-68~154.6025~0~0~None~0~0, LightSource><1211><227.2638><0.1086954~EffectColor1~160~249~-68~154.6025~0~0~None~0~0, LightSource><1649><318><0.1086956~EffectColor1~-351~249~-68~154.6025~0~0~None~0~0, LightSource><1976><142><0.1086956~EffectColor1~-276~234~-68~154.6025~0~0~None~0~0, LightSource><2565.908><108><0.1086956~EffectColor1~185~335~-68~154.6025~0~0~None~0~0, LightSource><2299><115><0.05434749~EffectColor1~162~227~-68~154.6025~0~0~None~0~0, LightSource><2906><174><0.05434749~EffectColor1~162~227~-68~154.6025~0~0~None~0~0, 
+FadePalette: 31, 0.9021739, 0.9021739, 0.9021739
