@@ -27,8 +27,6 @@
 	</ItemGroup>
 
 	<Target Name="GenerateMod" AfterTargets="PostBuildEvent">
-		<Message Text="NT: GenerateMod"
-			Importance="high" />
 		<!-- <Delete Files="@(RemovePlugins)" /> -->
 		<Copy SourceFiles="$(OutDir)$(ProjectName).dll" DestinationFolder="../mod/newest/plugins"
 			Retries="3" RetryDelayMilliseconds="300" />
