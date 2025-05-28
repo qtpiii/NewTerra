@@ -1,0 +1,3 @@
+Template: db_settingstemplate_crypt
+PlacedObjects: AirPocket><219.3469><440.1287><99~126~95.00003~-65~Y~47, 
+FadePalette: 10, 0.6521739, 0.8043478
