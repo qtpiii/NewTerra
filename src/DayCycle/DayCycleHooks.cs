@@ -17,19 +17,6 @@ public class DayCycleHooks
 		On.RoomCamera.Update += RoomCameraOnUpdate;
 		On.RoomCamera.ChangeRoom += RoomCameraOnChangeRoom;
 		
-		// AAAUGH
-		void AttachCWT(RoomSettings self)
-		{
-			try
-			{
-				DayCycleExtensions.settingsExtensionTable.Add(self, new());
-			}
-			catch (ArgumentException) {}
-		}
-		On.RoomSettings.ctor_string_Region_bool_bool_Name += (orig, self, name, region, template, firstTemplate, playerChar) => { orig(self, name, region, template, firstTemplate, playerChar); AttachCWT(self); };
-		On.RoomSettings.ctor_string_Region_bool_bool_Timeline_RainWorldGame += (orig, self, name, region, template, firstTemplate, point, game) => { orig(self, name, region, template, firstTemplate, point, game); AttachCWT(self); };
-		On.RoomSettings.ctor_Room_string_Region_bool_bool_Timeline_RainWorldGame += (orig, self, room, name, region, template, firstTemplate, point, game) => { orig(self, room, name, region, template, firstTemplate, point, game); AttachCWT(self); };
-		
 		On.DevInterface.RoomSettingsPage.ctor += RoomSettingsPageOnctor; // adds the DayCyclePanel to the room settings page
 		
 		// saving and loading of ext data
@@ -68,7 +55,10 @@ public class DayCycleHooks
 				palettes.Append($"fade_{i},{ext.palettes[1, i]},{ext.paletteIntensities[1, i]};");
 			}
 		}
-		writer.WriteLine($"DayCyclePalettes: {palettes}");
+		if (palettes.ToString() != "")
+		{
+			writer.WriteLine($"DayCyclePalettes: {palettes}");
+		}
 	}
 
 	private static bool RoomSettingsOnLoad_Timeline(On.RoomSettings.orig_Load_Timeline orig, RoomSettings self, SlugcatStats.Timeline timelinepoint)
@@ -152,8 +142,15 @@ public class DayCycleHooks
 
 		var settingsExt = DayCycleExtensions.settingsExtensionTable.GetOrCreateValue(self.room.roomSettings);
 		var cameraExt = DayCycleExtensions.cameraExtensionTable.GetOrCreateValue(self);
-		//float[] intensitiesAtTime = cameraExt.PaletteIntensityAtTime(self.game.clock * 0.0001f);
-		float[] intensitiesAtTime = cameraExt.PaletteIntensityAtTime(settingsExt.time);
+		float[] intensitiesAtTime;
+		if (settingsExt.timeOverride)
+		{
+			intensitiesAtTime = cameraExt.PaletteIntensityAtTime(settingsExt.time);
+		}
+		else
+		{
+			intensitiesAtTime = cameraExt.PaletteIntensityAtTime(self.game.clock * 0.0001f);
+		}
 		
 		self.LoadPalette(self.paletteA, ref self.fadeTexA);
 		self.LoadPalette(self.paletteB, ref self.fadeTexB);

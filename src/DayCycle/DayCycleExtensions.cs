@@ -10,6 +10,7 @@ public static class DayCycleExtensions
 		public int?[,] palettes = new int?[2, 4]; // first dimension: 0, main; 1, fade. second dimension: 0, dawn; 1, day; 2, dusk; 3, night.
 		public float[,] paletteIntensities = new float[2, 4]; // same layout as the one above
 		public float time;
+		public bool timeOverride;
 	}
 	public static ConditionalWeakTable<RoomSettings, RoomSettingsExtension> settingsExtensionTable = new();
 

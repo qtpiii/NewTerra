@@ -11,29 +11,20 @@ public class DayCyclePanel : Panel, IDevUISignals
 	public PalettesPanel fadePalettesPanel;
 
 	public PercentageSlider timeSlider;
+	public Button timeOverrideToggler;
 
-	public DayCycleExtensions.RoomSettingsExtension RoomSettingsExt
-	{
-		get
-		{
-			if (DayCycleExtensions.settingsExtensionTable.TryGetValue(RoomSettings, out var ext))
-			{
-				return ext;
-			}
-			return null;
-		}
-	}
+	public DayCycleExtensions.RoomSettingsExtension RoomSettingsExt => DayCycleExtensions.settingsExtensionTable.GetOrCreateValue(RoomSettings);
 	
 	public DayCyclePanel(DevUI owner, string id, DevUINode parentNode, Vector2 pos) : base(owner, id, parentNode, pos, new Vector2(210f, 5f), "DAYCYCLE")
 	{
 		Vector2 nodePos = new Vector2(5f, 5f);
 		
-		if (owner.game.IsArenaSession)
-		{
-			subNodes.Add(timeSlider = new PercentageSlider(owner, "DayCycle_Time", this, nodePos, "time", RoomSettingsExt.time));
-			nodePos.y += 20f;
-			size.y += 20f;
-		}
+		subNodes.Add(timeSlider = new PercentageSlider(owner, "DayCycle_Time", this, nodePos, "time", RoomSettingsExt.time));
+		nodePos.y += 20f;
+		size.y += 20f;
+		subNodes.Add(timeOverrideToggler = new Button(owner, "Toggle_Time_Override", this, nodePos, 150f, ""));
+		nodePos.y += 20f;
+		size.y += 20f;
 		
 		subNodes.Add(new Button(owner, "Toggle_Main_Palettes_Panel", this, nodePos, 190f, "toggle main palettes panel"));
 		nodePos.y += 20f;
@@ -82,6 +73,8 @@ public class DayCyclePanel : Panel, IDevUISignals
 		base.Update();
 		
 		RoomSettingsExt.time = timeSlider.value;
+
+		timeOverrideToggler.Text = $"override time: {RoomSettingsExt.timeOverride}";
 	}
 
 	public void Signal(DevUISignalType type, DevUINode sender, string message)
@@ -115,6 +108,11 @@ public class DayCyclePanel : Panel, IDevUISignals
 					subNodes.Remove(fadePalettesPanel);
 					fadePalettesPanel = null;
 				}
+			}
+
+			if (sender == timeOverrideToggler)
+			{
+				RoomSettingsExt.timeOverride = !RoomSettingsExt.timeOverride;
 			}
 		}
 	}
