@@ -1,9 +1,0 @@
-Template: NONE
-Clouds: 0.5
-Grime: 0.25
-Palette: 4970
-EffectColorA: 13
-Effects: Bloom-0.5-17-111, VoidMelt-0.5-20-20, 
-PlacedObjects: LightSource><414.4573><135.0546><0.25~EffectColor1~153~129~50~86.60254~0~0~None~0~0, LightSource><681><353><0.25~EffectColor1~97~85~50~86.60254~0~0~None~0~0, LightSource><891><193><0.1086956~EffectColor1~134~121~-230~151.6025~0~0~None~0~0, 
-AmbientSounds: OMNI><am_ind-utility01.ogg><741.4801><446.301><0.25><1, OMNI><am_win-subwnd.ogg><720.4288><312.1604><0.5><1, OMNI><deep weird wind.wav><732.3029><207.9662><0.25><1, 
-FadePalette: 31, 0.75

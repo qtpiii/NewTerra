@@ -1,0 +1,7 @@
+DangerType: None
+Clouds: 0.5
+Grime: 0.25
+Palette: 4970
+EffectColorA: 13
+Effects: Bloom-0.6-17-111, VoidMelt-0.4-20-20, 
+AmbientSounds: OMNI><am_ind-utility01.ogg><741.4801><446.301><0.25><1, OMNI><am_win-subwnd.ogg><720.4288><312.1604><0.5><1, OMNI><deep weird wind.wav><732.3029><207.9662><0.25><1, 

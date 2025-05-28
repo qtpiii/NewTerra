@@ -9,3 +9,4 @@ Palette: 4972
 EffectColorA: 10
 EffectColorB: 9
 Effects: Coldness-0.05-30-107, Beetle-0.1-299-60, Flies-0.2-38.53751-130.2667, SeedBats-1-282.5677-49.91111, Fog-0.2-0-0,
+WaterReflectionAlpha: 0.1

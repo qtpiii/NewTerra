@@ -1,0 +1,6 @@
+DangerType: None
+Clouds: 0.25
+Palette: 4971
+EffectColorA: 10
+EffectColorB: 2
+Effects: ModifyEffectColorB-0,0.3043478,0.2065217-20-20, ModifyEffectColorA-0,0.5,0.2065217-291-87, 
