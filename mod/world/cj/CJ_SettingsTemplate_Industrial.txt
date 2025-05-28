@@ -1,6 +1,21 @@
 DangerType: None
+CeilingDrips: 0.5
+RainIntensity: 1
+RumbleIntensity: 1
+WaveSpeed: 0.75
+WaveLength: 0.5
+WaveAmplitude: 0
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
 Clouds: 0.25
+Grime: 0.5
+BkgDroneVolume: 0.3
+BkgDroneNoThreatVolume: 1
+RandomItemDensity: 0.5
+RandomItemSpearChance: 0.2
+WaterReflectionAlpha: 1
 Palette: 4971
 EffectColorA: 10
 EffectColorB: 2
 Effects: ModifyEffectColorB-0,0.3043478,0.2065217-20-20, ModifyEffectColorA-0,0.5,0.2065217-291-87, 
+AmbientSounds: OMNI><am_ind-factory03.ogg><719.55><357.9957><0.4021739><1, OMNI><am_ind-deephum.ogg><718.9641><478.5533><0.2065217><1, OMNI><newterra-slowdown.ogg><740.8658><552.413><0.1086956><0.6086956, OMNI><AM_IND-Warehouse01.ogg><734.8168><532.9199><0.4456522><0.8826087 
