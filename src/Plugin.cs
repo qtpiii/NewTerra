@@ -38,10 +38,6 @@ public class Plugin : BaseUnityPlugin
 			WorldHooks.Apply();
 			DayCycleHooks.Apply();
 		}
-		catch (FileNotFoundException)
-		{
-			logger.LogWarning("BlackGlare not loaded, labels inaccessible");
-		}
 		catch (Exception ex)
 		{
 			logger.LogFatal(ex);

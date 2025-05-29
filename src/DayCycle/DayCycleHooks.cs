@@ -16,12 +16,64 @@ public class DayCycleHooks
 	{
 		On.RoomCamera.Update += RoomCameraOnUpdate;
 		On.RoomCamera.ChangeRoom += RoomCameraOnChangeRoom;
+		On.RoomCamera.ModifyEffectColorA += RoomCameraOnModifyEffectColorA;
+		On.RoomCamera.ModifyEffectColorB += RoomCameraOnModifyEffectColorB;
 		
 		On.DevInterface.RoomSettingsPage.ctor += RoomSettingsPageOnctor; // adds the DayCyclePanel to the room settings page
 		
 		// saving and loading of ext data
 		On.RoomSettings.Save_string_bool += RoomSettingsOnSave_string_bool;
 		On.RoomSettings.Load_Timeline += RoomSettingsOnLoad_Timeline;
+	}
+
+	private static Color[] RoomCameraOnModifyEffectColorA(On.RoomCamera.orig_ModifyEffectColorA orig, RoomCamera self, Color[] colors)
+	{
+		var settingsExt = DayCycleExtensions.settingsExtensionTable.GetOrCreateValue(self.room.roomSettings);
+		Color[] origReturn = orig(self, colors);
+		
+		float[] intensitiesAtTime;
+		if (settingsExt.timeOverride)
+		{
+			intensitiesAtTime = DayCycleExtensions.PaletteIntensityAtTime(settingsExt.time);
+		}
+		else
+		{
+			intensitiesAtTime = DayCycleExtensions.PaletteIntensityAtTime(self.game.Time());
+		}
+		
+		for (int i = 0; i < origReturn.Length; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				origReturn[i] = Color.Lerp(origReturn[i], settingsExt.effectColors[0, j], settingsExt.effectColorIntensities[0, j] * intensitiesAtTime[j]);
+			}
+		}
+		return origReturn;
+	}
+	
+	private static Color[] RoomCameraOnModifyEffectColorB(On.RoomCamera.orig_ModifyEffectColorB orig, RoomCamera self, Color[] colors)
+	{
+		var settingsExt = DayCycleExtensions.settingsExtensionTable.GetOrCreateValue(self.room.roomSettings);
+		Color[] origReturn = orig(self, colors);
+		
+		float[] intensitiesAtTime;
+		if (settingsExt.timeOverride)
+		{
+			intensitiesAtTime = DayCycleExtensions.PaletteIntensityAtTime(settingsExt.time);
+		}
+		else
+		{
+			intensitiesAtTime = DayCycleExtensions.PaletteIntensityAtTime(self.game.Time());
+		}
+		
+		for (int i = 0; i < origReturn.Length; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				origReturn[i] = Color.Lerp(origReturn[i], settingsExt.effectColors[1, j], settingsExt.effectColorIntensities[1, j] * intensitiesAtTime[j]);
+			}
+		}
+		return origReturn;
 	}
 
 	#region room settings
@@ -59,6 +111,17 @@ public class DayCycleHooks
 		{
 			writer.WriteLine($"DayCyclePalettes: {palettes}");
 		}
+
+		StringBuilder effectColors = new();
+		for (int i = 0; i < 4; i++)
+		{
+			effectColors.Append($"a_{i},{ext.effectColors[0, i].r},{ext.effectColors[0, i].g},{ext.effectColors[0, i].b},{ext.effectColorIntensities[0, i]};");
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			effectColors.Append($"b_{i},{ext.effectColors[1, i].r},{ext.effectColors[1, i].g},{ext.effectColors[1, i].b},{ext.effectColorIntensities[1, i]};");
+		}
+		writer.WriteLine($"DayCycleEffectColors: {effectColors}");
 	}
 
 	private static bool RoomSettingsOnLoad_Timeline(On.RoomSettings.orig_Load_Timeline orig, RoomSettings self, SlugcatStats.Timeline timelinepoint)
@@ -112,6 +175,27 @@ public class DayCycleHooks
 					}
 					break;
 				}
+				case "DayCycleEffectColors":
+				{
+					string[] split = keyValuePairs[i][1].Split(';');
+					for (int j = 0; j < split.Length - 1; j++) // -1 because theres always a trailing ;
+					{
+						string[] keyValue = split[j].Split(','); // 0 is identifier, 1 is palette id, 2 is intensity
+						if (keyValue.Length != 5) continue;
+						if (keyValue[0].StartsWith("a_"))
+						{
+							// index 2 of the identifier should always be an integer (eg: a_3)
+							ext.effectColors[0, int.Parse(keyValue[0][2].ToString())] = new Color(float.Parse(keyValue[1]), float.Parse(keyValue[2]), float.Parse(keyValue[3]));
+							ext.effectColorIntensities[0, int.Parse(keyValue[0][2].ToString())] = float.Parse(keyValue[4]);
+						}
+						if (keyValue[0].StartsWith("b_"))
+						{
+							ext.effectColors[1, int.Parse(keyValue[0][2].ToString())] = new Color(float.Parse(keyValue[1]), float.Parse(keyValue[2]), float.Parse(keyValue[3]));
+							ext.effectColorIntensities[1, int.Parse(keyValue[0][2].ToString())] = float.Parse(keyValue[4]);
+						}
+					}
+					break;
+				}
 			}
 		}
 
@@ -122,7 +206,7 @@ public class DayCycleHooks
 	{
 		orig(self, owner, id, parentNode, name);
 		
-		self.subNodes.Add(new DayCyclePanel(owner, "DayCycle_Panel", self, new Vector2(1030f, 600f)));
+		self.subNodes.Add(new DayCyclePanel(owner, "DayCycle_Panel", self, new Vector2(1030f, 540f)));
 	}
 	#endregion
 	
@@ -145,11 +229,11 @@ public class DayCycleHooks
 		float[] intensitiesAtTime;
 		if (settingsExt.timeOverride)
 		{
-			intensitiesAtTime = cameraExt.PaletteIntensityAtTime(settingsExt.time);
+			intensitiesAtTime = DayCycleExtensions.PaletteIntensityAtTime(settingsExt.time);
 		}
 		else
 		{
-			intensitiesAtTime = cameraExt.PaletteIntensityAtTime(self.game.clock * 0.0001f);
+			intensitiesAtTime = DayCycleExtensions.PaletteIntensityAtTime(self.game.clock * 0.0001f);
 		}
 		
 		self.LoadPalette(self.paletteA, ref self.fadeTexA);
@@ -174,7 +258,7 @@ public class DayCycleHooks
 		}
 		self.fadeTexA.Apply();
 		self.fadeTexB.Apply();
-		self.ApplyFade();
+		self.ApplyEffectColorsToAllPaletteTextures(self.room.roomSettings.EffectColorA, self.room.roomSettings.EffectColorB);
 	}
 	#endregion
 }
