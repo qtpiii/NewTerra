@@ -28,8 +28,6 @@ namespace NewTerra
 
 				On.RoomRain.Update += RoomRain_Update;
 
-				On.Room.Update += Room_Update;
-
 				On.Music.ProceduralMusic.ProceduralMusicInstruction.Track.AllowedInSubRegion += Track_AllowedInSubRegion;
 
 				//IL.ScavengerTradeSpot.Update += ScavengerTradeSpot_Update;
@@ -136,24 +134,6 @@ namespace NewTerra
 					currWeather = weatherpatterns[rnd.Next(weatherpatterns.Count)];
 				}
 				UnityEngine.Debug.Log("Weather set to " + currWeather);
-			}
-		}
-
-		private static void Room_Update(On.Room.orig_Update orig, Room self)
-		{
-			orig(self);
-			if (self.world.name is "RU")
-			{
-				self.roomSettings.placedObjects.ForEach(obj =>
-				{
-					if (obj.type == PlacedObject.Type.CustomDecal && !(obj.data as PlacedObject.CustomDecalData).imageName.StartsWith("scrounger"))
-					{
-						for (int i = 0; i < 4; i++)
-						{
-							(obj.data as PlacedObject.CustomDecalData).vertices[i, 0] *= self.game.cameras[0].PaletteDarkness();
-						}
-					}
-				});
 			}
 		}
 
