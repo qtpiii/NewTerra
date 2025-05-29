@@ -1,0 +1,5 @@
+Template: cj_settingstemplate_industrial
+Grime: 0.2065217
+PlacedObjects: AirPocket><56.19714><1322.784><820~209~64~-186~Y~209, CustomDecal><145.9791><754.4492><3~765~544~760~554~-5~-290~10~0~1~0.5543478~blackrust1~0.75~0.6086956~0.75~0.6086956~0.75~0.6086956~0.75~0.6086956, 
+FadePalette: 4970, 0.4021739, 0.4565217
+MorePalette0: 4979, 0.25, 0.5

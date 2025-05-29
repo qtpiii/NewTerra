@@ -1,2 +1,2 @@
-Effects: VoidMelt-0.2065217-20-20, 
+Effects: VoidMelt-0.1521739-20-20, 
 FadePalette: 31, 0.25
