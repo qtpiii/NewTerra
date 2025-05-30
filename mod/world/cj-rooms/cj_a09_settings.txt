@@ -1,0 +1,3 @@
+Template: cj_settingstemplate_sundown
+FadePalette: 0, 0.1086956
+MorePalette0: 31, 0.7065217
