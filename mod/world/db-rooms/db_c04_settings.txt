@@ -1,0 +1,4 @@
+Effects: SilenceWater-0.8043478-21-52, 
+PlacedObjects: AirPocket><552.1638><-19.88494><885~314~30~30~Y~18, 
+FadePalette: 4972, 0.6521739, 0.8043478, 0.8586956
+MorePalette0: 4990, 0, 0.1521739, 0.5
