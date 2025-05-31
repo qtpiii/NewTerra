@@ -1,0 +1,4 @@
+Template: ntcj_settingstemplate_sundown
+Effects: VoidMelt-0.1521739-30-30, 
+FadePalette: 31, 0.5543478
+DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;

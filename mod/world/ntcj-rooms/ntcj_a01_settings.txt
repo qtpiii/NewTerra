@@ -1,3 +1,5 @@
+Template: ntcj_settingstemplate_sundown
 Effects: VoidMelt-0.1086956-20-20, 
 PlacedObjects: LightSource><110.3055><168.7034><0.05434814~EffectColor1~187~224~50~86.60254~0~0~None~0~0, LightSource><839><508><0.108696~EffectColor1~199~137~-88~-175.3975~0~0~None~0~0, SnowSource><-16.44833><151.7758><Radial~258~166~50~86.60254~1~1, SnowSource><455><494><Radial~258~166~50~86.60254~1~1, SnowSource><62><652><Radial~258~166~50~86.60254~1~1, SnowSource><891><366><Radial~-144~116~-116~-95.39746~0.75~1, SnowSource><665><147><Radial~-144~116~-116~-95.39746~0.75~1, 
-FadePalette: 31, 0.25
+FadePalette: 31, 0.3043478
+DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;
