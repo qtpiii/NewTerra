@@ -20,9 +20,6 @@ public class Plugin : BaseUnityPlugin
 	internal const string POM_CATEGORY = "NEW_TERRA";
 	internal const string TARDIGOATED_ID = "Tenacious";
 
-
-	internal readonly Dictionary<string, string[]> DecalAutoplaceSets = new();
-
 	internal static ManualLogSource logger;
 
 	public static ConditionalWeakTable<Player, TardiData> tardiCWT = new();
@@ -50,11 +47,11 @@ public class Plugin : BaseUnityPlugin
 	private void RoomSpecificScript_AddRoomSpecificScript(On.RoomSpecificScript.orig_AddRoomSpecificScript orig, Room room)
 	{
 		orig(room);
-		if (room.abstractRoom.name == "AW_E01")
+		if (room.abstractRoom.name == "NTAC_E01")
 		{
 			if (room.game.IsStorySession && room.game.GetStorySession.saveState.cycleNumber == 0 && room.abstractRoom.firstTimeRealized)
 			{
-				room.AddObject(new AW_TenaciousStart(room));
+				room.AddObject(new NTAC_TenaciousStart(room));
 			}
 		}
 	}

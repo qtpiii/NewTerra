@@ -1,0 +1,5 @@
+Template: cj_settingstemplate_sundown
+Effects: VoidMelt-0.5-11-19, SilenceWater-0.6086956-253-118, 
+PlacedObjects: SnowSource><113.0916><1675.878><Radial~141~117~50~86.60254~1~1, SnowSource><815><1691><Radial~141~117~50~86.60254~0.5~1, LightSource><473.8099><1325.875><0.1521736~EffectColor1~335~138~50~86.60254~0~0~None~0~0, LightSource><484><84.00029><0.1086956~EffectColor1~514~208~50~86.60254~0~0~None~0~0, SnowSource><818><310><Radial~167~91~50~86.60254~1~1, SnowSource><137><344><Radial~241~89~50~86.60254~0.5~1, SnowSource><458><974.201><Radial~313~89~50~86.60254~0.75~1, 
+FadePalette: 4, 0.05434782, 0.1521739, 0.3043478
+MorePalette0: 31, 0.7065217, 0.75, 0.8043478

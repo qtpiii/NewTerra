@@ -1,0 +1,5 @@
+Template: cj_settingstemplate_sundown
+Effects: VoidMelt-0.7065217-5-32, 
+PlacedObjects: LightSource><250.9499><413.7443><0.1086956~EffectColor1~224~130~131~-157.3975~0~0~None~0~0, LightSource><695><377><0.1521742~EffectColor1~309~185~131~-157.3975~0~0~None~0~0, MudPit><-198.5256><-33.44836><1360~310~271, MudPit><-198><737><1360~1~271, MudPit><-203><233><243~503~271, MudPit><1045><229><119~506~271, 
+FadePalette: 4, 0.6521739
+MorePalette0: 31, 0.9021739

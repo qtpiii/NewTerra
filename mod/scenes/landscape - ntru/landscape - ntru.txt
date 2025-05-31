@@ -1,0 +1,12 @@
+ntru_landscape - 5 : 25
+ntru_landscape - 4 : 7
+ntru_landscape - 3 : 5
+ntru_landscape - 2 : 3
+ntru_landscape - 1 : 1
+
+blurMin : 0.15
+blurMax : 0.35
+
+idleDepths : 4
+idleDepths : 3
+idleDepths : 2

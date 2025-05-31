@@ -1,3 +1,0 @@
-Template: cj_settingstemplate_sundown
-PlacedObjects: LightSource><570.632><142.5885><0.1086956~EffectColor1~-274~264~50~86.60254~0~0~None~0~0, LightSource><819><123><0.1521739~EffectColor1~-158~155~50~86.60254~0~0~None~0~0, LightSource><334><155><0.05434782~EffectColor1~121~184~50~86.60254~0~0~None~0~0, 
-FadePalette: 31, 0.6521739

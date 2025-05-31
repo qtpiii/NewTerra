@@ -18,6 +18,8 @@ namespace NewTerra
 
 		public static CurrWeather currWeather;
 
+		public static string[] NTRegionAcronyms = {"NTRU", "NTAC", "NTCB", "NTAR", "NTDS", "NTSD", "NTCG", "NTCJ", "NTDZ"};
+
 		public static void Apply()
 		{
 			try
@@ -40,7 +42,7 @@ namespace NewTerra
 
 		private static void Room_Loaded(On.Room.orig_Loaded orig, Room self)
 		{
-			if (self.world.name is "RU" or "AW")
+			if (self.world.name is "NTRU" or "NTAC")
 			{
 				switch (currWeather)
 				{
@@ -73,7 +75,7 @@ namespace NewTerra
 				}
 				//UnityEngine.Debug.Log("Effects loaded in " + self.roomSettings.name + " for " + currWeather + " weather");
 			}
-			if (self.world.name is "DB")
+			if (self.world.name is "NTCB")
 			{
 				switch (currWeather)
 				{
@@ -188,7 +190,7 @@ namespace NewTerra
 					// the function this EmitDelegate emits eats the "Scavenger Merchant" string so that a c.Remove() isnt used
 					c.EmitDelegate((string s, ScavengerTradeSpot self) => // switched order of arguments because the "Scavenger Merchant" string is loaded before ldarg_0
 					{
-						if (self.room.abstractRoom.name.StartsWith("RU_"))
+						if (self.room.abstractRoom.world.name is "NTRU")
 						{
 							return "Scrounger Merchant";
 						}
@@ -225,7 +227,7 @@ namespace NewTerra
 		private static void RoomRain_Update(On.RoomRain.orig_Update orig, RoomRain self, bool eu)
 		{
 			orig(self, eu);
-			if (self.room.world.name is "RU" or "AW")
+			if (NTRegionAcronyms.Contains(self.room.world.name))
 			{
 				self.floodingSound.Volume = 0;
 			}

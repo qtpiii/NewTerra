@@ -28,7 +28,7 @@
 			{ "name": "Eyes", "story": "001100", "arena": [ "001100", "001100", "001100", "FFFFFF" ] },
 		],
 		
-		"start_room": "AW_E01",
+		"start_room": "NTAC_E01",
 		
 		"karma": 0,
 		"karma_cap": 2,

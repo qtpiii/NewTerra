@@ -1,0 +1,112 @@
+ROOMS
+
+NTRU_A01 : NTRU_B12, NTRU_H01, NTRU_A07
+NTRU_B01 : NTRU_B02, NTRU_S01, NTRU_C01
+NTRU_S01 : NTRU_R01, NTRU_B01 : SHELTER
+NTRU_B02 : NTRU_C02, NTRU_B01, NTRU_A02
+NTRU_A02 : NTRU_B02, NTRU_B04, NTRU_D02
+NTRU_B03 : NTRU_D02, NTRU_A03, NTRU_C03, NTRU_A04
+NTRU_A03 : NTRU_B03, NTRU_D01
+NTRU_D01 : NTRU_A05, NTRU_A03, NTRU_C05
+NTRU_D02 : NTRU_A02, NTRU_C01, NTRU_B03, NTRU_C04
+NTRU_C01 : NTRU_B01, NTRU_A13, NTRU_D02
+NTRU_C02 : NTRU_B02, NTRU_B04 : SWARMROOM
+NTRU_A04 : NTRU_B03, NTRU_B07, NTRU_A06
+NTRU_C03 : NTRU_B03, NTRU_A06
+NTRU_B04 : NTRU_C02, NTRU_A02, NTRU_A05, NTRU_B05
+NTRU_B05 : NTRU_B04, NTRU_B07
+NTRU_A05 : NTRU_B04, NTRU_D01
+NTRU_A06 : NTRU_A04, NTRU_C03, NTRU_B06, NTRU_A07
+NTRU_A07 : NTRU_A06, NTRU_A01
+NTRU_C04 : NTRU_D02, NTRU_B06
+NTRU_B06 : NTRU_C04, NTRU_A06, NTRU_A09
+NTRU_A08 : NTRU_B08 : SCAVTRADER
+NTRU_B07 : NTRU_B05, NTRU_A04, NTRU_B08
+NTRU_A09 : NTRU_B06, NTRU_C06
+NTRU_A10 : NTRU_B16, NTRU_B15, NTRU_A20
+NTRU_S02 : NTRU_A14, NTRU_B10 : SHELTER
+NTRU_B08 : NTRU_A08, NTRU_B07, NTRU_A12
+NTRU_C05 : NTRU_D01, NTRU_B09
+NTRU_H01 : NTRU_A01, NTRU_A15
+NTRU_B09 : NTRU_C05, NTRU_A11, NTRU_B13 : SWARMROOM
+NTRU_A11 : NTRU_B09, NTRU_B14
+NTRU_A12 : NTRU_B08, NTRU_B10
+NTRU_B10 : NTRU_A12, NTRU_A17, NTRU_S02, NTRU_C06
+NTRU_A14 : NTRU_S02, NTRU_R02
+NTRU_D03 : NTRU_R02, DISCONNECTED
+NTRU_C06 : NTRU_A09, NTRU_B10, NTRU_B11
+NTRU_B11 : NTRU_B12, NTRU_C06
+NTRU_B12 : NTRU_A01, NTRU_B11
+NTRU_A15 : NTRU_A16, NTRU_H01
+NTRU_B13 : NTRU_B09, NTRU_A16
+NTRU_A16 : NTRU_B13, NTRU_A15, NTRU_C08
+NTRU_A13 : DISCONNECTED, NTRU_C01, DISCONNECTED
+NTRU_A17 : NTRU_B10 : SWARMROOM
+NTRU_B14 : NTRU_A11, NTRU_C07, NTRU_A18
+NTRU_C08 : NTRU_A16, NTRU_B15
+NTRU_A18 : NTRU_B14, NTRU_A19
+NTRU_A19 : NTRU_A18, NTRU_B15
+NTRU_B15 : NTRU_A19, NTRU_C08, NTRU_A10
+NTRU_A20 : NTRU_A10, NTRU_B17
+NTRU_C07 : NTRU_A21, NTRU_B14, NTRU_C09
+NTRU_B16 : NTRU_C09, NTRU_A10
+NTRU_C09 : NTRU_C07, NTRU_B16, NTRU_B17
+NTRU_B17 : NTRU_C09, NTRU_A20, NTRU_B20
+NTRU_A21 : NTRU_B19, NTRU_D04, NTRU_C07 : SWARMROOM
+NTRU_D04 : NTRU_B18, NTRU_A21, NTRU_S03
+NTRU_S03 : NTRU_D04, NTRU_R03 : SHELTER
+NTRU_B18 : NTRU_A22, NTRU_B19, NTRU_D04
+NTRU_A22 : NTRU_B18
+NTRU_B19 : NTRU_B18, NTRU_A21
+NTRU_B20 : NTRU_S04, NTRU_B17
+NTRU_S04 : NTRU_B20, DISCONNECTED : SHELTER
+NTRU_R01 : NTRU_S01, GATE_AW_NTRU
+NTRU_R02 : NTRU_A14, NTRU_D03
+NTRU_R03 : DISCONNECTED, NTRU_S03
+GATE_AW_NTRU : DISCONNECTED, NTRU_R01 : GATE
+
+END ROOMS
+CREATURES
+
+NTRU_B06 : 5-TentaclePlant-{Ignorecycle}, 6-SmallCentipede-{Ignorecycle}-2, 9-Leech-{Ignorecycle}-7, 4-WhiteLizard-{Ignorecycle}
+OFFSCREEN : 0-Scrounger-5, 0-Scrounger-{Night}-6, 0-minileviathan-3
+NTRU_B08 : 5-TentaclePlant-{Ignorecycle}, 4-Snail-3
+NTRU_C09 : 3-TentaclePlant-{Ignorecycle}
+NTRU_B18 : 4-BlueLizard, 3-CyanLizard-{Night}
+NTRU_D04 : 8-BigSpider-{Night}, 6-BigSpider-{Night}-2, 9-LanternMouse-{Night}-3, 3-SmallCentipede-{Ignorecycle}-2
+NTRU_B19 : 4-Centipede-{Ignorecycle}
+NTRU_C07 : 3-Centipede-{Ignorecycle}
+NTRU_A21 : 3-PinkLizard-{Ignorecycle}
+NTRU_A20 : 3-PinkLizard-{Ignorecycle}
+NTRU_H01 : 4-WaterSpitter, 3-Snail-2, 2-WaterSpitter
+NTRU_A07 : 3-WaterSpitter
+NTRU_C05 : 3-Centipede-{Ignorecycle}
+NTRU_A04 : 3-RedCentipede-{Night}, 4-BlueLizard, 4-CyanLizard-{Night}
+NTRU_B15 : 10-RedCentipede-{Night}, 12-Centipede-{Ignorecycle}, 6-WhiteLizard-{Ignorecycle}
+NTRU_C08 : 5-SmallCentipede-{Ignorecycle}-2, 3-PinkLizard-{Ignorecycle}, 2-Centipede-{Ignorecycle}, 4-CyanLizard-{Night}
+NTRU_B13 : 3-BlueLizard, 2-Centipede-{Ignorecycle}
+NTRU_B05 : 4-WhiteLizard-{Ignorecycle}
+NTRU_C01 : 6-BlueLizard
+LINEAGE : NTRU_C01 : 4 : PinkLizard-{Ignorecycle}-0.3, White-{Ignorecycle}-0
+NTRU_B02 : 4-BlueLizard, 5-CyanLizard-{Night}
+NTRU_D02 : 8-Centipede-{Ignorecycle}-2, 7-PinkLizard
+NTRU_C06 : 5-Snail-2, 3-Salamander, 4-SeaLeech-{Ignorecycle}
+NTRU_B11 : 2-Snail-2
+NTRU_A02 : 3-Snail-2
+NTRU_A05 : 2-BigNeedleWorm, 2-SmallNeedleWorm-3
+NTRU_B10 : 5-Leech-{Ignorecycle}-4, 4-CyanLizard-{Night}
+NTRU_C04 : 5-Leech-{Ignorecycle}-4, 4-BlueLizard, 3-CyanLizard-{Night}
+NTRU_A06 : 4-BlueLizard
+NTRU_C03 : 2-PinkLizard-{Ignorecycle}, 4-Centipede-{Ignorecycle}
+NTRU_B07 : 3-Centipede-{Ignorecycle}
+NTRU_B16 : 2-BlueLizard, 3-CyanLizard-{Night}
+NTRU_A17 : 1-BlueLizard
+NTRU_A12 : 4-Salamander
+NTRU_A01 : 5-Salamander, 3-BigNeedleWorm, 3-SmallNeedleWorm-2
+NTRU_B03 : 4-WhiteLizard-{Ignorecycle}
+NTRU_B17 : 4-PinkLizard-{Ignorecycle}, 3-BlueLizard
+NTRU_A18 : 3-BlueLizard
+NTRU_A19 : 2-CyanLizard-{Night}
+NTRU_B14 : 3-WhiteLizard
+NTRU_B09 : 3-BigNeedleWorm, 3-SmallNeedleWorm-3
+END CREATURES
