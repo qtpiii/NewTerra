@@ -1,5 +1,5 @@
 DangerType: None
-Clouds: 0.25
+Clouds: 0.05
 Grime: 0.4
 Palette: 4971
 EffectColorA: 10

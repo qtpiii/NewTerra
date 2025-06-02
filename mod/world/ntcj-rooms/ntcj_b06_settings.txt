@@ -1,5 +1,6 @@
-Template: cj_settingstemplate_sundown
+Template: ntcj_settingstemplate_sundown
 Effects: VoidMelt-0.6086956-18-22, Bloom-0.75-23-121, 
 PlacedObjects: LightSource><306.8077><1028.055><0.1521739~EffectColor1~157~200~50~86.60254~0~0~None~0~0, LightSource><440><347.7893><0.1086956~EffectColor1~185~228~50~86.60254~0~0~None~0~0, SnowSource><166.8476><182.1295><Radial~167~144~50~86.60254~0.75~1, SnowSource><809><301><Radial~167~144~50~86.60254~0.75~1, SnowSource><255><1001><Radial~202~154~50~86.60254~0.75~1, SnowSource><851><1072><Radial~121~80~50~86.60254~1~1, LightSource><294><607.3086><0.05434782~EffectColor1~408~234~50~86.60254~0~0~None~0~0, LightSource><949><747.0062><0.05434782~EffectColor1~408~234~50~86.60254~0~0~None~0~0, LightSource><840><1011><0.1086956~EffectColor1~147~106~50~86.60254~0~0~None~0~0, MudPit><-201.0417><-20.05438><64~1534~374, MudPit><1098><-19.41735><64~1534~374, MudPit><-141><-17.99833><1243~9~284, MudPit><-137><1375><1234~141~284, 
 FadePalette: 4, 0.4021739, 0.4021739
+DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;
 MorePalette0: 31, 0.8586956, 0.9565217

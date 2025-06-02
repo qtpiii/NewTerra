@@ -1,4 +1,6 @@
 Template: ntcj_settingstemplate_sundown
 Effects: VoidMelt-0.1521739-30-30, 
-FadePalette: 31, 0.5543478
+PlacedObjects: CustomDecal><177.7081><332.903><-11.33334~524.2667~823.4166~537.7778~810.6667~-207.6445~-364.7916~-74.66669~0~1~0.5004529~voidgoop1~0.1535324~1~0.1535324~1~0.1535324~1~0.1535324~1, 
+FadePalette: 0, 0.1539856
 DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;
+MorePalette0: 31, 0.5081522

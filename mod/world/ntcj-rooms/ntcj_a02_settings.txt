@@ -1,3 +1,4 @@
-Template: cj_settingstemplate_sundown
-PlacedObjects: LightSource><414.4573><135.0546><0.25~EffectColor1~153~129~50~86.60254~0~0~None~0~0, LightSource><681><353><0.25~EffectColor1~97~85~50~86.60254~0~0~None~0~0, LightSource><891><193><0.1086956~EffectColor1~134~121~-230~151.6025~0~0~None~0~0, SnowSource><251.8701><172.4099><Radial~256~71~50~86.60254~0.5~1, SnowSource><912><208><Radial~256~71~50~86.60254~1~1, SnowSource><888><561><Radial~256~71~50~86.60254~1~1, 
+Template: ntcj_settingstemplate_sundown
+PlacedObjects: LightSource><414.4573><135.0546><0.25~EffectColor1~153~129~50~86.60254~0~0~None~0~0, LightSource><681><353><0.25~EffectColor1~97~85~50~86.60254~0~0~None~0~0, LightSource><891><193><0.1086956~EffectColor1~134~121~-230~151.6025~0~0~None~0~0, SnowSource><251.8701><172.4099><Radial~256~71~50~86.60254~0.5~1, SnowSource><912><208><Radial~256~71~50~86.60254~1~1, SnowSource><888><561><Radial~256~71~50~86.60254~1~1, CustomDecal><158.3056><148.3741><279.0833~310.9333~600.2917~527.8222~625.0833~-72.53333~-267.75~-4.977783~0~1~0.5004528~voidgoop1~0.307518~1~0.307518~1~0.307518~1~0.307518~1, 
 FadePalette: 31, 0.75
+DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;

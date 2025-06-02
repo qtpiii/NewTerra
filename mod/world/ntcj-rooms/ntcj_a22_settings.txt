@@ -1,0 +1,5 @@
+EffectColorA: 9
+Effects: ModifyEffectColorB-0,0.3075182,0.4076087-17.25-10.08888, 
+FadePalette: 0, 0.3002719
+DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;
+MorePalette0: 4979, 0.3079714

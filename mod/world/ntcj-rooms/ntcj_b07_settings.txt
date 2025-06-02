@@ -1,5 +1,6 @@
-Template: cj_settingstemplate_sundown
+Template: ntcj_settingstemplate_sundown
 Palette: 4
 Effects: VoidMelt-0.8043478-13-15, SilenceWater-0.5-249-122, 
 PlacedObjects: LightSource><307.348><394.8256><0.2065217~EffectColor1~363~178~50~86.60254~0~0~None~0~0, LightSource><1065><384><0.1521739~EffectColor1~385~131~50~86.60254~0~0~None~0~0, LightSource><1416><219><0.25~EffectColor1~389~157~50~86.60254~0~0~None~0~0, LightSource><1698><245><0.2065217~EffectColor1~346~136~50~86.60254~0~0~None~0~0, LightSource><576><331><0.1086956~EffectColor1~313~151~50~86.60254~0~0~None~0~0, MudPit><-201.0893><-51.82098><1283~257~255, MudPit><1985><-46><197~778~255, MudPit><-205><207><177~509~255, MudPit><-27><717><2047~3~135, 
 FadePalette: 31, 0.9021739, 0.9565217
+DayCycleEffectColors: a_0,0,0,0,0;a_1,0,0,0,0;a_2,0,0,0,0;a_3,0,0,0,0;b_0,0,0,0,0;b_1,0,0,0,0;b_2,0,0,0,0;b_3,0,0,0,0;
