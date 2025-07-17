@@ -1,0 +1,16 @@
+TH_NTRU - BLIPPER : NEUTRAL
+TH_NTRU - COOLPERC : NEUTRAL
+TH_NTRU - KICK : NEUTRAL
+TH_NTRU - LAMEPERC : NEUTRAL
+TH_NTRU - LEAD : NEUTRAL
+TH_NTRU - LEADALT : NEUTRAL
+TH_NTRU - LEADDARK : NEUTRAL
+TH_NTRU - PAD : NEUTRAL
+TH_NTRU - SNARE : NEUTRAL
+TH_NTRU - SPARKLES : NEUTRAL
+
+
+Layer : TH_NTRU - KICK, {Cloudy|Riverbed Urban}TH_NTRU - LAMEPERC, {Rainy|Stormy|Riverbed Urban}TH_NTRU - COOLPERC
+Layer : {Sunny|Cloudy}TH_NTRU - PAD, {Cloudy|Rainy|Stormy}TH_NTRU - SNARE, {Rainy|Stormy}TH_NTRU - BLIPPER
+Layer : {Sunny|Cloudy}TH_NTRU - LEAD, {Rainy|Stormy|Riverbed Urban}TH_NTRU - LEADDARK, Rainy|Stormy|Old Path}TH_NTRU - LEADALT
+Layer : {Cloudy|Rainy|Stormy|Riverbed Urban}TH_NTRU - BLIPPER, TH_NTRU - SPARKLES, {Old Path}TH_NTRU - PAD
