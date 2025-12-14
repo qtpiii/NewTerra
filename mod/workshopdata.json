@@ -1,11 +1,11 @@
 {
   "Title": "New Terra",
-  "Description": "Lawl",
+  "Description": "A world of unknowns, of new territories.",
   "ID": "qtpi.new-terra",
   "Version": "1.0.0",
   "TargetGameVersion": "v1.9.06",
-  "Requirements": "watcher,slime-cubed.slugbase,pom,regionkit,crs,lb-fgf-m4r-ik.modpack,
-  "RequirementNames": "The Watcher,SlugBase,POM,RegionKit,Custom Regions Support,The M4rblelous Entity Pack,
+  "Requirements": "watcher,slime-cubed.slugbase,fisobs,pom,regionkit,crs,lb-fgf-m4r-ik.modpack",
+  "RequirementNames": "The Watcher,SlugBase,Fisobs,POM,RegionKit,Custom Regions Support,The M4rblelous Entity Pack",
   "Authors": "qtpi",
   "Visibility": "Unlisted",
   "Tags": [
