@@ -1,10 +1,10 @@
 ﻿{
 	"id": "qtpi.new-terra",
 	"name": "New Terra",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"authors": "qtpi",
 	"description": "A world of unknowns, of new territories.",
-	"requirements": [ "slime-cubed.slugbase", "fisobs", "pom", "regionkit"],
-	"requirements_names": [ "SlugBase", "Fisobs", "POM", "RegionKit"],
+	"requirements": ["watcher", "slime-cubed.slugbase", "fisobs", "pom", "regionkit", "crs", "lb-fgf-m4r-ik.modpack"],
+	"requirements_names": ["The Watcher", "SlugBase", "Fisobs", "POM", "RegionKit", "Custom Regions Support", "The M4rblelous Entity Pack"],
 	"tags": [ "Custom Slugcat" ]
 }

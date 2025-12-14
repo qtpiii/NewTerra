@@ -1,4 +1,4 @@
-Template: cj_settingstemplate_industrial
+Template: ntcj_settingstemplate_industrial
 AmbientSounds: SPOT><am_ind-electrichum01.ogg><543.6244><604.0934><0.3586957><1><512.6244><518.0934><-75.35535><-78.35535><0><0.154348, 
 FadePalette: 5, 0.05434782
 MorePalette0: 4979, 0.25

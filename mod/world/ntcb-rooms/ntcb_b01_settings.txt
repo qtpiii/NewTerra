@@ -1,4 +1,4 @@
-Template: db_settingstemplate_outside
+Template: ntcb_settingstemplate_outside
 WaveSpeed: 0.5013056
 WaveLength: 0.9993472
 WaveAmplitude: 0.0007165496
